@@ -1,0 +1,35 @@
+services:
+  mdxfy-nginx:
+    container_name: mdxfy-nginx
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../nginx/conf.d/web.conf:/etc/nginx/conf.d
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - mdxfy-network
+
+  mdxfy-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3030:3030"
+    volumes:
+      - ../mdxfy-web:/web
+    networks:
+      - mdxfy-network
+
+volumes:
+  postgres_data:
+  minio_data:
+  cache:
+    driver: local
+
+networks:
+  mdxfy-network:
+    driver: bridge

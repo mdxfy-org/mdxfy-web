@@ -1,0 +1,188 @@
+{
+  "Pages": {
+    "Index": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Agricultural Machinery Transport",
+        "description": "Fast and safe agricultural machinery transport"
+      }
+    },
+    "Login": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Login",
+        "description": "Log in to access your NomeDoSeuNegocio account"
+      }
+    },
+    "SignUp": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Sign Up",
+        "description": "Create a new account on NomeDoSeuNegocio"
+      }
+    },
+    "AuthCode": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Authentication Code",
+        "description": "Enter the authentication code sent to your phone"
+      }
+    },
+    "ForgotPass": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Forgot My Password",
+        "description": "Recover your NomeDoSeuNegocio password"
+      }
+    },
+    "RecoverToken": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Recover Password",
+        "description": "Enter the recovery token sent to your phone"
+      }
+    },
+    "NotFound": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Page Not Found",
+        "description": "Page not found"
+      },
+      "messages": {
+        "page_not_found": "Page not found",
+        "as_expected": "As expected?",
+        "back_to_safety": "Back to safety"
+      }
+    },
+    "InternalError": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Internal Error",
+        "description": "An error occurred"
+      },
+      "messages": {
+        "an_error_has_occurred": "An internal error occurred"
+      }
+    }
+  },
+  "UI": {
+    "tooltips": {
+      "write_number": {
+        "title": "Enter your number",
+        "info": "Write your phone number with area code.",
+        "example": "Your phone number should be formatted as follows: +55 01 23456-7890"
+      }
+    },
+    "info": {
+      "verification_code_sent": "A verification code has been sent to the number: ",
+      "did_not_received_code": "Didn't receive the code?"
+    },
+    "buttons": {
+      "next": "Next",
+      "enter": "Enter",
+      "continue": "Continue",
+      "cancel": "Cancel",
+      "search": "Search",
+      "understood": "Understood",
+      "resend_code": "Resend code"
+    },
+    "labels": {
+      "code": "Code",
+      "name": "Name",
+      "surname": "Surname",
+      "number": "Number",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "new_password": "New password",
+      "new_password_confirm": "Confirm new password"
+    },
+    "placeholders": {
+      "write_code": "Enter the code",
+      "write_name": "Enter your name",
+      "write_surname": "Enter your surname",
+      "write_number": "Enter your number",
+      "write_password": "Enter your password",
+      "write_password_confirm": "Confirm your password",
+      "write_new_password": "Enter your new password",
+      "write_new_password_confirm": "Confirm your new password"
+    },
+    "messages": {
+      "required_field": "Required field",
+      "fill_this_field": "Fill in this field"
+    },
+    "titles": {
+      "welcome_again": "Welcome back, {name}!",
+      "create_account": "Create account",
+      "create_new_password": "Create new password",
+      "inform_your_number": "Inform your number"
+    },
+    "checkboxes": {
+      "remember_me": "Remember me"
+    },
+    "redirects": {
+      "see_more": "See more",
+      "about": "About",
+      "profile": "Profile",
+      "configs": "Settings",
+      "home": "Home",
+      "application": "Application",
+      "create_account": "Create an account",
+      "forgot_password": "Forgot my password",
+      "enter_another_account": "Enter another account",
+      "enter_existing_account": "Enter an existing account"
+    }
+  },
+  "Messages": {
+    "errors": {
+      "default": "An unexpected error occurred. Please try again later.",
+      "not_implemented": "Not implemented",
+      "user_not_found": "User not found",
+      "error_creating_user": "Error creating user",
+      "user_already_exists": "User already exists",
+      "invalid_login_credentials": "Invalid login credentials",
+      "wrong_password": "Incorrect password",
+      "user_not_authenticated": "User not authenticated",
+      "invalid_authentication_code": "Invalid authentication code",
+      "authentication_code_attempts_exceeded": "Authentication code attempts exceeded",
+      "incorrect_authentication_code": "Incorrect authentication code",
+      "failed_to_resend_code": "Failed to resend code",
+      "failed_to_upload_image": "Failed to upload image",
+      "failed_to_save_image_record": "Failed to save image record",
+      "no_images_found": "No images found"
+    },
+    "success": {
+      "user_created_successfully": "User created successfully",
+      "login_successful": "Login successful",
+      "user_authenticated_successfully": "User authenticated successfully",
+      "authentication_code_resent": "Authentication code resent",
+      "image_uploaded_successfully": "Image uploaded successfully",
+      "user_found": "User found"
+    },
+    "info": {
+      "wait_resend_code_timeout": "Wait {seconds} seconds to resend the code."
+    }
+  },
+  "Application": {
+    "slogan": "TRANSPORTING YOUR PRODUCTION",
+    "index_init_button": "Let's go!"
+  },
+  "Advertizement": {
+    "titles": {
+      "primary": "Agricultural transport"
+    },
+    "subtitles": {
+      "primary": "Agility in agricultural machinery transport"
+    },
+    "descriptions": {
+      "primary": "Revolutionizing the way you transport your agricultural machines"
+    }
+  },
+  "Language": {
+    "current": "English",
+    "flag": "🇺🇸"
+  },
+  "Legal": {
+    "agreements": {
+      "accept_policy_and_terms": "I agree to the <use>Terms of Use</use> and acknowledge that I have read the <privacy>Privacy Policy</privacy>",
+      "terms_of_use": "Terms of Use",
+      "privacy_policy": "Privacy Policy",
+      "sign_in_terms": "By continuing, we will send a validation code to the provided number. Data and message rates may apply.",
+      "login_terms": "By continuing, we will send a validation code to the provided number. Data and message rates may apply.",
+      "mailing_list": "I want to receive promotional emails from NomeDoSeuNegocio."
+    },
+    "terms_of_use_markdown": "",
+    "privacy_policy_markdown": ""
+  }
+}

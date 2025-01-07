@@ -1,0 +1,193 @@
+{
+  "Pages": {
+    "Index": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Transporte de Maquinário Agrícola",
+        "description": "Transporte de maquinário agrícola de forma rápida e segura"
+      }
+    },
+    "Login": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Login",
+        "description": "Faça login para acessar sua conta NomeDoSeuNegocio"
+      }
+    },
+    "SignUp": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Cadastro",
+        "description": "Crie uma nova conta no NomeDoSeuNegocio"
+      }
+    },
+    "AuthCode": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Código de Autenticação",
+        "description": "Digite o código de autenticação enviado para seu telefone"
+      }
+    },
+    "ForgotPass": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Esqueci Minha Senha",
+        "description": "Recupere sua senha do NomeDoSeuNegocio"
+      }
+    },
+    "RecoverToken": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Recuperar senha",
+        "description": "Digite o token de recuperação enviado para seu telefone"
+      }
+    },
+    "NotFound": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Página não encontrada",
+        "description": "Página não encontrada"
+      },
+      "messages": {
+        "page_not_found": "Página não encontrada",
+        "as_expected": "Assim como esperado?",
+        "back_to_safety": "Voltar para a segurança"
+      }
+    },
+    "InternalError": {
+      "meta": {
+        "title": "NomeDoSeuNegocio - Erro interno",
+        "description": "Ocorreu um erro"
+      },
+      "messages": {
+        "an_error_has_occurred": "Ocorreu um erro interno"
+      }
+    }
+  },
+  "UI": {
+    "tooltips": {
+      "write_number": {
+        "title": "Digite seu número",
+        "info": "Escreva seu número de telefone com DDD.",
+        "example": "Seu número de telefone deve ser formatado da seguinte maneira: +55 01 23456-7890"
+      }
+    },
+    "info": {
+      "verification_code_sent": "Um code de verificação foi enviado para o número: ",
+      "did_not_received_code": "Não recebeu o código?"
+    },
+    "buttons": {
+      "next": "Próximo",
+      "enter": "Entrar",
+      "continue": "Continuar",
+      "cancel": "Cancelar",
+      "search": "Pesquisar",
+      "understood": "Entendi",
+      "resend_code": "Reenviar código"
+    },
+    "labels": {
+      "code": "Código",
+      "name": "Nome",
+      "surname": "Sobrenome",
+      "email": "Email",
+      "number": "Número",
+      "password": "Senha",
+      "password_confirm": "Confirmar senha",
+      "new_password": "Nova senha",
+      "new_password_confirm": "Confirmar nova senha"
+    },
+    "placeholders": {
+      "write_code": "Digite o código",
+      "write_name": "Digite seu nome",
+      "write_surname": "Digite seu sobrenome",
+      "write_email": "Digite seu email",
+      "write_number": "Digite seu número",
+      "write_password": "Digite sua senha",
+      "write_password_confirm": "Confirme sua senha",
+      "write_new_password": "Digite sua nova senha",
+      "write_new_password_confirm": "Confirme sua nova senha"
+    },
+    "messages": {
+      "required_field": "Campo obrigatório",
+      "fill_this_field": "Preencha este campo"
+    },
+    "titles": {
+      "welcome_again": "Bem-vindo de volta, {name}!",
+      "create_account": "Criar conta",
+      "create_new_password": "Criar nova senha",
+      "inform_your_number": "Informe seu número",
+      "update_account": "Atualizar conta"
+    },
+    "checkboxes": {
+      "remember_me": "Lembrar-se de mim"
+    },
+    "redirects": {
+      "see_more": "Veja mais",
+      "about": "Sobre",
+      "profile": "Perfil",
+      "configs": "Configurações",
+      "home": "Início",
+      "application": "Aplicação",
+      "create_account": "Criar uma conta",
+      "forgot_password": "Esqueci minha senha",
+      "enter_another_account": "Entrar em outra conta",
+      "enter_existing_account": "Entrar em uma conta existente"
+    }
+  },
+  "Messages": {
+    "errors": {
+      "default": "Um erro inesperado ocorreu. Por favor, tente novamente mais tarde.",
+
+      "not_implemented": "Não implementado",
+      "user_not_found": "Usuário não encontrado",
+      "error_creating_user": "Erro ao criar usuário",
+      "user_already_exists": "Usuário já existe",
+      "invalid_login_credentials": "Credenciais de login inválidas",
+      "wrong_password": "Senha incorreta",
+      "user_not_authenticated": "Usuário não autenticado",
+      "invalid_authentication_code": "Código de autenticação inválido",
+      "authentication_code_attempts_exceeded": "Tentativas de código de autenticação excedidas",
+      "incorrect_authentication_code": "Código de autenticação incorreto",
+      "failed_to_resend_code": "Falha ao reenviar código",
+      "failed_to_upload_image": "Falha ao enviar imagem",
+      "failed_to_save_image_record": "Falha ao salvar registro de imagem",
+      "no_images_found": "Nenhuma imagem encontrada"
+    },
+    "success": {
+      "user_created_successfully": "Usuário criado com sucesso",
+      "login_successful": "Login bem-sucedido",
+      "user_authenticated_successfully": "Usuário autenticado com sucesso",
+      "authentication_code_resent": "Código de autenticação reenviado",
+      "image_uploaded_successfully": "Imagem enviada com sucesso",
+      "user_found": "Usuário encontrado"
+    },
+    "info": {
+      "wait_resend_code_timeout": "Aguarde {seconds} segundos para reenviar o código."
+    }
+  },
+  "Application": {
+    "slogan": "Slogan da sua empresa",
+    "index_init_button": "Vamos lá!"
+  },
+  "Advertizement": {
+    "titles": {
+      "primary": "Transportes agrícola"
+    },
+    "subtitles": {
+      "primary": "Agilidade no transporte de maquinário agrícola"
+    },
+    "descriptions": {
+      "primary": "Revolucionando a forma que você transporta suas máquinas agrícolas"
+    }
+  },
+  "Language": {
+    "current": "Português",
+    "flag": "🇧🇷"
+  },
+  "Legal": {
+    "agreements": {
+      "accept_policy_and_terms": "Concordo com os <use>Termos de Uso</use> e reconheço que li a <privacy>Política de Privacidade</privacy>",
+      "terms_of_use": "Termos de Uso",
+      "privacy_policy": "Política de Privacidade",
+
+      "sign_in_terms": "Ao continuar, enviaremos um código de validação no número informado. Podem ser aplicadas taxas de dados e mensagens.",
+      "login_terms": "Ao continuar, enviaremos um código de validação no número informado. Podem ser aplicadas taxas de dados e mensagens.",
+      "mailing_list": "Desejo receber e-mails promocionais da NomeDoSeuNegocio."
+    },
+    "terms_of_use_markdown": "",
+    "privacy_policy_markdown": ""
+  }
+}
