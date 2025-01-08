@@ -1,6 +1,6 @@
-# MDXfy - A Rede Social Baseada em Markdown 🚀
+# MdxFy - A Rede Social Baseada em Markdown 🚀
 
-**MDXfy** é uma rede social projetada para desenvolvedores, mas aberta a todos! O objetivo é oferecer uma experiência única de interação social, combinando uma política justa para comentários e publicações com a flexibilidade e o poder do **Markdown** para criar conteúdo.
+**MdxFy** é uma rede social projetada para desenvolvedores, mas aberta a todos! O objetivo é oferecer uma experiência única de interação social, combinando uma política justa para comentários e publicações com a flexibilidade e o poder do **Markdown** para criar conteúdo.
 
 ---
 
@@ -27,7 +27,7 @@
 
 ### **4. Markdown Everywhere**
 
-- Todos os posts na MDXfy são escritos em **Markdown**:
+- Todos os posts na MdxFy são escritos em **Markdown**:
   - Crie conteúdo estruturado com cabeçalhos, listas, tabelas e muito mais.
   - Ideal para desenvolvedores e criadores de conteúdo técnico.
 
@@ -48,7 +48,7 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/mdxfy.git
+   git clone https://github.com/iloElias/mdxfy-web.git
    cd mdxfy
    ```
 
@@ -82,7 +82,7 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 
 ## 🌈 **Contribuição**
 
-Quer ajudar a construir o MDXfy? Ficaremos felizes com sua contribuição! Confira o [guia de contribuição](./CONTRIBUTING.md) para mais detalhes.
+Quer ajudar a construir o MdxFy? Ficaremos felizes com sua contribuição! Confira o [guia de contribuição](./CONTRIBUTING.md) para mais detalhes.
 
 ---
 
@@ -103,9 +103,9 @@ Este projeto está licenciado sob a [Licença MIT](./LICENSE). Sinta-se à vonta
 Se você tiver dúvidas, sugestões ou apenas quiser dizer oi, entre em contato:
 
 - **Email:** <contato@mdxfy.com>
-- **Twitter:** [@MDXfy](https://twitter.com/MDXfy)
+- **Twitter:** [@MdxFy](https://twitter.com/MdxFy)
 - **Site Oficial:** [www.mdxfy.com](https://www.mdxfy.com)
 
 --- -->
 
-Obrigado por fazer parte do **MDXfy**! Vamos juntos criar uma rede social mais justa, acessível e voltada para criadores de conteúdo. 🚀
+Obrigado por fazer parte do **MdxFy**! Vamos juntos criar uma rede social mais justa, acessível e voltada para criadores de conteúdo. 🚀

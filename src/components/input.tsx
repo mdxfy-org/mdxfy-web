@@ -73,7 +73,7 @@ const Input = ({ taggableVisibility, ...props }: InputProps) => {
       {...props}
       validate={(value) => {
         if (props.isRequired && !value) {
-          return t("Base.fill_this_field");
+          return t("UI.messages.fill_this_field");
         }
         if (props.validate) {
           return props.validate(value);
