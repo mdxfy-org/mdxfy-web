@@ -10,7 +10,7 @@ import {
   Spacer,
 } from "@nextui-org/react";
 import { useState } from "react";
-import EstoqueTemplate from "@/components/ui/mdxfy";
+import Mdxfy from "@/components/ui/mdxfy";
 import { numberInputMask } from "@/lib/utils";
 import Input from "@/components/input";
 import { useTranslations } from "next-intl";
@@ -38,7 +38,7 @@ export default function ForgotPass() {
         <div className="flex flex-1 justify-center md:items-center max-h-svh overflow-hidden overflow-y-auto">
           <div className="flex flex-col gap-4 px-8 py-6 w-full max-w-md min-h-max">
             <div className="flex flex-col items-center gap-2">
-              <EstoqueTemplate.Logo className="w-40 h-10" />
+              <Mdxfy.Logo className="w-40 h-10" />
             </div>
             <p className="pb-2 font-semibold text-2xl text-gray-700 text-left dark:text-gray-200">
               {t("UI.titles.inform_your_number")}

@@ -16,7 +16,7 @@ import { useLanguage } from "@/contexts/language-provider";
 import { useOverlay } from "@/contexts/overlay-provider";
 import { useUser } from "@/contexts/auth-provider";
 import Link from "next/link";
-import EstoqueTemplate from "@/components/ui/mdxfy";
+import Mdxfy from "@/components/ui/mdxfy";
 
 export default function SignIn() {
   const router = useRouter();
@@ -60,7 +60,7 @@ export default function SignIn() {
       </Head>
       <Body className="flex flex-row" hideHeader>
         <div className="lg:flex flex-col flex-[4] justify-center items-center hidden">
-          <EstoqueTemplate.Logo />
+          <Mdxfy.Logo />
         </div>
         <div className="flex flex-[5] justify-center md:items-center max-h-svh overflow-hidden overflow-y-auto">
           <div className="flex flex-col gap-4 px-8 py-6 w-full max-w-md min-h-max">

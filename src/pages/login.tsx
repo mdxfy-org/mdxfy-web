@@ -15,7 +15,7 @@ import { useOverlay } from "@/contexts/overlay-provider";
 import { useUser } from "@/contexts/auth-provider";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/language-provider";
-import EstoqueTemplate from "@/components/ui/mdxfy";
+import Mdxfy from "@/components/ui/mdxfy";
 
 export default function Login() {
   const router = useRouter();
@@ -60,13 +60,13 @@ export default function Login() {
       <Body className="flex flex-row" hideHeader>
         <div className="lg:flex flex-col flex-[4] justify-center items-center hidden">
           <section className="flex flex-col items-start gap-4 p-4">
-            <EstoqueTemplate.Logo className="w-40 h-10" />
+            <Mdxfy.Logo className="w-40 h-10" />
           </section>
         </div>
         <div className="flex flex-[5] justify-center md:items-center max-h-svh overflow-hidden overflow-y-auto">
           <div className="flex flex-col gap-4 px-8 py-6 w-full max-w-md min-h-max">
             <div className="flex flex-col items-center gap-2">
-              <EstoqueTemplate.Logo className="w-40 h-10" />
+              <Mdxfy.Logo className="w-40 h-10" />
             </div>
             <p className="pb-2 font-semibold text-2xl text-gray-700 text-left dark:text-gray-200">
               {t("UI.redirects.enter_existing_account")}

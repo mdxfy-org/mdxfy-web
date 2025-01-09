@@ -32,7 +32,7 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
   if (!mounted) return null;
 
   return (
-    <Button color="primary" className={className} onPress={toggleTheme} isIconOnly {...props}>
+    <Button color="default" className={className} onPress={toggleTheme} isIconOnly {...props}>
       <motion.div
         initial="hidden"
         animate={theme === "dark" ? "hidden" : "visible"}
@@ -45,7 +45,7 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
         <Sun01Icon
           type="rounded"
           variant="duotone"
-          className="w-[1em] h-[1em] text-gray-700 text-inherit dark:text-gray-200"
+          className="w-[1em] h-[1em] text-gray-600 text-inherit dark:text-gray-200"
         />
       </motion.div>
       <motion.div
