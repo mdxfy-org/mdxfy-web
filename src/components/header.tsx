@@ -1,5 +1,5 @@
 import React from "react";
-import Agrofast from "@/components/ui/agrofast";
+import MDxFy from "@/components/ui/mdxfy";
 
 import dynamic from "next/dynamic";
 import { LazyThemeSwitcher } from "@/components/ui/theme-switcher";
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
       <div className="flex justify-between items-center mx-auto p-4 container">
         <div className="flex flex-row flex-1 justify-start items-center gap-4">
           <Link href="/">
-            <Agrofast.Logo className="w-36 h-9 translate-y-1" />
+            <MDxFy.Logo className="w-36 h-9 translate-y-1" />
           </Link>
         </div>
         <div className="hidden md:block space-x-4">

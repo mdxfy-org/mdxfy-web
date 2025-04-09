@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ className, children, hideHeader }) => {
   return (
     <>
       <Head>
-        <title>Agrofast</title>
+        <title>MDxFy</title>
       </Head>
       {!hideHeader && <Header />}
       <main

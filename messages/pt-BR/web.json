@@ -2,43 +2,43 @@
   "Pages": {
     "Index": {
       "meta": {
-        "title": "Agrofast - Transporte de Maquinário Agrícola",
+        "title": "MDxFy - Transporte de Maquinário Agrícola",
         "description": "Transporte de maquinário agrícola de forma rápida e segura"
       }
     },
     "Login": {
       "meta": {
-        "title": "Agrofast - Login",
-        "description": "Faça login para acessar sua conta Agrofast"
+        "title": "MDxFy - Login",
+        "description": "Faça login para acessar sua conta MDxFy"
       }
     },
     "SignUp": {
       "meta": {
-        "title": "Agrofast - Cadastro",
-        "description": "Crie uma nova conta no Agrofast"
+        "title": "MDxFy - Cadastro",
+        "description": "Crie uma nova conta no MDxFy"
       }
     },
     "AuthCode": {
       "meta": {
-        "title": "Agrofast - Código de Autenticação",
+        "title": "MDxFy - Código de Autenticação",
         "description": "Digite o código de autenticação enviado para seu telefone"
       }
     },
     "ForgotPass": {
       "meta": {
-        "title": "Agrofast - Esqueci Minha Senha",
-        "description": "Recupere sua senha do Agrofast"
+        "title": "MDxFy - Esqueci Minha Senha",
+        "description": "Recupere sua senha do MDxFy"
       }
     },
     "RecoverToken": {
       "meta": {
-        "title": "Agrofast - Recuperar senha",
+        "title": "MDxFy - Recuperar senha",
         "description": "Digite o token de recuperação enviado para seu telefone"
       }
     },
     "NotFound": {
       "meta": {
-        "title": "Agrofast - Página não encontrada",
+        "title": "MDxFy - Página não encontrada",
         "description": "Página não encontrada"
       },
       "messages": {
@@ -49,7 +49,7 @@
     },
     "InternalError": {
       "meta": {
-        "title": "Agrofast - Erro interno",
+        "title": "MDxFy - Erro interno",
         "description": "Ocorreu um erro"
       },
       "messages": {

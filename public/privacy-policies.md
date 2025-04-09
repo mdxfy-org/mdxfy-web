@@ -1,12 +1,12 @@
-# **POLÍTICA DE PRIVACIDADE – APLICATIVO “AGROFAST”**
+# **POLÍTICA DE PRIVACIDADE – APLICATIVO “MDXFY”**
 
-A presente Política de Privacidade tem como objetivo esclarecer quais dados são coletados dos(as) usuários(as) do aplicativo “AgroFast”, desenvolvido para facilitar o transporte de máquinas agrícolas (tratores, colhedeiras, pulverizadores etc.) por meio de uma plataforma inspirada em serviços de intermediação de transporte. Também descreve como essas informações são utilizadas, armazenadas, compartilhadas e os direitos de cada usuário(a) quanto a seus dados, em conformidade com a legislação brasileira aplicável.
+A presente Política de Privacidade tem como objetivo esclarecer quais dados são coletados dos(as) usuários(as) do aplicativo “MDxFy”, desenvolvido para facilitar o transporte de máquinas agrícolas (tratores, colhedeiras, pulverizadores etc.) por meio de uma plataforma inspirada em serviços de intermediação de transporte. Também descreve como essas informações são utilizadas, armazenadas, compartilhadas e os direitos de cada usuário(a) quanto a seus dados, em conformidade com a legislação brasileira aplicável.
 
 ---
 
 ## 1. INFORMAÇÕES GERAIS
 
-O “AgroFast” conecta **proprietários(as) de máquinas agrícolas** a **motoristas de caminhão prancha**, proporcionando agendamento flexível, negociação de tarifas, rotas otimizadas e outras funcionalidades descritas em nosso Documento de Especificação de Requisitos de Software (DERS). Para fornecer esses serviços de maneira confiável, segura e eficiente, a coleta e o processamento de alguns dados pessoais são indispensáveis.
+O “MDxFy” conecta **proprietários(as) de máquinas agrícolas** a **motoristas de caminhão prancha**, proporcionando agendamento flexível, negociação de tarifas, rotas otimizadas e outras funcionalidades descritas em nosso Documento de Especificação de Requisitos de Software (DERS). Para fornecer esses serviços de maneira confiável, segura e eficiente, a coleta e o processamento de alguns dados pessoais são indispensáveis.
 
 ---
 
@@ -138,14 +138,14 @@ Embora o foco principal seja o aplicativo móvel, certas funcionalidades podem u
 
 ## 9. ATUALIZAÇÕES DA POLÍTICA
 
-Esta Política de Privacidade pode ser modificada a qualquer momento para refletir melhorias no “AgroFast” ou mudanças legais. Quando houver alterações relevantes, o(a) usuário(a) será notificado(a) por meio de aviso no aplicativo ou outro canal apropriado. A continuidade de uso do serviço após tais alterações implica concordância com a versão atualizada.
+Esta Política de Privacidade pode ser modificada a qualquer momento para refletir melhorias no “MDxFy” ou mudanças legais. Quando houver alterações relevantes, o(a) usuário(a) será notificado(a) por meio de aviso no aplicativo ou outro canal apropriado. A continuidade de uso do serviço após tais alterações implica concordância com a versão atualizada.
 
 ---
 
 ## 10. CONTATO E SUPORTE
 
-Em caso de dúvidas, solicitações ou reclamações sobre esta Política ou o tratamento de dados no “AgroFast”, entre em contato pelos canais de suporte disponíveis no próprio aplicativo ou por e-mail indicado na seção “Suporte e Assistência ao Usuário”.
+Em caso de dúvidas, solicitações ou reclamações sobre esta Política ou o tratamento de dados no “MDxFy”, entre em contato pelos canais de suporte disponíveis no próprio aplicativo ou por e-mail indicado na seção “Suporte e Assistência ao Usuário”.
 
 ---
 
-**Esta Política de Privacidade** é parte fundamental do compromisso do “AgroFast” em oferecer um serviço seguro, transparente e confiável para proprietários(as) de máquinas agrícolas e motoristas de caminhão prancha. A utilização do aplicativo implica a aceitação integral das disposições aqui descritas, e quaisquer exceções, ressalvas ou casos omissos serão tratados de acordo com a legislação vigente e/ou mediante negociação direta com o(a) usuário(a).
+**Esta Política de Privacidade** é parte fundamental do compromisso do “MDxFy” em oferecer um serviço seguro, transparente e confiável para proprietários(as) de máquinas agrícolas e motoristas de caminhão prancha. A utilização do aplicativo implica a aceitação integral das disposições aqui descritas, e quaisquer exceções, ressalvas ou casos omissos serão tratados de acordo com a legislação vigente e/ou mediante negociação direta com o(a) usuário(a).

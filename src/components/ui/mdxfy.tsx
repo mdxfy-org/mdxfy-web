@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
 
-interface AgrofastGraphicsProps {
+interface MDxFyGraphicsProps {
   className?: string;
   style?: React.CSSProperties;
 }
 
-const Icon = ({ className, style }: AgrofastGraphicsProps) => {
+const Icon = ({ className, style }: MDxFyGraphicsProps) => {
   return (
     <svg
       width="400"
@@ -84,7 +84,7 @@ const Icon = ({ className, style }: AgrofastGraphicsProps) => {
   );
 };
 
-const Logo = ({ className, style }: AgrofastGraphicsProps) => {
+const Logo = ({ className, style }: MDxFyGraphicsProps) => {
   return (
     <svg
       width="273"
@@ -138,7 +138,7 @@ const Logo = ({ className, style }: AgrofastGraphicsProps) => {
   );
 };
 
-const AppLogo = ({ className, style }: AgrofastGraphicsProps) => {
+const AppLogo = ({ className, style }: MDxFyGraphicsProps) => {
   return (
     <svg
       width="400"
@@ -494,5 +494,5 @@ const AppLogo = ({ className, style }: AgrofastGraphicsProps) => {
   );
 };
 
-const Agrofast = { Logo, Icon, AppLogo };
-export default Agrofast;
+const MDxFy = { Logo, Icon, AppLogo };
+export default MDxFy;
