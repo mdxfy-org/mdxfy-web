@@ -7,7 +7,10 @@ type Language = "pt-BR" | "en" | "es";
 interface LanguageContextProps {
   language: Language;
   setLanguage: (language: Language) => void;
-  translateResponse: (fields: Record<string, string>) => Record<string, string>;
+  translateResponse: (
+    fields: Record<string, string | string[]>,
+    params?: Record<string, string>
+  ) => Record<string, string>;
 }
 
 const LanguageContext = createContext<LanguageContextProps | undefined>(
@@ -32,19 +35,23 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
   );
 
   const translateResponse = (
-    fields: Record<string, string | string[]> | undefined
+    fields: Record<string, string | string[]> | undefined,
+    params?: Record<string, string> | undefined
   ): Record<string, string> => {
     if (!fields) return {};
     return (
-      Object.keys(fields).reduce<Record<string, string>>(
-        (acc, key) => {
-          const value = Array.isArray(fields[key]) ? fields[key][0] : fields[key];
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          acc[key] = t(`Responses.${value}` as any);
-          return acc;
-        },
-        {}
-      ) ?? {}
+      Object.keys(fields).reduce<Record<string, string>>((acc, key) => {
+        const value = Array.isArray(fields[key]) ? fields[key][0] : fields[key];
+        const paramsValue: Record<string, string> | undefined = params
+          ? Object.keys(params).reduce<Record<string, string>>((acc, paramKey) => {
+              acc[paramKey] = params[paramKey];
+              return acc;
+            }, {})
+          : undefined;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        acc[key] = t(`Messages.errors.${value}` as any, paramsValue);
+        return acc;
+      }, {}) ?? {}
     );
   };
 

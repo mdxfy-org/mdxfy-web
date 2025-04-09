@@ -1,0 +1,171 @@
+{
+  "UI": {
+    "tooltips": {
+      "write_number": {
+        "title": "Ingresa tu número",
+        "info": "Escribe tu número de teléfono con código de área.",
+        "example": "Tu número de teléfono debe estar formateado de la siguiente manera: "
+      }
+    },
+    "info": {
+      "title": {
+        "verification_code_sent": "Código de verificación enviado"
+      },
+      "sms_verification_code_sent": "Se ha enviado un código de verificación al número: <number></number>. ¿No recibiste el código? <action>{action}</action>",
+      "email_verification_code_sent": "Se ha enviado un código de verificación al correo: <email></email>. ¿No recibiste el código? <action>{action}</action>"
+    },
+    "buttons": {
+      "next": "Siguiente",
+      "enter": "Ingresar",
+      "continue": "Continuar",
+      "cancel": "Cancelar",
+      "search": "Buscar",
+      "understood": "Entendido",
+      "resend_code": "Reenviar código",
+      "choose_a_photo": "Elige una foto",
+      "choose_another_photo": "Elige otra foto"
+    },
+    "labels": {
+      "code": "Código",
+      "name": "Nombre",
+      "surname": "Apellido",
+      "email": "Correo electrónico",
+      "number": "Número",
+      "password": "Contraseña",
+      "password_confirm": "Confirmar contraseña",
+      "new_password": "Nueva contraseña",
+      "new_password_confirm": "Confirmar nueva contraseña"
+    },
+    "placeholders": {
+      "write_code": "Ingresa el código",
+      "write_name": "Ingresa tu nombre",
+      "write_surname": "Ingresa tu apellido",
+      "write_email": "Ingresa tu correo electrónico",
+      "write_number": "Ingresa tu número",
+      "write_password": "Ingresa tu contraseña",
+      "write_password_confirm": "Confirma tu contraseña",
+      "write_new_password": "Ingresa tu nueva contraseña",
+      "write_new_password_confirm": "Confirma tu nueva contraseña"
+    },
+    "messages": {
+      "required_field": "Campo obligatorio",
+      "fill_this_field": "Completa este campo"
+    },
+    "titles": {
+      "welcome_again": "¡Bienvenido de nuevo, {name}!",
+      "create_account": "Crear cuenta",
+      "create_new_password": "Crear nueva contraseña",
+      "inform_your_number": "Proporciona tu número",
+      "update_account": "Actualizar cuenta"
+    },
+    "checkboxes": {
+      "remember_me": "Recuérdame"
+    },
+    "redirects": {
+      "about": "Acerca de",
+      "application": "Aplicación",
+      "web_version": "Versión web",
+      "see_more": "Ver más",
+      "profile": "Perfil",
+      "configs": "Configuraciones",
+      "home": "Inicio",
+      "create_account": "Crear una cuenta",
+      "forgot_password": "Olvidé mi contraseña",
+      "enter_another_account": "Iniciar sesión en otra cuenta",
+      "enter_existing_account": "Iniciar sesión en una cuenta existente",
+      "go_to_download": "Ir a Descargar",
+      "download_app": "Descargar App",
+      "change_theme": "Cambiar tema",
+      "logout": "Cerrar sesión"
+    }
+  },
+  "Messages": {
+    "titles": {
+      "error": "Error",
+      "success": "Éxito",
+      "info": "Información",
+      "warning": "Advertencia"
+    },
+    "errors": {
+      "default": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.",
+      "name_required": "El nombre es obligatorio",
+      "surname_required": "El apellido es obligatorio",
+      "number_required": "El número es obligatorio",
+      "invalid_number": "Número inválido",
+      "invalid_email": "Correo electrónico inválido",
+      "password_required": "La contraseña es obligatoria",
+      "password_length": "La contraseña debe tener al menos 8 caracteres",
+      "password_character": "La contraseña debe contener al menos un número, una letra mayúscula y un carácter especial",
+      "password_confirm_required": "La confirmación de la contraseña es obligatoria",
+      "password_not_coincide": "La contraseña y la confirmación no coinciden",
+      "terms_and_privacy_agreement_required": "Debes aceptar los Términos de Uso y la Política de Privacidad",
+      "terms_and_privacy_agreement_not_accepted": "No se aceptaron los Términos de Uso o la Política de Privacidad",
+      "not_implemented": "No implementado",
+      "user_not_found": "Usuario no encontrado",
+      "error_creating_user": "Error al crear el usuario",
+      "user_already_exists": "El usuario ya existe",
+      "invalid_login_credentials": "Credenciales de inicio de sesión inválidas",
+      "wrong_password": "Contraseña incorrecta",
+      "user_not_authenticated": "Usuario no autenticado",
+      "invalid_authentication_code": "Código de autenticación inválido",
+      "authentication_code_attempts": "Código de autenticación inválido. Quedan {attempts_left} intentos.",
+      "authentication_code_attempts_exceeded": "Se excedieron los intentos del código de autenticación",
+      "incorrect_authentication_code": "Código de autenticación incorrecto",
+      "failed_to_resend_code": "No se pudo reenviar el código",
+      "failed_to_upload_image": "No se pudo cargar la imagen",
+      "failed_to_save_image_record": "No se pudo guardar el registro de la imagen",
+      "no_images_found": "No se encontraron imágenes",
+      "failed_to_get_browser_agent": "No se pudo recopilar un agente del navegador",
+      "failed_to_upload_profile_picture": "Hubo un error al cargar la imagen del perfil"
+    },
+    "success": {
+      "user_created_successfully": "Usuario creado con éxito",
+      "login_successful": "Inicio de sesión exitoso",
+      "user_authenticated_successfully": "Usuario autenticado con éxito",
+      "authentication_code_resent": "Código de autenticación reenviado",
+      "image_uploaded_successfully": "Imagen cargada con éxito",
+      "user_found": "Usuario encontrado"
+    },
+    "info": {
+      "loading": "Cargando...",
+      "wait_resend_code_timeout": "Espera {seconds} segundos para reenviar el código."
+    }
+  },
+  "Application": {
+    "slogan": "TRANSPORTANDO TU PRODUCCIÓN",
+    "index_init_button": "¡Vamos!"
+  },
+  "Advertizement": {
+    "titles": {
+      "primary": "Transporte agrícola"
+    },
+    "subtitles": {
+      "primary": "Agilidad en el transporte de maquinaria agrícola"
+    },
+    "descriptions": {
+      "primary": "Revolucionando la forma en que transportas tus máquinas agrícolas"
+    }
+  },
+  "Language": {
+    "current": "Español",
+    "flag": "🇪🇸"
+  },
+  "Legal": {
+    "agreements": {
+      "accept_policy_and_terms": "Acepto los <use>Términos de Uso</use> y reconozco que he leído la <privacy>Política de Privacidad</privacy>",
+      "terms_of_use": "Términos de Uso",
+      "terms_of_use_info_1": "Al acceder o usar el sitio web, aceptas cumplir con los Términos de Uso y todas las leyes y regulaciones aplicables. Si no estás de acuerdo con alguno de estos términos, tienes prohibido usar o acceder a este sitio.",
+      "terms_of_use_info_2": "Los materiales contenidos en este sitio están protegidos por las leyes de derechos de autor y marcas registradas aplicables.",
+      "terms_of_use_info_3": "Para más información sobre cómo usamos tus datos, visita la página de <link>términos de uso</link> de nuestra plataforma.",
+      "privacy_policy": "Política de Privacidad",
+      "privacy_policy_info_1": "Tu privacidad es importante para nosotros. Es política de Agrofast respetar tu privacidad con respecto a cualquier información que podamos recopilar en el sitio web de Agrofast y otros sitios que poseemos y operamos.",
+      "privacy_policy_info_2": "Solicitamos información personal solo cuando realmente la necesitamos para brindarte un servicio. Lo hacemos por medios justos y legales, con tu conocimiento y consentimiento. También te informamos por qué la estamos recopilando y cómo se utilizará.",
+      "privacy_policy_info_3": "Para más información sobre cómo usamos tus datos, visita la página de <link>política de privacidad</link> de nuestra plataforma.",
+      "sign_in_terms": "Al continuar, enviaremos un código de validación al número proporcionado. Pueden aplicarse tarifas de datos y mensajes.",
+      "login_terms": "Al continuar, enviaremos un código de validación al número proporcionado. Pueden aplicarse tarifas de datos y mensajes.",
+      "mailing_list": "Quiero recibir correos promocionales de Agrofast."
+    },
+    "terms_of_use_markdown": "",
+    "privacy_policy_markdown": ""
+  }
+}

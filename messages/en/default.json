@@ -1,73 +1,18 @@
 {
-  "Pages": {
-    "Index": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Agricultural Machinery Transport",
-        "description": "Fast and safe agricultural machinery transport"
-      }
-    },
-    "Login": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Login",
-        "description": "Log in to access your NomeDoSeuNegocio account"
-      }
-    },
-    "SignUp": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Sign Up",
-        "description": "Create a new account on NomeDoSeuNegocio"
-      }
-    },
-    "AuthCode": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Authentication Code",
-        "description": "Enter the authentication code sent to your phone"
-      }
-    },
-    "ForgotPass": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Forgot My Password",
-        "description": "Recover your NomeDoSeuNegocio password"
-      }
-    },
-    "RecoverToken": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Recover Password",
-        "description": "Enter the recovery token sent to your phone"
-      }
-    },
-    "NotFound": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Page Not Found",
-        "description": "Page not found"
-      },
-      "messages": {
-        "page_not_found": "Page not found",
-        "as_expected": "As expected?",
-        "back_to_safety": "Back to safety"
-      }
-    },
-    "InternalError": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Internal Error",
-        "description": "An error occurred"
-      },
-      "messages": {
-        "an_error_has_occurred": "An internal error occurred"
-      }
-    }
-  },
   "UI": {
     "tooltips": {
       "write_number": {
         "title": "Enter your number",
         "info": "Write your phone number with area code.",
-        "example": "Your phone number should be formatted as follows: +55 01 23456-7890"
+        "example": "Your phone number should be formatted as follows: "
       }
     },
     "info": {
-      "verification_code_sent": "A verification code has been sent to the number: ",
-      "did_not_received_code": "Didn't receive the code?"
+      "title": {
+        "verification_code_sent": "Verification code sent"
+      },
+      "sms_verification_code_sent": "A verification code has been sent to the number: <number></number>. Didn't receive the code? <action>{action}</action>",
+      "email_verification_code_sent": "A verification code has been sent to the email: <email></email>. Didn't receive the code? <action>{action}</action>"
     },
     "buttons": {
       "next": "Next",
@@ -76,12 +21,15 @@
       "cancel": "Cancel",
       "search": "Search",
       "understood": "Understood",
-      "resend_code": "Resend code"
+      "resend_code": "Resend code",
+      "choose_a_photo": "Escolha uma foto",
+      "choose_another_photo": "Escolher outra foto"
     },
     "labels": {
       "code": "Code",
       "name": "Name",
       "surname": "Surname",
+      "email": "Email",
       "number": "Number",
       "password": "Password",
       "password_confirm": "Confirm password",
@@ -92,6 +40,7 @@
       "write_code": "Enter the code",
       "write_name": "Enter your name",
       "write_surname": "Enter your surname",
+      "write_email": "Enter your email",
       "write_number": "Enter your number",
       "write_password": "Enter your password",
       "write_password_confirm": "Confirm your password",
@@ -100,33 +49,57 @@
     },
     "messages": {
       "required_field": "Required field",
-      "fill_this_field": "Fill in this field"
+      "fill_this_field": "Fill out this field"
     },
     "titles": {
       "welcome_again": "Welcome back, {name}!",
       "create_account": "Create account",
       "create_new_password": "Create new password",
-      "inform_your_number": "Inform your number"
+      "inform_your_number": "Provide your number",
+      "update_account": "Update account"
     },
     "checkboxes": {
       "remember_me": "Remember me"
     },
     "redirects": {
-      "see_more": "See more",
       "about": "About",
+      "application": "Application",
+      "web_version": "Web Version",
+      "see_more": "See more",
       "profile": "Profile",
       "configs": "Settings",
       "home": "Home",
-      "application": "Application",
       "create_account": "Create an account",
       "forgot_password": "Forgot my password",
-      "enter_another_account": "Enter another account",
-      "enter_existing_account": "Enter an existing account"
+      "enter_another_account": "Sign in to another account",
+      "enter_existing_account": "Sign in to an existing account",
+      "go_to_download": "Go to Download",
+      "download_app": "Download App",
+      "change_theme": "Change theme",
+      "logout": "Log out"
     }
   },
   "Messages": {
+    "titles": {
+      "error": "Error",
+      "success": "Success",
+      "info": "Information",
+      "warning": "Warning"
+    },
     "errors": {
       "default": "An unexpected error occurred. Please try again later.",
+      "name_required": "Name is required",
+      "surname_required": "Surname is required",
+      "number_required": "Number is required",
+      "invalid_number": "Invalid number",
+      "invalid_email": "Invalid email",
+      "password_required": "Password is required",
+      "password_length": "The password must be at least 8 characters long",
+      "password_character": "The password must contain at least one number, one uppercase letter, and one special character",
+      "password_confirm_required": "Password confirmation is required",
+      "password_not_coincide": "The password and confirmation do not match",
+      "terms_and_privacy_agreement_required": "You must accept the Terms of Use and Privacy Policy",
+      "terms_and_privacy_agreement_not_accepted": "The Terms of Use or Privacy Policy were not accepted",
       "not_implemented": "Not implemented",
       "user_not_found": "User not found",
       "error_creating_user": "Error creating user",
@@ -135,12 +108,15 @@
       "wrong_password": "Incorrect password",
       "user_not_authenticated": "User not authenticated",
       "invalid_authentication_code": "Invalid authentication code",
+      "authentication_code_attempts": "Invalid authentication code. {attempts_left} attempts remaining.",
       "authentication_code_attempts_exceeded": "Authentication code attempts exceeded",
       "incorrect_authentication_code": "Incorrect authentication code",
       "failed_to_resend_code": "Failed to resend code",
       "failed_to_upload_image": "Failed to upload image",
       "failed_to_save_image_record": "Failed to save image record",
-      "no_images_found": "No images found"
+      "no_images_found": "No images found",
+      "failed_to_get_browser_agent": "Failed to collect a browser agent",
+      "failed_to_upload_profile_picture": "There was an error uploading the profile picture"
     },
     "success": {
       "user_created_successfully": "User created successfully",
@@ -151,6 +127,7 @@
       "user_found": "User found"
     },
     "info": {
+      "loading": "Loading...",
       "wait_resend_code_timeout": "Wait {seconds} seconds to resend the code."
     }
   },
@@ -163,7 +140,7 @@
       "primary": "Agricultural transport"
     },
     "subtitles": {
-      "primary": "Agility in agricultural machinery transport"
+      "primary": "Agility in the transport of agricultural machinery"
     },
     "descriptions": {
       "primary": "Revolutionizing the way you transport your agricultural machines"
@@ -177,10 +154,16 @@
     "agreements": {
       "accept_policy_and_terms": "I agree to the <use>Terms of Use</use> and acknowledge that I have read the <privacy>Privacy Policy</privacy>",
       "terms_of_use": "Terms of Use",
+      "terms_of_use_info_1": "By accessing or using the website, you agree to comply with the Terms of Use and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.",
+      "terms_of_use_info_2": "The materials contained on this site are protected by applicable copyright and trademark laws.",
+      "terms_of_use_info_3": "For more information on how we use your data, visit the <link>terms of use</link> page of our platform.",
       "privacy_policy": "Privacy Policy",
+      "privacy_policy_info_1": "Your privacy is important to us. It is Agrofast's policy to respect your privacy regarding any information we may collect on the Agrofast website and other sites we own and operate.",
+      "privacy_policy_info_2": "We request personal information only when we truly need it to provide you with a service. We do so by fair and lawful means, with your knowledge and consent. We also inform you why we are collecting it and how it will be used.",
+      "privacy_policy_info_3": "For more information on how we use your data, visit the <link>privacy policy</link> page of our platform.",
       "sign_in_terms": "By continuing, we will send a validation code to the provided number. Data and message rates may apply.",
       "login_terms": "By continuing, we will send a validation code to the provided number. Data and message rates may apply.",
-      "mailing_list": "I want to receive promotional emails from NomeDoSeuNegocio."
+      "mailing_list": "I want to receive promotional emails from Agrofast."
     },
     "terms_of_use_markdown": "",
     "privacy_policy_markdown": ""

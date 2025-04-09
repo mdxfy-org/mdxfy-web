@@ -1,0 +1,177 @@
+{
+  "Pages": {
+    "TermsOfUse": {
+      "meta": {
+        "title": "Agrofast - Terms of Use",
+        "description": "Agrofast Terms of Use"
+      },
+      "content": {
+        "main_title": "TERMS OF USE OF THE “AGROFAST” APPLICATION",
+        "section_1": {
+          "title": "1. INTRODUCTION AND ACCEPTANCE",
+          "paragraph_1": "Welcome to “AgroFast,” a platform that connects owners of agricultural machinery with flatbed truck drivers, facilitating negotiation and safe transport of heavy machinery.",
+          "paragraph_2": "These Terms of Use (“Terms”) are intended to regulate the conditions of use of the “AgroFast” application (“Application”). By using our service, the user declares that they have read, understood, and fully accepted these Terms."
+        },
+        "section_2": {
+          "title": "2. ELIGIBILITY",
+          "paragraph_1": "To use the Application, the user must have full legal capacity under Brazilian law and must not be legally prohibited from entering into contracts or performing civil acts.",
+          "paragraph_2": "Minors under 18 may only use “AgroFast” if duly represented or assisted by a legal guardian."
+        },
+        "section_3": {
+          "title": "3. REGISTRATION AND USER RESPONSIBILITY",
+          "paragraph_1": "Registration in the Application requires the provision of truthful and complete information, such as full name, email address, phone number, among others. The user is responsible for the veracity and timeliness of the data provided.",
+          "paragraph_2": "Each user is responsible for safeguarding the confidentiality of their access credentials (login and password). Any activities performed using these credentials are the exclusive responsibility of the account holder."
+        },
+        "section_4": {
+          "title": "4. CONDUCT AND PROPER USE",
+          "paragraph_1": "Respect and Civility: It is strictly prohibited to adopt discriminatory, offensive, abusive, defamatory, or threatening behavior, or any behavior that violates human rights and the dignity of individuals. Users must maintain cordiality and mutual respect throughout the entire experience within the Application.",
+          "paragraph_2": "Illegal Acts: Any practice contrary to current laws and regulations is prohibited, including but not limited to fraud, violations of intellectual property, communication of illegal or defamatory content, and misuse of the Application for criminal purposes.",
+          "paragraph_3": "Harmony in Relationships: Users (both owners of agricultural machinery and drivers) must undertake to:",
+          "paragraph_4": "4.3.1. Treat everyone with empathy, refraining from hate speech, prejudice, or harassment.\n4.3.2. Maintain integrity in providing information about vehicles, machinery, routes, and transportation costs.\n4.3.3. Ensure that transportation activities comply with legal regulations (for example, weight limits, dimensions, and specific licenses)."
+        },
+        "section_5": {
+          "title": "5. PAYMENTS AND FEES",
+          "paragraph_1": "“AgroFast” may offer functionalities for payment and charging for the transportation of machinery. Any fees, as well as payment methods, will be described on the platform or through support channels.",
+          "paragraph_2": "The user agrees to pay all amounts due for the provision of services to the respective driver(s) or owner(s) of machinery, in accordance with the rules established in the Application."
+        },
+        "section_6": {
+          "title": "6. INTELLECTUAL PROPERTY",
+          "paragraph_1": "The intellectual property rights related to trademarks, logos, domain names, layout, and any other distinctive signs of “AgroFast” belong to the team responsible for the platform, and no license or authorization is granted for use beyond what is strictly necessary to enjoy the services offered.",
+          "paragraph_2": "It is prohibited to copy, reproduce, modify, create derivative works, distribute, publish, or otherwise exploit the content of the Application without the prior and express authorization of its owners."
+        },
+        "section_7": {
+          "title": "7. PRIVACY AND DATA PROTECTION",
+          "paragraph_1": "Using “AgroFast” implies reading and accepting the Privacy Policy, which explains the types of data collected, the purposes, and how they are processed.",
+          "paragraph_2": "Users undertake to use the data obtained through the Application solely for the purposes of communication and the provision of services described, in compliance with the legislation, especially the Brazilian General Data Protection Law (LGPD)."
+        },
+        "section_8": {
+          "title": "8. LIMITATION OF LIABILITY",
+          "paragraph_1": "“AgroFast” acts as an intermediary between owners of agricultural machinery and drivers, and is not directly responsible for the execution of transportation, the quality of the service provided, or the actions/omissions of users.",
+          "paragraph_2": "To the maximum extent permitted by applicable law, “AgroFast” shall not be liable for any damages, losses, lost profits, or any harm resulting from delays, cancellations, accidents, or any other events related to the provision of the transportation service."
+        },
+        "section_9": {
+          "title": "9. INDEMNIFICATION",
+          "paragraph_1": "The user agrees to indemnify and hold “AgroFast” harmless from any liabilities, claims, demands, losses, or expenses arising from:",
+          "paragraph_2": "9.1.1. Violation of these Terms of Use or of the applicable legislation.\n9.1.2. Illegal activities carried out through their account.\n9.1.3. False or misleading information provided to “AgroFast” or third parties on the platform."
+        },
+        "section_10": {
+          "title": "10. CHANGES TO THE TERMS",
+          "paragraph_1": "“AgroFast” may modify these Terms at any time to improve the service or adapt it to legal changes. The user will be notified when relevant changes occur. Continued use of the Application after the disclosure of such changes constitutes acceptance of the new Terms."
+        },
+        "section_11": {
+          "title": "11. DURATION AND TERMINATION",
+          "paragraph_1": "These Terms are valid for an indefinite period from the moment the user accepts them.",
+          "paragraph_2": "Either party may terminate the relationship at any time by deleting the account. Nevertheless, obligations arising from events occurring before termination may remain."
+        },
+        "section_12": {
+          "title": "12. APPLICABLE LAW AND JURISDICTION",
+          "paragraph_1": "These Terms shall be interpreted in accordance with Brazilian law.",
+          "paragraph_2": "The court of the user's place of residence is chosen to resolve any disputes arising from these Terms, unless otherwise required by law or an express agreement between the parties."
+        },
+        "section_13": {
+          "title": "13. FINAL PROVISIONS",
+          "paragraph_1": "The possible tolerance of “AgroFast” regarding the breach of any clauses of these Terms does not imply a waiver of the right to demand compliance at a later time.",
+          "paragraph_2": "Should any provision of this instrument be deemed invalid or unenforceable, the remaining provisions shall remain in full force and effect.",
+          "paragraph_3": "BY USING “AGROFAST”, YOU ACKNOWLEDGE THAT YOU HAVE READ AND AGREE TO ALL THE ABOVE TERMS."
+        }
+      }
+    },
+    "PrivacyPolicies": {
+      "meta": {
+        "title": "Agrofast - Privacy Policy",
+        "description": "Agrofast Privacy Policy"
+      },
+      "content": {
+        "main_title": "PRIVACY POLICY – “AGROFAST” APPLICATION",
+        "section_1": {
+          "title": "1. GENERAL INFORMATION",
+          "paragraph_1": "“AgroFast” connects owners of agricultural machinery to flatbed truck drivers, providing flexible scheduling, rate negotiation, optimized routes, and other features described in our Software Requirements Specification Document (DERS). To offer these services reliably, securely, and efficiently, the collection and processing of certain personal data are essential."
+        },
+        "section_2": {
+          "title": "2. DATA COLLECTED",
+          "subsections": {
+            "subsection_2_1": {
+              "subtitle": "2.1. Registration Data",
+              "paragraph_1": "Personal information: full name, email address, phone number/cell phone.",
+              "paragraph_2": "Access credentials: login and password, required for authentication in the application."
+            },
+            "subsection_2_2": {
+              "subtitle": "2.2. Profile Data",
+              "paragraph_1": "Driver Profile: information about the vehicle (type of flatbed truck), service radius, availability, transportation preferences, and any attachments related to licensing or permits.",
+              "paragraph_2": "Owner Profile: details about the agricultural machine(s) (dimensions, approximate weight, type of equipment)."
+            },
+            "subsection_2_3": {
+              "subtitle": "2.3. Location Data",
+              "paragraph_1": "Real-time location (via GPS) or approximate location of the user, used to indicate the exact place of pickup/delivery of the machines, calculate optimized routes, and estimate costs."
+            },
+            "subsection_2_4": {
+              "subtitle": "2.4. Payment and Transaction Data",
+              "paragraph_1": "Payment method: data required to carry out the transaction (when there is payment integration).",
+              "paragraph_2": "Transaction history: amounts paid, dates, times, and details of each trip."
+            },
+            "subsection_2_5": {
+              "subtitle": "2.5. Application Usage Data",
+              "paragraph_1": "Transportation requests: records of each request (starting point, destination, machine dimensions/weight, date, and time).",
+              "paragraph_2": "Internal messages: content of conversations exchanged via the application's messaging system.",
+              "paragraph_3": "Ratings and feedback: scores and comments after the completion of services."
+            },
+            "subsection_2_6": {
+              "subtitle": "2.6. Notification Data",
+              "paragraph_1": "Notification tokens, collected to enable real-time alerts about requests, transportation status, and payments."
+            },
+            "subsection_2_7": {
+              "subtitle": "2.7. Technical Data",
+              "paragraph_1": "Error logs and performance metrics, device information (model, operating system, app version, etc.) for diagnosis and support."
+            }
+          }
+        },
+        "section_3": {
+          "title": "3. PURPOSES OF DATA PROCESSING",
+          "paragraph_1": "Service Provision: enabling the connection between owners and drivers, allowing registration, request publication, routing, and billing.",
+          "paragraph_2": "Security: preventing fraud, misuse of the application, and ensuring the authenticity of accesses.",
+          "paragraph_3": "Route Optimization and Fare Calculation: use of location and travel information for cost estimates and efficient routes.",
+          "paragraph_4": "Support and Dispute Resolution: contact with the support team to solve problems and verify services.",
+          "paragraph_5": "Service Improvements: analysis of statistics, errors, and metrics to enhance features.",
+          "paragraph_6": "Communication: sending notifications and important updates.",
+          "paragraph_7": "Legal Obligations: maintaining tax records and responding to official requests."
+        },
+        "section_4": {
+          "title": "4. DATA SHARING",
+          "paragraph_1": "Between users: basic information necessary to complete the transport (e.g., pickup location, truck details).",
+          "paragraph_2": "Map providers: location and travel information may be shared with third-party APIs (Google Maps, etc.) for routing.",
+          "paragraph_3": "Payment providers: billing data sent to trusted financial intermediaries.",
+          "paragraph_4": "Competent authorities: if required to comply with legal obligations, court orders, or investigations."
+        },
+        "section_5": {
+          "title": "5. LEGAL BASIS AND USER RIGHTS",
+          "paragraph_1": "The collection and processing of personal data are based on consent, legitimate interest, and/or compliance with legal obligations.",
+          "paragraph_2": "Under Brazilian law (LGPD), users have rights to confirm data processing, access, correction, anonymization, blocking or deletion of data, portability, revocation of consent, among others."
+        },
+        "section_6": {
+          "title": "6. DATA RETENTION AND DELETION",
+          "paragraph_1": "Registration data is kept as long as there is an active account. In the event of deletion, data may be retained to fulfill legal obligations.",
+          "paragraph_2": "Transaction history is stored for managerial and audit purposes.",
+          "paragraph_3": "Messages, feedback, and ratings may be retained for reputation verification and dispute resolution."
+        },
+        "section_7": {
+          "title": "7. SECURITY MEASURES",
+          "paragraph_1": "Encryption (HTTPS) to protect data in transit.",
+          "paragraph_2": "Secure storage with physical and logical access controls.",
+          "paragraph_3": "Strong password policy and vulnerability monitoring."
+        },
+        "section_8": {
+          "title": "8. COOKIES AND SIMILAR TECHNOLOGIES",
+          "paragraph_1": "Tracking technologies (cookies, device identifiers) may be used to improve user experience, remember language preferences, and optimize performance."
+        },
+        "section_9": {
+          "title": "9. POLICY UPDATES",
+          "paragraph_1": "This Policy may be modified at any time to reflect service improvements or legal changes. Users will be notified of relevant changes."
+        },
+        "section_10": {
+          "title": "10. CONTACT AND SUPPORT",
+          "paragraph_1": "Questions, requests, or complaints should be directed to the support channels within the application or via the email provided for this purpose."
+        }
+      }
+    }
+  }
+}

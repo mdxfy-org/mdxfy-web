@@ -1,82 +1,29 @@
 {
-  "Pages": {
-    "Index": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Transporte de Maquinário Agrícola",
-        "description": "Transporte de maquinário agrícola de forma rápida e segura"
-      }
-    },
-    "Login": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Login",
-        "description": "Faça login para acessar sua conta NomeDoSeuNegocio"
-      }
-    },
-    "SignUp": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Cadastro",
-        "description": "Crie uma nova conta no NomeDoSeuNegocio"
-      }
-    },
-    "AuthCode": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Código de Autenticação",
-        "description": "Digite o código de autenticação enviado para seu telefone"
-      }
-    },
-    "ForgotPass": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Esqueci Minha Senha",
-        "description": "Recupere sua senha do NomeDoSeuNegocio"
-      }
-    },
-    "RecoverToken": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Recuperar senha",
-        "description": "Digite o token de recuperação enviado para seu telefone"
-      }
-    },
-    "NotFound": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Página não encontrada",
-        "description": "Página não encontrada"
-      },
-      "messages": {
-        "page_not_found": "Página não encontrada",
-        "as_expected": "Assim como esperado?",
-        "back_to_safety": "Voltar para a segurança"
-      }
-    },
-    "InternalError": {
-      "meta": {
-        "title": "NomeDoSeuNegocio - Erro interno",
-        "description": "Ocorreu um erro"
-      },
-      "messages": {
-        "an_error_has_occurred": "Ocorreu um erro interno"
-      }
-    }
-  },
   "UI": {
     "tooltips": {
       "write_number": {
         "title": "Digite seu número",
         "info": "Escreva seu número de telefone com DDD.",
-        "example": "Seu número de telefone deve ser formatado da seguinte maneira: +55 01 23456-7890"
+        "example": "Seu número de telefone deve ser formatado da seguinte maneira: "
       }
     },
     "info": {
-      "verification_code_sent": "Um code de verificação foi enviado para o número: ",
-      "did_not_received_code": "Não recebeu o código?"
+      "title": {
+        "verification_code_sent": "Código de verificação enviado"
+      },
+      "sms_verification_code_sent": "Um code de verificação foi enviado para o número: <number></number>. Não recebeu o código? <action>{action}</action>",
+      "email_verification_code_sent": "Um code de verificação foi enviado para o email: <email></email>. Não recebeu o código? <action>{action}</action>"
     },
     "buttons": {
-      "next": "Próximo",
+      "next": "Proximo",
       "enter": "Entrar",
       "continue": "Continuar",
       "cancel": "Cancelar",
       "search": "Pesquisar",
       "understood": "Entendi",
-      "resend_code": "Reenviar código"
+      "resend_code": "Reenviar código",
+      "choose_a_photo": "Escolher uma foto",
+      "choose_another_photo": "Escolher outra foto"
     },
     "labels": {
       "code": "Código",
@@ -115,22 +62,44 @@
       "remember_me": "Lembrar-se de mim"
     },
     "redirects": {
-      "see_more": "Veja mais",
       "about": "Sobre",
+      "application": "Aplicação",
+      "web_version": "Versão Web",
+      "see_more": "Veja mais",
       "profile": "Perfil",
       "configs": "Configurações",
       "home": "Início",
-      "application": "Aplicação",
       "create_account": "Criar uma conta",
       "forgot_password": "Esqueci minha senha",
       "enter_another_account": "Entrar em outra conta",
-      "enter_existing_account": "Entrar em uma conta existente"
+      "enter_existing_account": "Entrar em uma conta existente",
+      "go_to_download": "Ir Para Download",
+      "download_app": "Fazer Download",
+      "change_theme": "Alterar tema",
+      "logout": "Sair da conta"
     }
   },
   "Messages": {
+    "titles": {
+      "error": "Erro",
+      "success": "Sucesso",
+      "info": "Informação",
+      "warning": "Atenção"
+    },
     "errors": {
       "default": "Um erro inesperado ocorreu. Por favor, tente novamente mais tarde.",
-
+      "name_required": "Nome é obrigatório",
+      "surname_required": "Sobrenome é obrigatório",
+      "number_required": "Número é obrigatório",
+      "invalid_number": "Número inválido",
+      "invalid_email": "Email inválido",
+      "password_required": "Senha é obrigatória",
+      "password_length": "A senha deve ter pelo menos 8 caracteres",
+      "password_character": "A senha deve conter pelo menos um número, uma letra maiúscula e um caractere especial",
+      "password_confirm_required": "Confirmação da senha é obrigatória",
+      "password_not_coincide": "A senha e a confirmação não coincidem",
+      "terms_and_privacy_agreement_required": "Você deve aceitar os Termos de Uso e a Política de Privacidade",
+      "terms_and_privacy_agreement_not_accepted": "Os Termos de Uso ou a Política de Privacidade não foram aceitos",
       "not_implemented": "Não implementado",
       "user_not_found": "Usuário não encontrado",
       "error_creating_user": "Erro ao criar usuário",
@@ -139,12 +108,15 @@
       "wrong_password": "Senha incorreta",
       "user_not_authenticated": "Usuário não autenticado",
       "invalid_authentication_code": "Código de autenticação inválido",
+      "authentication_code_attempts": "Código de autenticação inválido. {attempts_left} tentativas restantes.",
       "authentication_code_attempts_exceeded": "Tentativas de código de autenticação excedidas",
       "incorrect_authentication_code": "Código de autenticação incorreto",
       "failed_to_resend_code": "Falha ao reenviar código",
       "failed_to_upload_image": "Falha ao enviar imagem",
       "failed_to_save_image_record": "Falha ao salvar registro de imagem",
-      "no_images_found": "Nenhuma imagem encontrada"
+      "no_images_found": "Nenhuma imagem encontrada",
+      "failed_to_get_browser_agent": "Não foi possível coletar um agente de navegador",
+      "failed_to_upload_profile_picture": "Houve um erro ao enviar a imagem do perfil"
     },
     "success": {
       "user_created_successfully": "Usuário criado com sucesso",
@@ -155,11 +127,12 @@
       "user_found": "Usuário encontrado"
     },
     "info": {
+      "loading": "Carregando...",
       "wait_resend_code_timeout": "Aguarde {seconds} segundos para reenviar o código."
     }
   },
   "Application": {
-    "slogan": "Slogan da sua empresa",
+    "slogan": "TRANSPORTANDO SUA PRODUÇÃO",
     "index_init_button": "Vamos lá!"
   },
   "Advertizement": {
@@ -181,11 +154,16 @@
     "agreements": {
       "accept_policy_and_terms": "Concordo com os <use>Termos de Uso</use> e reconheço que li a <privacy>Política de Privacidade</privacy>",
       "terms_of_use": "Termos de Uso",
+      "terms_of_use_info_1": "Ao acessar ou usar o site, você concorda em cumprir os Termos de Uso e todas as leis e regulamentos aplicáveis. Se você não concordar com qualquer um destes termos, está proibido de usar ou acessar este site.",
+      "terms_of_use_info_2": "Os materiais contidos neste site são protegidos pelas leis de direitos autorais e marcas comerciais aplicáveis.",
+      "terms_of_use_info_3": "Para mais informações sobre como usamos seus dados, a pagina de <link>termos de uso</link> da nossa plataforma.",
       "privacy_policy": "Política de Privacidade",
-
+      "privacy_policy_info_1": "Sua privacidade é importante para nós. É política do Agrofast respeitar sua privacidade em relação a qualquer informação sua que possamos coletar no site Agrofast, e outros sites que possuímos e operamos.",
+      "privacy_policy_info_2": "Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.",
+      "privacy_policy_info_3": "Para mais informações sobre como usamos seus dados, a pagina de <link>política de privacidade</link> da nossa plataforma.",
       "sign_in_terms": "Ao continuar, enviaremos um código de validação no número informado. Podem ser aplicadas taxas de dados e mensagens.",
       "login_terms": "Ao continuar, enviaremos um código de validação no número informado. Podem ser aplicadas taxas de dados e mensagens.",
-      "mailing_list": "Desejo receber e-mails promocionais da NomeDoSeuNegocio."
+      "mailing_list": "Desejo receber e-mails promocionais da Agrofast."
     },
     "terms_of_use_markdown": "",
     "privacy_policy_markdown": ""

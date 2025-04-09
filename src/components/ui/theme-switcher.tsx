@@ -2,15 +2,15 @@
 
 import {
   Button,
-  ButtonProps as NextUIButtonProps,
+  ButtonProps as HeroUIButtonProps,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Moon02Icon, Sun01Icon } from "@hugeicons/react";
+import { cn } from "@/lib/utils";
+import ThemeUserFeedback from "../ux/theme-user-feedback";
 
-interface ThemeSwitcherProps extends NextUIButtonProps {
+interface ThemeSwitcherProps extends HeroUIButtonProps {
   className?: string;
 }
 
@@ -32,37 +32,8 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
   if (!mounted) return null;
 
   return (
-    <Button color="default" className={className} onPress={toggleTheme} isIconOnly {...props}>
-      <motion.div
-        initial="hidden"
-        animate={theme === "dark" ? "hidden" : "visible"}
-        className="absolute text-inherit"
-        variants={{
-          hidden: { opacity: 0, rotate: -90 },
-          visible: { opacity: 1, rotate: 0 },
-        }}
-      >
-        <Sun01Icon
-          type="rounded"
-          variant="duotone"
-          className="w-[1em] h-[1em] text-gray-600 text-inherit dark:text-gray-200"
-        />
-      </motion.div>
-      <motion.div
-        initial="hidden"
-        animate={theme === "dark" ? "visible" : "hidden"}
-        className="absolute text-inherit"
-        variants={{
-          hidden: { opacity: 0, rotate: 90 },
-          visible: { opacity: 1, rotate: 0 },
-        }}
-      >
-        <Moon02Icon
-          type="rounded"
-          variant="duotone"
-          className="w-[1em] h-[1em] text-gray-700 text-inherit dark:text-gray-200"
-        />
-      </motion.div>
+    <Button className={cn("bg-default-100 hover:bg-default-200 shadow-sm duration-100", className)} onPress={toggleTheme} isIconOnly {...props}>
+      <ThemeUserFeedback />
     </Button>
   );
 };
@@ -70,7 +41,7 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
 export const LazyThemeSwitcher: React.FC = () => {
   return (
     <Button isIconOnly>
-      <Spinner />
+      <Spinner size="sm" color="default" />
     </Button>
   );
 };

@@ -1,30 +1,100 @@
 import { motion } from "framer-motion";
 import {
   Button,
-  InputProps as NextUIInputProps,
-  Input as NextUIInput,
-} from "@nextui-org/react";
+  InputProps as HeroUIInputProps,
+  Input as HeroUIInput,
+} from "@heroui/react";
 import { ViewIcon, ViewOffIcon } from "@hugeicons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
+import { cn } from "@/lib/utils";
 
-export interface InputProps extends NextUIInputProps {
+export interface InputProps extends HeroUIInputProps {
+  format?: (value: string) => string;
+  queryCollectable?: boolean;
   taggableVisibility?: boolean;
-  error?: string | Record<string, string>;
 }
 
-const Input = ({ taggableVisibility, ...props }: InputProps) => {
+const Input: React.FC<InputProps> = ({
+  name,
+  value,
+  format,
+  className,
+  queryCollectable = false,
+  taggableVisibility,
+  disabled,
+  onChange,
+  ...props
+}) => {
+  const router = useRouter();
   const t = useTranslations();
+
+  const [hasFirstRender, setHasFirstRender] = useState(false);
+  const [inputValue, setInputValue] = useState(value ?? "");
   const [isPassVisible, setIsPassVisible] = useState(false);
 
   const togglePassVisibility = () => setIsPassVisible(!isPassVisible);
 
+  useEffect(() => {
+    if (value) {
+      setInputValue(value);
+      onChange?.({ target: { value } } as React.ChangeEvent<HTMLInputElement>);
+    }
+  }, [value, onChange]);
+
+  useEffect(() => {
+    if (format) {
+      setInputValue(format(inputValue ?? ""));
+      onChange?.({
+        target: { value: format(inputValue ?? "") },
+      } as React.ChangeEvent<HTMLInputElement>);
+      return;
+    }
+    onChange?.({
+      target: { value: inputValue ?? "" },
+    } as React.ChangeEvent<HTMLInputElement>);
+  }, [format, inputValue, onChange]);
+
+  useEffect(() => {
+    if (queryCollectable && name && router.query[name] && !hasFirstRender) {
+      const queryValue = router.query[name];
+      if (queryValue) {
+        const val = queryValue as string;
+        setInputValue(val);
+        onChange?.({
+          target: { value: val },
+        } as React.ChangeEvent<HTMLInputElement>);
+        setHasFirstRender(true);
+      }
+    }
+  }, [queryCollectable, name, onChange, router.query, hasFirstRender]);
+
   return (
-    <NextUIInput
+    <HeroUIInput
+      name={name}
       classNames={{
         base: "relative",
         label: "top-6",
-        helperWrapper: "absolute -bottom-[20px] -left-0.5 min-w-max",
+        helperWrapper: "absolute -bottom-[20px] -left-0.5 max-w-full",
+        errorMessage: "truncate",
+        input: "!transition-colors !duration-100 ",
+        inputWrapper: "!transition-colors !duration-100",
+      }}
+      labelPlacement="outside"
+      variant="bordered"
+      className={cn(
+        "text-gray-700 dark:text-gray-200 transition-colors duration-100",
+        className,
+        disabled && "opacity-50 pointer-events-none",
+      )}
+      value={inputValue}
+      onChange={(e) => {
+        if (format) {
+          setInputValue(format(e.target.value));
+          return;
+        }
+        setInputValue(e.target.value);
       }}
       endContent={
         taggableVisibility &&
@@ -33,7 +103,7 @@ const Input = ({ taggableVisibility, ...props }: InputProps) => {
             type="button"
             size="sm"
             variant="flat"
-            className="-right-[9px]"
+            className="-right-[10px]"
             isIconOnly
             onPress={togglePassVisibility}
           >
@@ -49,7 +119,7 @@ const Input = ({ taggableVisibility, ...props }: InputProps) => {
               <ViewOffIcon
                 type="rounded"
                 variant="bulk"
-                className="group-data-[pressed=true]:scale-y-90 text-default-700 text-xl transition-transform pointer-events-none"
+                className="text-default-700 text-xl group-data-[pressed=true]:scale-y-90 transition-transform pointer-events-none"
               />
             </motion.div>
             <motion.div
@@ -64,13 +134,12 @@ const Input = ({ taggableVisibility, ...props }: InputProps) => {
               <ViewIcon
                 type="rounded"
                 variant="stroke"
-                className="group-data-[pressed=true]:scale-y-85 text-default-700 text-xl transition-transform pointer-events-none"
+                className="text-default-700 text-xl group-data-[pressed=true]:scale-y-85 transition-transform pointer-events-none"
               />
             </motion.div>
           </Button>
         )
       }
-      {...props}
       validate={(value) => {
         if (props.isRequired && !value) {
           return t("UI.messages.fill_this_field");
@@ -80,7 +149,9 @@ const Input = ({ taggableVisibility, ...props }: InputProps) => {
         }
         return null;
       }}
+      {...props}
       type={isPassVisible ? "text" : props.type}
+      disabled={disabled}
     />
   );
 };

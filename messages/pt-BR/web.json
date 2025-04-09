@@ -1,0 +1,60 @@
+{
+  "Pages": {
+    "Index": {
+      "meta": {
+        "title": "Agrofast - Transporte de Maquinário Agrícola",
+        "description": "Transporte de maquinário agrícola de forma rápida e segura"
+      }
+    },
+    "Login": {
+      "meta": {
+        "title": "Agrofast - Login",
+        "description": "Faça login para acessar sua conta Agrofast"
+      }
+    },
+    "SignUp": {
+      "meta": {
+        "title": "Agrofast - Cadastro",
+        "description": "Crie uma nova conta no Agrofast"
+      }
+    },
+    "AuthCode": {
+      "meta": {
+        "title": "Agrofast - Código de Autenticação",
+        "description": "Digite o código de autenticação enviado para seu telefone"
+      }
+    },
+    "ForgotPass": {
+      "meta": {
+        "title": "Agrofast - Esqueci Minha Senha",
+        "description": "Recupere sua senha do Agrofast"
+      }
+    },
+    "RecoverToken": {
+      "meta": {
+        "title": "Agrofast - Recuperar senha",
+        "description": "Digite o token de recuperação enviado para seu telefone"
+      }
+    },
+    "NotFound": {
+      "meta": {
+        "title": "Agrofast - Página não encontrada",
+        "description": "Página não encontrada"
+      },
+      "messages": {
+        "page_not_found": "Página não encontrada",
+        "as_expected": "Assim como esperado?",
+        "back_to_safety": "Voltar para a segurança"
+      }
+    },
+    "InternalError": {
+      "meta": {
+        "title": "Agrofast - Erro interno",
+        "description": "Ocorreu um erro"
+      },
+      "messages": {
+        "an_error_has_occurred": "Ocorreu um erro interno"
+      }
+    }
+  }
+}

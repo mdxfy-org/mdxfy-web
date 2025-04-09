@@ -1,5 +1,4 @@
-import api from "@/service/api";
-import { useRouter } from "next/router";
+// providers/AuthProvider.tsx
 import React, {
   createContext,
   useContext,
@@ -7,22 +6,19 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useRef,
 } from "react";
-
-interface User {
-  id: string;
-  name: string;
-  surname: string;
-  number: string;
-  email?: string;
-  profile_picture?: string;
-}
+import { useRouter } from "next/router";
+import { useCookies } from "react-cookie";
+import api, { setBearerToken } from "@/service/api";
+import { getMe } from "@/http/user/get-me";
+import { AUTH_TOKEN_KEY, AUTHENTICATED_KEY } from "@/middleware";
+import { User } from "@/types/user";
+import { useOverlay } from "./overlay-provider";
 
 interface AuthContextProps {
   token: string | undefined;
   setToken: (token: string | undefined) => void;
-  tempToken: string | undefined;
-  setTempToken: (token: string | undefined) => void;
   user: User | undefined;
   setUser: (user: User | undefined) => void;
   logout: () => void;
@@ -30,10 +26,10 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-export const useUser = (): AuthContextProps => {
+export const useAuth = (): AuthContextProps => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useUser must be used within a AuthProvider");
+    throw new Error("useUser must be used within an AuthProvider");
   }
   return context;
 };
@@ -42,80 +38,94 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const router = useRouter();
-  const [tempToken, setTempAuthToken] = useState<string | undefined>(undefined);
-  const [token, setAuthToken] = useState<string | undefined>(undefined);
+  const { setIsPageLoading } = useOverlay();
+
+  const [cookies, setCookie, removeCookie] = useCookies([
+    AUTH_TOKEN_KEY,
+    AUTHENTICATED_KEY,
+  ]);
+  const [token, setAuthTokenState] = useState<string | undefined>(undefined);
   const [user, setUser] = useState<User | undefined>(undefined);
 
-  const setTempToken = useCallback((token: string | undefined) => {
-    if (token) {
-      localStorage.setItem("mdxfy_temp_auth_token", token);
-    } else {
-      localStorage.removeItem("mdxfy_temp_auth_token");
-    }
-    setTempAuthToken(token);
-  }, []);
+  const fetchInProgress = useRef(false);
 
   const setToken = useCallback(
-    (token: string | undefined) => {
-      if (token) {
-        localStorage.setItem("mdxfy_auth_token", token);
-        setTempToken(undefined);
+    (tokenValue: string | undefined) => {
+      if (tokenValue) {
+        setAuthTokenState(tokenValue);
+        setBearerToken(tokenValue);
+        setCookie(AUTH_TOKEN_KEY, tokenValue);
       } else {
-        localStorage.removeItem("mdxfy_auth_token");
+        setAuthTokenState(undefined);
+        removeCookie(AUTHENTICATED_KEY);
+        removeCookie(AUTH_TOKEN_KEY);
+        delete api.defaults.headers["Authorization"];
       }
-      setAuthToken(token);
     },
-    [setTempToken]
+    [setCookie, removeCookie]
   );
 
   const logout = useCallback(() => {
     setUser(undefined);
-    setAuthToken(undefined);
-    setTempToken(undefined);
     setToken(undefined);
-    delete api.defaults.headers["Authorization"];
     router.push("/login", undefined, { locale: router.locale });
-  }, [router, setAuthToken, setUser, setToken, setTempToken]);
+  }, [router, setToken]);
 
-  const fetchUser = useCallback(async () => {    
-    if (token || tempToken) {
-      api.defaults.headers["Authorization"] = `Bearer ${token ?? tempToken}`;
-      api
-      .get("/user/info/me")
-      .then(({ data }) => {
-          setUser(data?.user);
+  const fetchMe = useCallback(async () => {
+    if (fetchInProgress.current || user) return;
+    fetchInProgress.current = true;
+
+    const storedToken = cookies[AUTH_TOKEN_KEY];
+    if (storedToken) {
+      setToken(storedToken);
+      setBearerToken(storedToken);
+      getMe()
+        .then(({ data }) => {
+          setUser(data.user);
+          if (data.authenticated) {
+            setCookie(AUTHENTICATED_KEY, data.authenticated);
+            return;
+          }
+          if (
+            !cookies[AUTHENTICATED_KEY] ||
+            cookies[AUTHENTICATED_KEY] !== true ||
+            !data.authenticated
+          ) {
+            removeCookie(AUTHENTICATED_KEY);
+          }
         })
-        .catch(() => {
-          logout();
+        .catch(({ response }) => {
+          if (response?.status === 401) {
+            logout();
+          }
+        })
+        .finally(() => {
+          setIsPageLoading(false);
+          fetchInProgress.current = false;
         });
+    } else {
+      setIsPageLoading(false);
+      fetchInProgress.current = false;
     }
-  }, [token, tempToken, setUser, logout]);
+  }, [
+    user,
+    cookies,
+    logout,
+    setToken,
+    setCookie,
+    removeCookie,
+    setIsPageLoading,
+  ]);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("mdxfy_auth_token");
-    const storedTempToken = localStorage.getItem("mdxfy_temp_auth_token");
-    if (storedToken) {
-      setAuthToken(storedToken);
-    }
-    if (storedTempToken) {
-      setTempAuthToken(storedTempToken);
-    }
-    fetchUser();
-  }, [fetchUser]);
+    fetchMe();
+  }, [fetchMe]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        token,
-        setToken,
-        tempToken,
-        setTempToken,
-        user,
-        setUser,
-        logout,
-      }}
-    >
+    <AuthContext.Provider value={{ token, setToken, user, setUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export default AuthProvider;

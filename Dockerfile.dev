@@ -1,11 +1,11 @@
 FROM node:20 as builder
 
+EXPOSE 3030
+
 WORKDIR /web
-
-COPY package.json package-lock.json* .npmrc ./ 
-
-RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "dev"]
+RUN npm install
+
+CMD [ "npm", "run", "dev" ]

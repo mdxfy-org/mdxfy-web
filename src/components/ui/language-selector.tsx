@@ -1,8 +1,8 @@
 import {
   Select,
   SelectItem,
-  SelectProps as NextUISelectProps,
-} from "@nextui-org/react";
+  SelectProps as HeroUISelectProps,
+} from "@heroui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -11,7 +11,7 @@ import { Globe02Icon, LanguageSkillIcon } from "@hugeicons/react";
 import { languages } from "@/internationalization/languages";
 import { cn } from "@/lib/utils";
 
-interface LanguageSelectorProps extends Omit<NextUISelectProps, 'children'> {
+interface LanguageSelectorProps extends Omit<HeroUISelectProps, "children"> {
   className?: string;
   children?: React.ReactNode;
 }
@@ -24,14 +24,24 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
 
   const handleRouteChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    router.push(router.pathname, undefined, { locale: event.target.value });
+    const selectedLocale = event.target.value;
+    let newPath = router.asPath;
+
+    newPath = newPath.replace(/^\/(portfolio|web|legal)/, "");
+
+    if (!newPath.startsWith("/")) {
+      newPath = "/" + newPath;
+    }
+
+    router.push(newPath, undefined, { locale: selectedLocale });
   };
 
   return (
     <Select
       onChange={handleRouteChange}
-      className={cn("text-medium max-w-40", className)}
+      className={cn("max-w-40 text-medium", className)}
       classNames={{
+        trigger: "!transition-colors !duration-100",
         popoverContent: "rounded-md min-w-[10rem]",
         selectorIcon: "right-2",
       }}
@@ -84,7 +94,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       disableSelectorIconRotation
     >
       {languages.map((lang) => (
-        <SelectItem startContent={lang.flag} key={lang.id} value={lang.id}>
+        <SelectItem startContent={lang.flag} key={lang.id} data-value={lang.id}>
           {lang.name}
         </SelectItem>
       ))}
@@ -102,11 +112,11 @@ export const LazyLanguageSelector: React.FC<LanguageSelectorProps> = ({
       radius="sm"
       aria-label="Language"
       placeholder="Select language"
-      className={cn("text-medium max-w-40", className)}
+      className={cn("max-w-40 text-medium", className)}
       {...props}
     >
       {languages.map((lang) => (
-        <SelectItem startContent={lang.flag} key={lang.id} value={lang.id}>
+        <SelectItem startContent={lang.flag} key={lang.id} data-value={lang.id}>
           {lang.name}
         </SelectItem>
       ))}

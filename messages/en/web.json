@@ -1,0 +1,60 @@
+{
+  "Pages": {
+    "Index": {
+      "meta": {
+        "title": "Agrofast - Agricultural Machinery Transport",
+        "description": "Transport agricultural machinery quickly and safely"
+      }
+    },
+    "Login": {
+      "meta": {
+        "title": "Agrofast - Login",
+        "description": "Log in to access your Agrofast account"
+      }
+    },
+    "SignUp": {
+      "meta": {
+        "title": "Agrofast - Sign Up",
+        "description": "Create a new account on Agrofast"
+      }
+    },
+    "AuthCode": {
+      "meta": {
+        "title": "Agrofast - Authentication Code",
+        "description": "Enter the authentication code sent to your phone"
+      }
+    },
+    "ForgotPass": {
+      "meta": {
+        "title": "Agrofast - Forgot My Password",
+        "description": "Recover your Agrofast password"
+      }
+    },
+    "RecoverToken": {
+      "meta": {
+        "title": "Agrofast - Recover Password",
+        "description": "Enter the recovery token sent to your phone"
+      }
+    },
+    "NotFound": {
+      "meta": {
+        "title": "Agrofast - Page Not Found",
+        "description": "Page not found"
+      },
+      "messages": {
+        "page_not_found": "Page not found",
+        "as_expected": "As expected?",
+        "back_to_safety": "Back to safety"
+      }
+    },
+    "InternalError": {
+      "meta": {
+        "title": "Agrofast - Internal Error",
+        "description": "An error occurred"
+      },
+      "messages": {
+        "an_error_has_occurred": "An internal error occurred"
+      }
+    }
+  }
+}

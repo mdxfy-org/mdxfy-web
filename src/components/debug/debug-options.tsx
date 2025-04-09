@@ -6,7 +6,7 @@ import {
   Select,
   SelectItem,
   Switch,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useRouter } from "next/router";
 import { LazyThemeSwitcher } from "../ui/theme-switcher";
 import dynamic from "next/dynamic";
@@ -33,7 +33,7 @@ const RouteSelector = () => {
     "/login",
     "/sign-up",
     "/auth-code",
-    "/forgot-pass",
+    "/reset-password",
     "/recover-token",
   ];
   const router = useRouter();
@@ -55,7 +55,7 @@ const RouteSelector = () => {
       placeholder="Select route"
     >
       {routes.map((route) => (
-        <SelectItem key={route} value={route}>
+        <SelectItem key={route} data-value={route}>
           {route}
         </SelectItem>
       ))}
@@ -64,15 +64,15 @@ const RouteSelector = () => {
 };
 
 const DebugOptions = () => {
-  const { isLoading, setIsLoading } = useOverlay();
+  const { isLoading, setIsLoading, isPageLoading, setIsPageLoading } = useOverlay();
 
   if (process.env.NODE_ENV !== "development") {
     return null;
   }
 
   return (
-    <div className="right-4 bottom-4 z-[150] fixed">
-      <Popover radius="sm" placement="top-end" offset={8}>
+    <div className="bottom-4 left-4 z-[150] fixed">
+      <Popover radius="sm" placement="top-start" offset={8}>
         <PopoverTrigger>
           <Button size="md" color="success" isIconOnly>
             <Bug01Icon
@@ -90,6 +90,19 @@ const DebugOptions = () => {
               <hr className="flex-1 mx-2 border-dashed" />
               <p>Change theme</p>
             </div>
+            <div className="flex flex-row justify-between items-center text-tiny">
+              <Switch
+                size="sm"
+                defaultChecked={isPageLoading}
+                onChange={(value) => {
+                  setIsPageLoading(value.target.checked);
+                }}
+                className="text-medium"
+              />
+              <hr className="flex-1 mx-2 border-dashed" />
+              <p>Page Loading</p>
+            </div>
+
             <div className="flex flex-row justify-between items-center text-tiny">
               <Switch
                 size="sm"
