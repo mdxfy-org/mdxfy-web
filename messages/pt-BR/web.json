@@ -2,58 +2,58 @@
   "Pages": {
     "Index": {
       "meta": {
-        "title": "MDxFy - Transporte de Maquinário Agrícola",
-        "description": "Transporte de maquinário agrícola de forma rápida e segura"
+        "title": "MDXfy - A rede social para desenvolvedores",
+        "description": "Compartilhe conhecimento, escreva com Markdown e conecte-se com a comunidade dev"
       }
     },
     "Login": {
       "meta": {
-        "title": "MDxFy - Login",
-        "description": "Faça login para acessar sua conta MDxFy"
+        "title": "MDXfy - Login",
+        "description": "Faça login para acessar sua conta e interagir com a comunidade"
       }
     },
     "SignUp": {
       "meta": {
-        "title": "MDxFy - Cadastro",
-        "description": "Crie uma nova conta no MDxFy"
+        "title": "MDXfy - Criar Conta",
+        "description": "Crie uma conta gratuita e comece a compartilhar ideias com Markdown"
       }
     },
     "AuthCode": {
       "meta": {
-        "title": "MDxFy - Código de Autenticação",
-        "description": "Digite o código de autenticação enviado para seu telefone"
+        "title": "MDXfy - Código de Verificação",
+        "description": "Digite o código de verificação enviado para seu e-mail"
       }
     },
     "ForgotPass": {
       "meta": {
-        "title": "MDxFy - Esqueci Minha Senha",
-        "description": "Recupere sua senha do MDxFy"
+        "title": "MDXfy - Recuperar Senha",
+        "description": "Receba instruções para redefinir sua senha"
       }
     },
     "RecoverToken": {
       "meta": {
-        "title": "MDxFy - Recuperar senha",
-        "description": "Digite o token de recuperação enviado para seu telefone"
+        "title": "MDXfy - Token de Recuperação",
+        "description": "Insira o token de recuperação enviado para seu e-mail"
       }
     },
     "NotFound": {
       "meta": {
-        "title": "MDxFy - Página não encontrada",
-        "description": "Página não encontrada"
+        "title": "MDXfy - Página não encontrada",
+        "description": "Não conseguimos encontrar a página que você procurava"
       },
       "messages": {
         "page_not_found": "Página não encontrada",
-        "as_expected": "Assim como esperado?",
-        "back_to_safety": "Voltar para a segurança"
+        "as_expected": "Isso era esperado?",
+        "back_to_safety": "Voltar para a página inicial"
       }
     },
     "InternalError": {
       "meta": {
-        "title": "MDxFy - Erro interno",
-        "description": "Ocorreu um erro"
+        "title": "MDXfy - Erro interno",
+        "description": "Algo deu errado. Estamos trabalhando para corrigir."
       },
       "messages": {
-        "an_error_has_occurred": "Ocorreu um erro interno"
+        "an_error_has_occurred": "Um erro inesperado ocorreu"
       }
     }
   }

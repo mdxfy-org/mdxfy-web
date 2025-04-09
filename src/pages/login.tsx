@@ -23,29 +23,6 @@ export default function Login() {
         <meta name="description" content={pt("meta.description")} />
       </Head>
       <Body className="flex flex-row" hideHeader>
-        <div className="hidden lg:flex flex-col flex-[4] justify-center items-center">
-          <section className="flex flex-col items-start gap-4 p-4">
-            <h1 className="font-mono font-light text-gray-700 dark:text-gray-200 text-2xl">
-              {t("Advertizement.titles.primary")}
-            </h1>
-            <h1 className="max-w-md font-inter font-bold text-gray-700 dark:text-gray-200 text-4xl">
-              {t("Advertizement.subtitles.primary")}
-            </h1>
-            <p className="text-gray-700 dark:text-gray-200 text-sm">
-              {t("Advertizement.descriptions.primary")}
-            </p>
-            <Button
-              color="success"
-              className="gap-1 text-white"
-              onPress={() => {
-                router.push(`${getPortfolioUrl()}/${router.locale}/about`);
-              }}
-            >
-              {t("UI.redirects.see_more")}
-              <ArrowUpRight01Icon />
-            </Button>
-          </section>
-        </div>
         <div className="flex flex-[5] justify-center md:items-center max-h-svh overflow-hidden overflow-y-auto">
           <div className="flex flex-col gap-4 px-8 py-6 w-full max-w-md min-h-max">
             <div className="flex flex-col items-center gap-2">

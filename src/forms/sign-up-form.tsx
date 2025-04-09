@@ -105,11 +105,10 @@ const SignInForm: React.FC = () => {
           isRequired
         />
         <Input
-          name="surname"
-          label={t("UI.labels.surname")}
-          placeholder={t("UI.placeholders.write_surname")}
-          type="name"
-          autoCapitalize="words"
+          name="username"
+          label={t("UI.labels.username")}
+          placeholder={t("UI.placeholders.write_username")}
+          type="text"
           isRequired
         />
         <Input
