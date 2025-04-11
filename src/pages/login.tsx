@@ -1,18 +1,11 @@
 import Body from "@/components/body";
-import { ArrowUpRight01Icon } from "@hugeicons/react";
-import {
-  Button,
-} from "@heroui/react";
 import MDxFy from "@/components/ui/mdxfy";
-import { getPortfolioUrl } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
-import { useRouter } from "next/router";
 import Head from "next/head";
 import LoginForm from "@/forms/login-form";
 
 export default function Login() {
-  const router = useRouter();
   const t = useTranslations();
   const pt = useTranslations("Pages.Login");
 

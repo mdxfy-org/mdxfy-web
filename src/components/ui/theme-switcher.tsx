@@ -22,12 +22,15 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    document.documentElement.setAttribute("data-color-mode", newTheme);
   };
 
   useEffect(() => {
+    document.documentElement.setAttribute("data-color-mode", theme || "light");
     setMounted(true);
-  }, []);
+  }, [theme]);
 
   if (!mounted) return null;
 

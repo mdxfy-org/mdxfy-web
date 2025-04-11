@@ -2,7 +2,6 @@ import Body from "@/components/body";
 import MDxFy from "@/components/ui/mdxfy";
 import { useTranslations } from "next-intl";
 import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
-import { useRouter } from "next/router";
 import Head from "next/head";
 import SignInForm from "@/forms/sign-up-form";
 

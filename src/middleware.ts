@@ -19,13 +19,11 @@ const webMiddleware = (request: NextRequest) => {
   const host = request.headers.get("host") || "";
 
   if (host === webHost) {
-    let authPath = pathname;
-
     const hasBrowserAgent = request.cookies.has(AUTH_BROWSER_AGENT_KEY);
     const hasToken = request.cookies.has(AUTH_TOKEN_KEY);
     const isAuthenticated = request.cookies.has(AUTHENTICATED_KEY);
 
-    if (PUBLIC_PATHS.includes(authPath)) {
+    if (PUBLIC_PATHS.includes(pathname)) {
       if (hasBrowserAgent && hasToken && isAuthenticated) {
         const redirectUrl = new URL("/", request.url);
         return NextResponse.redirect(redirectUrl);
@@ -33,7 +31,7 @@ const webMiddleware = (request: NextRequest) => {
       return NextResponse.next();
     }
 
-    if (PUBLIC_AUTH_PATHS.includes(authPath)) {
+    if (PUBLIC_AUTH_PATHS.includes(pathname)) {
       if (!hasBrowserAgent || !hasToken) {
         const redirectUrl = new URL(PUBLIC_PATHS[0], request.url);
         return NextResponse.redirect(redirectUrl);
@@ -71,11 +69,12 @@ const publicMatcher = [
 ];
 
 export function middleware(request: NextRequest) {
+  return NextResponse.next();
+
   if (publicMatcher.some((path) => request.nextUrl.pathname.startsWith(path))) {
     return NextResponse.next();
   }
 
-  const { pathname } = request.nextUrl;
   const host = request.headers.get("host") || "";
 
   if (host === webHost) {
