@@ -10,11 +10,9 @@ export type UploadPictureResponse = Success<{
 export const uploadPicture = async (
   picture: FormData
 ): Promise<UploadPictureResponse> => {
-  return api
-    .post("/user/picture/upload", picture, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    .then((res) => res.data);
+  return api.post("/user/picture/upload", picture, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };

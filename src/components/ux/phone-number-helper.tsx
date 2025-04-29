@@ -1,12 +1,24 @@
-import { Button, Code, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
-import { InformationCircleIcon } from "@hugeicons/react";
+import {
+  Button,
+  Code,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@heroui/react";
 import { useTranslations } from "next-intl";
+import Icon from "../icon";
+import { InfoCircle } from "@solar-icons/react";
 
 const PhoneNumberHelper: React.FC = () => {
   const t = useTranslations();
 
   return (
-    <Popover className="translate-x-1" placement="top-end" radius="sm" offset={8}>
+    <Popover
+      className="translate-x-1"
+      placement="top-end"
+      radius="sm"
+      offset={8}
+    >
       <PopoverTrigger>
         <Button
           type="button"
@@ -15,11 +27,9 @@ const PhoneNumberHelper: React.FC = () => {
           className="-right-[10px]"
           isIconOnly
         >
-          <InformationCircleIcon
-            type="rounded"
-            variant="stroke"
-            className="text-default-700 text-xl pointer-events-none"
-          />
+          <Icon>
+            <InfoCircle weight="Linear" />
+          </Icon>
         </Button>
       </PopoverTrigger>
       <PopoverContent>

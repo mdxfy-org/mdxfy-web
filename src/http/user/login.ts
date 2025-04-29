@@ -20,7 +20,7 @@ export const login = async (
 ): Promise<LoginResponse> => {
   return await api.post<LoginResponse>("/user/login", data).then(({ data }) => {
     api.interceptors.request.use((config) => {
-      config.headers.Authorization = `Bearer ${data.data.token}`;
+      config.headers.Authorization = `Bearer ${data.token}`;
       return config;
     });
     return data;

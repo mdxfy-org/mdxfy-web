@@ -1,4 +1,4 @@
-import Input from "@/components/input";
+import Input from "@/components/input/input";
 import {
   Button,
   Form,
@@ -51,14 +51,14 @@ const ResetPasswordForm: React.FC = () => {
           </Button>
           <div className="flex justify-between text-small text-center">
             <Link
-              href="/sign-up"
+              href="/web/sign-up"
               className="hover:opacity-80 font-medium text-primary text-sm hover:underline transition-all"
             >
               {t("UI.redirects.create_account")}
             </Link>
             <Link
               href={{
-                pathname: "/login",
+                pathname: "/web/login",
                 query: {
                   email: email,
                 },

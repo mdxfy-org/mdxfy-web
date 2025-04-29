@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@heroui/react";
-import { ViewIcon, ViewOffIcon } from "@hugeicons/react";
+import { Eye, EyeClosed } from "@solar-icons/react";
 
 interface PasswordVisibilityToggleProps {
   isPassVisible: boolean;
@@ -29,10 +29,9 @@ const PasswordVisibilityToggle: React.FC<PasswordVisibilityToggleProps> = ({
           visible: { opacity: 1, rotateX: 0 },
         }}
       >
-        <ViewOffIcon
-          type="rounded"
-          variant="bulk"
-          className="text-default-700 text-xl group-data-[pressed=true]:scale-y-90 transition-transform pointer-events-none"
+        <EyeClosed
+          weight="LineDuotone"
+          className="stroke-[0.1px] stroke-current text-default-700 text-xl group-data-[pressed=true]:scale-y-90 transition-transform translate-y-0.5 pointer-events-none"
         />
       </motion.div>
       <motion.div
@@ -44,9 +43,7 @@ const PasswordVisibilityToggle: React.FC<PasswordVisibilityToggleProps> = ({
           visible: { opacity: 1, rotateX: 0 },
         }}
       >
-        <ViewIcon
-          type="rounded"
-          variant="stroke"
+        <Eye
           className="text-default-700 text-xl group-data-[pressed=true]:scale-y-85 transition-transform pointer-events-none"
         />
       </motion.div>

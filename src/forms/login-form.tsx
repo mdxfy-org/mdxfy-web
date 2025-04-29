@@ -1,9 +1,7 @@
-import Checkbox from "@/components/checkbox";
-import Input from "@/components/input";
+import Checkbox from "@/components/input/checkbox";
+import Input from "@/components/input/input";
 import { useAuth } from "@/contexts/auth-provider";
-import { useLanguage } from "@/contexts/language-provider";
 import { useOverlay } from "@/contexts/overlay-provider";
-import { Button, Form } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Link from "@/components/link";
 import { useRouter } from "next/router";
@@ -11,12 +9,15 @@ import { useState } from "react";
 import { login } from "@/http/user/login";
 import { AUTHENTICATED_KEY } from "@/middleware";
 import { useCookies } from "react-cookie";
+import Button from "@/components/button";
+import Form from "@/components/form";
+import { FormValues } from "@/types/form";
+import { cookieOptions } from "@/service/cookie";
 
 const LoginForm: React.FC = () => {
   const router = useRouter();
   const t = useTranslations();
   const { setIsLoading } = useOverlay();
-  const { translateResponse } = useLanguage();
   const { setUser, setToken } = useAuth();
 
   const [, setCookie] = useCookies([AUTHENTICATED_KEY]);
@@ -24,26 +25,22 @@ const LoginForm: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-
+  const handleSubmit = (data: FormValues) => {
     setIsLoading(true);
     login(data)
-      .then(({ data }) => {
-        setToken(data.token);
-        setUser(data.user);
-        if (data?.auth === "authenticate") {
-          router.push("/auth-code");
+      .then(({ token, user, auth }) => {
+        setToken(token);
+        setUser(user);
+        if (auth === "authenticate") {
+          router.reload();
         }
-        if (data?.auth === "authenticated") {
-          setCookie(AUTHENTICATED_KEY, "true");
-          router.push("/");
+        if (auth === "authenticated") {
+          setCookie(AUTHENTICATED_KEY, "true", cookieOptions);
+          router.reload();
         }
       })
       .catch(({ response: { data: error } }) => {
-        const fields = translateResponse(error.errors);
-        setErrors(fields);
+        setErrors(error.errors);
       })
       .finally(() => {
         setIsLoading(false);
@@ -86,7 +83,7 @@ const LoginForm: React.FC = () => {
               {t("UI.checkboxes.remember_me")}
             </Checkbox>
             <Link
-              href="/reset-password"
+              href="/web/reset-password"
               className="hover:opacity-80 min-w-max font-medium text-primary text-sm hover:underline transition-all"
             >
               {t("UI.redirects.forgot_password")}
@@ -100,7 +97,7 @@ const LoginForm: React.FC = () => {
           <p className="text-small text-center">
             <Link
               href={{
-                pathname: "/sign-up",
+                pathname: "/web/sign-up",
                 query: {
                   email: email,
                 },

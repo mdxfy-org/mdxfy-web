@@ -12,7 +12,5 @@ export type AuthError = Error<{
 }>;
 
 export const auth = (code: string) => {
-  return api
-    .get<AuthResponse>("/user/auth", { params: { code } })
-    .then((res) => res.data);
+  return api.get<AuthResponse>("/user/auth", { params: { code } });
 };

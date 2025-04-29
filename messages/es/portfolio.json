@@ -1,0 +1,26 @@
+{
+  "Pages": {
+    "Index": {
+      "meta": {
+        "title": "Agrofast - Transporte de Maquinaria Agrícola",
+        "description": "Transporte de maquinaria agrícola de forma rápida y segura"
+      },
+      "title": "Transportes agrícolas",
+      "subtitle": "Agilidad en el transporte de maquinaria agrícola",
+      "descriptions": "Revolucionando la forma en que transportas tus máquinas agrícolas",
+      "app_description_1": "La aplicación de transporte de máquinas agrícolas",
+      "start_download_here": "Inicie aquí la descarga de la aplicación Agrofast",
+      "or_redirect_to_web_version": "Rediríjase a la versión web",
+      "find_our_policies": "Encuentre nuestras <policies>políticas de privacidad</policies> y <terms>términos de uso</terms> de la aplicación accediendo a estos enlaces."
+    },
+    "About": {
+      "meta": {
+        "title": "Agrofast - Sobre nosotros",
+        "description": "Algunas informaciones sobre Agrofast"
+      },
+      "paragraph_1": "La aplicación ofrece soporte tanto para conductores como para propietarios de maquinaria, con una propuesta similar a Uber, pero enfocada en el transporte de grandes maquinarias como sembradoras, cosechadoras, pulverizadores y tractores.",
+      "paragraph_2": "Garantizamos seguridad y eficiencia en cada transporte, con monitoreo en tiempo real y soporte dedicado para asegurar que sus máquinas lleguen al destino sin problemas. Confíe en nuestra experiencia y tecnología para sus necesidades de transporte de maquinaria.",
+      "paragraph_3": "Encuentre más información sobre las <policies>políticas de privacidad</policies> y <terms>términos de uso</terms> de la aplicación accediendo a estos enlaces."
+    }
+  }
+}

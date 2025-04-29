@@ -1,5 +1,4 @@
 import { useAuth } from "@/contexts/auth-provider";
-import { useLanguage } from "@/contexts/language-provider";
 import { useOverlay } from "@/contexts/overlay-provider";
 import { cn } from "@/lib/utils";
 import { Button, Form, Skeleton, Spacer } from "@heroui/react";
@@ -14,9 +13,10 @@ import { useToast } from "@/service/toast";
 import { useCountdown } from "@/lib/useCountdown";
 import { resendCode } from "@/http/user/resend-code";
 import { AxiosError } from "axios";
-import InputOtp from "@/components/input-otp";
+import InputOtp from "@/components/input/input-otp";
 import { useCookies } from "react-cookie";
 import { AUTHENTICATED_KEY } from "@/middleware";
+import { cookieOptions } from "@/service/cookie";
 
 const TIMEOUT = 60;
 
@@ -27,12 +27,11 @@ const AuthCodeForm: React.FC = () => {
 
   const [, setCookie] = useCookies([AUTHENTICATED_KEY]);
 
-  const { translateResponse } = useLanguage();
   const { setIsLoading } = useOverlay();
   const [isDataLoading, setIsDataLoading] = useState(false);
   const { user, setUser, setToken, logout } = useAuth();
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Record<string, string | string[]>>({});
 
   const [timer, setTimer] = useCountdown(TIMEOUT);
 
@@ -79,8 +78,8 @@ const AuthCodeForm: React.FC = () => {
       .then(({ data }) => {
         setUser(data.user);
         setToken(data.token);
-        setCookie(AUTHENTICATED_KEY, "true");
-        router.push("/");
+        setCookie(AUTHENTICATED_KEY, "true", cookieOptions);
+        router.reload();
       })
       .catch(({ response, status }: AxiosError<AuthError>) => {
         if (status === 401) {
@@ -92,18 +91,17 @@ const AuthCodeForm: React.FC = () => {
           logout();
           return;
         }
-        if (response?.data?.data?.attempts) {
+        if (response?.data?.attempts) {
           const params = {
-            attempts_left: response?.data?.data?.attempts?.toString() || "0",
+            attempts_left: response?.data?.attempts?.toString() || "0",
           };
-          const errors = translateResponse(response?.data.errors ?? {}, params);
           toast.error({
             description: t(
               "Messages.errors.authentication_code_attempts",
               params
             ),
           });
-          setErrors(errors);
+          setErrors(response?.data?.errors ?? {});
           return;
         }
         toast.error({
@@ -129,12 +127,14 @@ const AuthCodeForm: React.FC = () => {
         className="inline-block rounded-lg h-6"
         isLoaded={isDataLoading}
       >
-        <p className="pb-2 font-semibold text-gray-700 dark:text-gray-200 text-xl text-left">
-          {t("UI.titles.welcome_again", { name: user?.name })}
-          <span aria-label="emoji" className="ml-2" role="img">
-            👋
-          </span>
-        </p>
+        {user?.name && (
+          <p className="pb-2 font-semibold text-gray-700 dark:text-gray-200 text-xl text-left">
+            {t("UI.titles.welcome_again", { name: user?.name })}
+            <span aria-label="emoji" className="ml-2" role="img">
+              👋
+            </span>
+          </p>
+        )}
       </Skeleton>
       <Form
         className="flex flex-col flex-1 md:flex-auto"
@@ -150,7 +150,10 @@ const AuthCodeForm: React.FC = () => {
             >
               {t("UI.placeholders.write_code")}
             </label>
-            <Skeleton className="rounded-lg h-14" isLoaded={!codeLengthLoading && isDataLoading}>
+            <Skeleton
+              className="rounded-lg h-14"
+              isLoaded={!codeLengthLoading && isDataLoading}
+            >
               <InputOtp
                 name="code"
                 className="mb-2"
@@ -190,7 +193,7 @@ const AuthCodeForm: React.FC = () => {
             {t("UI.buttons.continue")}
           </Button>
           <p className="w-full text-small text-center">
-            <Link href="/login" onClick={logout}>
+            <Link href="/web/login" onClick={logout}>
               {t("UI.redirects.enter_another_account")}
             </Link>
           </p>

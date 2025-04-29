@@ -22,14 +22,11 @@ export type SignUpResponse = Success<{
 export const signUp = async (
   data: SignUpData | FormValues
 ): Promise<SignUpResponse> => {
-  const response = await api
-    .post<SignUpResponse>("/user", data)
-    .then((data) => {
-      return data;
+  return api.post<SignUpResponse>("/user", data).then(({ data }) => {
+    api.interceptors.request.use((config) => {
+      config.headers.Authorization = `Bearer ${data.token}`;
+      return config;
     });
-  api.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${response.data.data.token}`;
-    return config;
+    return data;
   });
-  return response.data;
 };

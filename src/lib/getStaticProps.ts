@@ -27,9 +27,10 @@ export const getStaticPropsWithMessages = async ({
 }: {
   locale: string;
 }) => {
-  const [base, legal, web] = await Promise.all([
+  const [base, legal, portfolio, web] = await Promise.all([
     import(`../../messages/${locale}/default.json`),
     import(`../../messages/${locale}/legal.json`),
+    import(`../../messages/${locale}/portfolio.json`),
     import(`../../messages/${locale}/web.json`),
   ]);
 
@@ -52,8 +53,9 @@ export const getStaticPropsWithMessages = async ({
     return target;
   };
 
-  const messages = {};
+  const messages = {}; 
   deepMerge(messages, base.default);
+  deepMerge(messages, portfolio.default);
   deepMerge(messages, legal.default);
   deepMerge(messages, web.default);
 

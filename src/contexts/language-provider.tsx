@@ -1,6 +1,8 @@
 import useLocalStorage from "@/lib/useLocalstorage";
 import { useTranslations } from "next-intl";
+import { I18nProvider } from "@react-aria/i18n";
 import React, { createContext, useContext, ReactNode, useEffect } from "react";
+import { useRouter } from "next/router";
 
 type Language = "pt-BR" | "en" | "es";
 
@@ -29,6 +31,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const t = useTranslations();
+  const router = useRouter();
   const [language, setLanguage] = useLocalStorage<Language>(
     "language",
     "pt-BR"
@@ -43,10 +46,13 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
       Object.keys(fields).reduce<Record<string, string>>((acc, key) => {
         const value = Array.isArray(fields[key]) ? fields[key][0] : fields[key];
         const paramsValue: Record<string, string> | undefined = params
-          ? Object.keys(params).reduce<Record<string, string>>((acc, paramKey) => {
-              acc[paramKey] = params[paramKey];
-              return acc;
-            }, {})
+          ? Object.keys(params).reduce<Record<string, string>>(
+              (acc, paramKey) => {
+                acc[paramKey] = params[paramKey];
+                return acc;
+              },
+              {}
+            )
           : undefined;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         acc[key] = t(`Messages.errors.${value}` as any, paramsValue);
@@ -60,12 +66,12 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
   }, [language]);
 
   return (
-    <>
+    <I18nProvider locale={router.locale}>
       <LanguageContext.Provider
         value={{ language, setLanguage, translateResponse }}
       >
         {children}
       </LanguageContext.Provider>
-    </>
+    </I18nProvider>
   );
 };

@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
-import { Moon02Icon, Sun01Icon } from "@hugeicons/react";
 import { useTheme } from "next-themes";
-// import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+import { Moon, Sun } from "@solar-icons/react";
 
 interface ThemeUserFeedbackProps {
   iconSize?: number;
+  className?: string;
 }
 
 const ThemeUserFeedback: React.FC<ThemeUserFeedbackProps> = ({
-  // className,
   iconSize = 16,
+  className = "text-inherit dark:text-inherit",
 }) => {
   const { theme } = useTheme();
 
@@ -18,33 +19,30 @@ const ThemeUserFeedback: React.FC<ThemeUserFeedbackProps> = ({
       <motion.div
         initial="hidden"
         animate={theme === "dark" ? "hidden" : "visible"}
-        className="absolute text-inherit"
+        className={cn("absolute text-gray-600 dark:text-gray-200", className)}
         variants={{
           hidden: { opacity: 0, rotate: -90 },
           visible: { opacity: 1, rotate: 0 },
         }}
       >
-        <Sun01Icon
+        <Sun
           size={iconSize}
-          type="rounded"
-          variant="stroke"
-          className="w-[1em] h-[1em] text-gray-600 text-inherit dark:text-gray-200"
+          weight="LineDuotone"
+          className="text-inherit"
         />
       </motion.div>
       <motion.div
         initial="hidden"
         animate={theme === "dark" ? "visible" : "hidden"}
-        className="absolute text-inherit"
+        className={cn("absolute text-gray-600 dark:text-gray-200", className)}
         variants={{
           hidden: { opacity: 0, rotate: 90 },
           visible: { opacity: 1, rotate: 0 },
         }}
       >
-        <Moon02Icon
+        <Moon
           size={iconSize}
-          type="rounded"
-          variant="duotone"
-          className="w-[1em] h-[1em] text-gray-600 text-inherit dark:text-gray-200"
+          className="text-inherit"
         />
       </motion.div>
     </>

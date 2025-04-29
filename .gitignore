@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 package-lock.json
+.npmrc
 
 /.pnp
 .pnp.*
@@ -11,6 +12,8 @@ package-lock.json
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+
+.idea
 
 # testing
 /coverage

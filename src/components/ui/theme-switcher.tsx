@@ -22,21 +22,18 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.setAttribute("data-color-mode", newTheme);
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-color-mode", theme || "light");
     setMounted(true);
-  }, [theme]);
+  }, []);
 
   if (!mounted) return null;
 
   return (
-    <Button className={cn("bg-default-100 hover:bg-default-200 shadow-sm duration-100", className)} onPress={toggleTheme} isIconOnly {...props}>
-      <ThemeUserFeedback />
+    <Button className={cn("bg-default-100 hover:bg-default-200 shadow-sm text-default-700 duration-100", className)} onPress={toggleTheme} isIconOnly {...props}>
+      <ThemeUserFeedback iconSize={22} />
     </Button>
   );
 };

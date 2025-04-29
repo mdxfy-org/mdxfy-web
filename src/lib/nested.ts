@@ -30,7 +30,11 @@ export const parseNested = (nested: Record<string, FormValue>): FormValues => {
   const flat: FormValues = {};
 
   const flatten = (obj: unknown, prefix: string = ""): void => {
-    if (typeof obj !== "object" || obj === null || obj instanceof File) {
+    if (
+      typeof obj !== "object" ||
+      obj === null ||
+      (obj.constructor && obj.constructor.name === "File")
+    ) {
       flat[prefix] = obj as FormValue;
       return;
     }
@@ -42,7 +46,7 @@ export const parseNested = (nested: Record<string, FormValue>): FormValues => {
 
     for (const key in obj) {
       if (!obj.hasOwnProperty(key)) continue;
-      const value = ((obj as unknown) as Record<string, FormValue>)[key];
+      const value = (obj as unknown as Record<string, FormValue>)[key];
       const newKey = prefix ? `${prefix}.${key}` : key;
       if (typeof value === "object" && value !== null) {
         flatten(value, newKey);
@@ -98,7 +102,7 @@ export const toNested = (values: FormValues): FormValues => {
       if (isLast) {
         current[key as FormValue] = value;
       } else {
-        if (current[key as FormValue] === undefined) {
+        if (typeof current[key as FormValue] !== "object" || current[key as FormValue] === null) {
           const nextPart = parts[i + 1];
           current[key as FormValue] = isNumeric(nextPart) ? [] : {};
         }
@@ -109,4 +113,3 @@ export const toNested = (values: FormValues): FormValues => {
 
   return result;
 };
-

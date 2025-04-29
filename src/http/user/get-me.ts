@@ -5,5 +5,5 @@ import { User } from "@/types/user";
 export type GetMeResponse = Success<{ user: User, authenticated: boolean }>;
 
 export const getMe = () => {
-  return api.get<GetMeResponse>("/user/info/me").then((res) => res.data);
+  return api.get<GetMeResponse>("/user/info/me");
 };

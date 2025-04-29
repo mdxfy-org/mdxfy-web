@@ -2,58 +2,58 @@
   "Pages": {
     "Index": {
       "meta": {
-        "title": "MDXfy - A rede social para desenvolvedores",
-        "description": "Compartilhe conhecimento, escreva com Markdown e conecte-se com a comunidade dev"
+        "title": "Agrofast - Transporte de Maquinário Agrícola",
+        "description": "Transporte de maquinário agrícola de forma rápida e segura"
       }
     },
     "Login": {
       "meta": {
-        "title": "MDXfy - Login",
-        "description": "Faça login para acessar sua conta e interagir com a comunidade"
+        "title": "Agrofast - Transporte de Maquinário Agrícola",
+        "description": "Faça login para acessar sua conta Agrofast"
       }
     },
     "SignUp": {
       "meta": {
-        "title": "MDXfy - Criar Conta",
-        "description": "Crie uma conta gratuita e comece a compartilhar ideias com Markdown"
+        "title": "Agrofast - Cadastro",
+        "description": "Crie uma nova conta no Agrofast"
       }
     },
     "AuthCode": {
       "meta": {
-        "title": "MDXfy - Código de Verificação",
-        "description": "Digite o código de verificação enviado para seu e-mail"
+        "title": "Agrofast - Código de Autenticação",
+        "description": "Digite o código de autenticação enviado para seu telefone"
       }
     },
     "ForgotPass": {
       "meta": {
-        "title": "MDXfy - Recuperar Senha",
-        "description": "Receba instruções para redefinir sua senha"
+        "title": "Agrofast - Esqueci Minha Senha",
+        "description": "Recupere sua senha do Agrofast"
       }
     },
     "RecoverToken": {
       "meta": {
-        "title": "MDXfy - Token de Recuperação",
-        "description": "Insira o token de recuperação enviado para seu e-mail"
+        "title": "Agrofast - Recuperar senha",
+        "description": "Digite o token de recuperação enviado para seu telefone"
       }
     },
     "NotFound": {
       "meta": {
-        "title": "MDXfy - Página não encontrada",
-        "description": "Não conseguimos encontrar a página que você procurava"
+        "title": "Agrofast - Página não encontrada",
+        "description": "Página não encontrada"
       },
       "messages": {
         "page_not_found": "Página não encontrada",
-        "as_expected": "Isso era esperado?",
-        "back_to_safety": "Voltar para a página inicial"
+        "as_expected": "Assim como esperado?",
+        "back_to_safety": "Voltar para a segurança"
       }
     },
     "InternalError": {
       "meta": {
-        "title": "MDXfy - Erro interno",
-        "description": "Algo deu errado. Estamos trabalhando para corrigir."
+        "title": "Agrofast - Erro interno",
+        "description": "Ocorreu um erro"
       },
       "messages": {
-        "an_error_has_occurred": "Um erro inesperado ocorreu"
+        "an_error_has_occurred": "Ocorreu um erro interno"
       }
     }
   }

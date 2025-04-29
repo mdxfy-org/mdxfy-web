@@ -1,29 +1,71 @@
 {
+  "Form": {
+    "update_user": {
+      "title": "Actualizar cuenta",
+      "description": "¿Desea realmente actualizar la información de su cuenta?",
+      "confirm": "Actualizar",
+      "cancel": "Cancelar"
+    }
+  },
   "UI": {
     "tooltips": {
       "write_number": {
-        "title": "Ingresa tu número",
-        "info": "Escribe tu número de teléfono con código de área.",
-        "example": "Tu número de teléfono debe estar formateado de la siguiente manera: "
+        "title": "Escriba su número",
+        "info": "Escriba su número de teléfono con código de área.",
+        "example": "Su número de teléfono debe estar formateado de la siguiente manera: "
+      }
+    },
+    "input": {
+      "error": {
+        "invalid": "Campo inválido",
+        "required": "Campo obligatorio",
+        "not_match": "Los campos no coinciden",
+        "min_items": "Número mínimo de ítems: {min}",
+        "max_items": "Número máximo de ítems: {max}"
+      }
+    },
+    "input_group": {
+      "button": "{count, plural, =0 {Registrar un {name}} =1 {Un {name} registrado} other {# {name} registrados}}",
+      "item": "Ítem",
+      "item_number": "Ítem número",
+      "insert": {
+        "title": "Agregar {item}",
+        "description": "¿Realmente desea agregar un nuevo {item}?",
+        "cancel": "Cancelar",
+        "confirm": "Agregar"
+      },
+      "edit": {
+        "title": "Editar {item}",
+        "description": "¿Aplicar los cambios para este {item}?",
+        "cancel": "Cancelar",
+        "confirm": "Guardar"
+      },
+      "delete": {
+        "title": "Eliminar {item}",
+        "description": "¿Está seguro de que quiere eliminar este {item}?",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar"
       }
     },
     "info": {
       "title": {
         "verification_code_sent": "Código de verificación enviado"
       },
-      "sms_verification_code_sent": "Se ha enviado un código de verificación al número: <number></number>. ¿No recibiste el código? <action>{action}</action>",
-      "email_verification_code_sent": "Se ha enviado un código de verificación al correo: <email></email>. ¿No recibiste el código? <action>{action}</action>"
+      "sms_verification_code_sent": "Se ha enviado un código de verificación al número: <number></number>. ¿No ha recibido el código? <action>{action}</action>",
+      "email_verification_code_sent": "Se ha enviado un código de verificación al correo: <email></email>. ¿No ha recibido el código? <action>{action}</action>"
     },
     "buttons": {
       "next": "Siguiente",
-      "enter": "Ingresar",
+      "enter": "Entrar",
       "continue": "Continuar",
       "cancel": "Cancelar",
+      "edit": "Editar",
+      "delete": "Eliminar",
       "search": "Buscar",
       "understood": "Entendido",
       "resend_code": "Reenviar código",
-      "choose_a_photo": "Elige una foto",
-      "choose_another_photo": "Elige otra foto"
+      "choose_a_photo": "Elegir una foto",
+      "choose_another_photo": "Elegir otra foto"
     },
     "labels": {
       "code": "Código",
@@ -34,29 +76,38 @@
       "password": "Contraseña",
       "password_confirm": "Confirmar contraseña",
       "new_password": "Nueva contraseña",
-      "new_password_confirm": "Confirmar nueva contraseña"
+      "new_password_confirm": "Confirmar nueva contraseña",
+      "document": "Documento",
+      "documents": "Documentos",
+      "emission_date": "Fecha de emisión",
+      "document_type": "Tipo de documento",
+      "document_number": "Número"
     },
     "placeholders": {
-      "write_code": "Ingresa el código",
-      "write_name": "Ingresa tu nombre",
-      "write_surname": "Ingresa tu apellido",
-      "write_email": "Ingresa tu correo electrónico",
-      "write_number": "Ingresa tu número",
-      "write_password": "Ingresa tu contraseña",
-      "write_password_confirm": "Confirma tu contraseña",
-      "write_new_password": "Ingresa tu nueva contraseña",
-      "write_new_password_confirm": "Confirma tu nueva contraseña"
+      "write_code": "Escriba el código",
+      "write_name": "Escriba su nombre",
+      "write_surname": "Escriba su apellido",
+      "write_email": "Escriba su correo",
+      "write_number": "Escriba su número",
+      "write_password": "Escriba su contraseña",
+      "write_password_confirm": "Confirme su contraseña",
+      "write_new_password": "Escriba su nueva contraseña",
+      "write_new_password_confirm": "Confirme su nueva contraseña",
+      "write_document_type": "Seleccione el tipo de documento",
+      "write_document_number": "Número del documento"
     },
     "messages": {
       "required_field": "Campo obligatorio",
-      "fill_this_field": "Completa este campo"
+      "fill_this_field": "Complete este campo"
     },
     "titles": {
       "welcome_again": "¡Bienvenido de nuevo, {name}!",
       "create_account": "Crear cuenta",
       "create_new_password": "Crear nueva contraseña",
-      "inform_your_number": "Proporciona tu número",
-      "update_account": "Actualizar cuenta"
+      "inform_your_number": "Ingrese su número",
+      "update_account": "Actualizar cuenta",
+      "action_confirm": "Confirmar acción",
+      "action_confirm_text": "¿Está seguro de que desea realizar esta acción?"
     },
     "checkboxes": {
       "remember_me": "Recuérdame"
@@ -64,17 +115,17 @@
     "redirects": {
       "about": "Acerca de",
       "application": "Aplicación",
-      "web_version": "Versión web",
+      "web_version": "Versión Web",
       "see_more": "Ver más",
       "profile": "Perfil",
       "configs": "Configuraciones",
       "home": "Inicio",
       "create_account": "Crear una cuenta",
       "forgot_password": "Olvidé mi contraseña",
-      "enter_another_account": "Iniciar sesión en otra cuenta",
-      "enter_existing_account": "Iniciar sesión en una cuenta existente",
-      "go_to_download": "Ir a Descargar",
-      "download_app": "Descargar App",
+      "enter_another_account": "Entrar con otra cuenta",
+      "enter_existing_account": "Entrar a una cuenta existente",
+      "go_to_download": "Ir a Descargas",
+      "download_app": "Descargar",
       "change_theme": "Cambiar tema",
       "logout": "Cerrar sesión"
     }
@@ -87,7 +138,7 @@
       "warning": "Advertencia"
     },
     "errors": {
-      "default": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.",
+      "default": "Ocurrió un error inesperado. Por favor, inténtelo de nuevo más tarde.",
       "name_required": "El nombre es obligatorio",
       "surname_required": "El apellido es obligatorio",
       "number_required": "El número es obligatorio",
@@ -97,26 +148,27 @@
       "password_length": "La contraseña debe tener al menos 8 caracteres",
       "password_character": "La contraseña debe contener al menos un número, una letra mayúscula y un carácter especial",
       "password_confirm_required": "La confirmación de la contraseña es obligatoria",
-      "password_not_coincide": "La contraseña y la confirmación no coinciden",
-      "terms_and_privacy_agreement_required": "Debes aceptar los Términos de Uso y la Política de Privacidad",
-      "terms_and_privacy_agreement_not_accepted": "No se aceptaron los Términos de Uso o la Política de Privacidad",
+      "password_not_coincide": "La contraseña y su confirmación no coinciden",
+      "documents_required": "Los documentos son obligatorios",
+      "terms_and_privacy_agreement_required": "Debe aceptar los Términos de Uso y la Política de Privacidad",
+      "terms_and_privacy_agreement_not_accepted": "Los Términos de Uso o la Política de Privacidad no han sido aceptados",
       "not_implemented": "No implementado",
       "user_not_found": "Usuario no encontrado",
-      "error_creating_user": "Error al crear el usuario",
+      "error_creating_user": "Error al crear usuario",
       "user_already_exists": "El usuario ya existe",
       "invalid_login_credentials": "Credenciales de inicio de sesión inválidas",
       "wrong_password": "Contraseña incorrecta",
       "user_not_authenticated": "Usuario no autenticado",
       "invalid_authentication_code": "Código de autenticación inválido",
       "authentication_code_attempts": "Código de autenticación inválido. Quedan {attempts_left} intentos.",
-      "authentication_code_attempts_exceeded": "Se excedieron los intentos del código de autenticación",
+      "authentication_code_attempts_exceeded": "Se han excedido los intentos para el código de autenticación",
       "incorrect_authentication_code": "Código de autenticación incorrecto",
-      "failed_to_resend_code": "No se pudo reenviar el código",
-      "failed_to_upload_image": "No se pudo cargar la imagen",
-      "failed_to_save_image_record": "No se pudo guardar el registro de la imagen",
+      "failed_to_resend_code": "Error al reenviar el código",
+      "failed_to_upload_image": "Error al cargar la imagen",
+      "failed_to_save_image_record": "Error al guardar el registro de la imagen",
       "no_images_found": "No se encontraron imágenes",
-      "failed_to_get_browser_agent": "No se pudo recopilar un agente del navegador",
-      "failed_to_upload_profile_picture": "Hubo un error al cargar la imagen del perfil"
+      "failed_to_get_browser_agent": "No fue posible obtener un agente de navegador",
+      "failed_to_upload_profile_picture": "Se produjo un error al cargar la foto de perfil"
     },
     "success": {
       "user_created_successfully": "Usuario creado con éxito",
@@ -128,12 +180,12 @@
     },
     "info": {
       "loading": "Cargando...",
-      "wait_resend_code_timeout": "Espera {seconds} segundos para reenviar el código."
+      "wait_resend_code_timeout": "Espere {seconds} segundos para reenviar el código."
     }
   },
   "Application": {
-    "slogan": "TRANSPORTANDO TU PRODUCCIÓN",
-    "index_init_button": "¡Vamos!"
+    "slogan": "TRANSPORTANDO SU PRODUCCIÓN",
+    "index_init_button": "¡Vamos allá!"
   },
   "Advertizement": {
     "titles": {
@@ -143,7 +195,7 @@
       "primary": "Agilidad en el transporte de maquinaria agrícola"
     },
     "descriptions": {
-      "primary": "Revolucionando la forma en que transportas tus máquinas agrícolas"
+      "primary": "Revolucionando la manera en que transporta sus máquinas agrícolas"
     }
   },
   "Language": {
@@ -154,16 +206,19 @@
     "agreements": {
       "accept_policy_and_terms": "Acepto los <use>Términos de Uso</use> y reconozco que he leído la <privacy>Política de Privacidad</privacy>",
       "terms_of_use": "Términos de Uso",
-      "terms_of_use_info_1": "Al acceder o usar el sitio web, aceptas cumplir con los Términos de Uso y todas las leyes y regulaciones aplicables. Si no estás de acuerdo con alguno de estos términos, tienes prohibido usar o acceder a este sitio.",
-      "terms_of_use_info_2": "Los materiales contenidos en este sitio están protegidos por las leyes de derechos de autor y marcas registradas aplicables.",
-      "terms_of_use_info_3": "Para más información sobre cómo usamos tus datos, visita la página de <link>términos de uso</link> de nuestra plataforma.",
+      "terms_of_use_info_1": "Al acceder o usar el sitio, usted acepta cumplir con los Términos de Uso y todas las leyes y regulaciones aplicables. Si no está de acuerdo con alguno de estos términos, tiene prohibido usar o acceder a este sitio.",
+      "terms_of_use_info_2": "El material contenido en este sitio está protegido por las leyes de derechos de autor y marcas registradas aplicables.",
+      "terms_of_use_info_3": "Para más información sobre cómo usamos sus datos, visite la página de <link>términos de uso</link> de nuestra plataforma.",
       "privacy_policy": "Política de Privacidad",
-      "privacy_policy_info_1": "Tu privacidad es importante para nosotros. Es política de MDxFy respetar tu privacidad con respecto a cualquier información que podamos recopilar en el sitio web de MDxFy y otros sitios que poseemos y operamos.",
-      "privacy_policy_info_2": "Solicitamos información personal solo cuando realmente la necesitamos para brindarte un servicio. Lo hacemos por medios justos y legales, con tu conocimiento y consentimiento. También te informamos por qué la estamos recopilando y cómo se utilizará.",
-      "privacy_policy_info_3": "Para más información sobre cómo usamos tus datos, visita la página de <link>política de privacidad</link> de nuestra plataforma.",
-      "sign_in_terms": "Al continuar, enviaremos un código de validación al número proporcionado. Pueden aplicarse tarifas de datos y mensajes.",
-      "login_terms": "Al continuar, enviaremos un código de validación al número proporcionado. Pueden aplicarse tarifas de datos y mensajes.",
-      "mailing_list": "Quiero recibir correos promocionales de MDxFy."
+      "privacy_policy_info_1": "Su privacidad es importante para nosotros. Es política de Agrofast respetar su privacidad respecto a cualquier información que podamos recopilar en el sitio Agrofast y en otros sitios que poseemos y operamos.",
+      "privacy_policy_info_2": "Solicitamos información personal solo cuando realmente lo necesitamos para brindarle un servicio. Lo hacemos por medios justos y legales, con su conocimiento y consentimiento. También informamos por qué estamos recopilando y cómo se utilizará.",
+      "privacy_policy_info_3": "Para más información sobre cómo usamos sus datos, visite la página de <link>política de privacidad</link> de nuestra plataforma.",
+      "sign_in_terms": "Al continuar, enviaremos un código de validación al número proporcionado. Pueden aplicarse cargos por datos y mensajes.",
+      "login_terms": "Al continuar, enviaremos un código de validación al número proporcionado. Pueden aplicarse cargos por datos y mensajes.",
+      "mailing_list": "Deseo recibir correos electrónicos promocionales de Agrofast.",
+      "cookie_use_warning_title": "Aviso de uso de cookies",
+      "cookie_use_warning_description": "Nuestra aplicación utiliza cookies para mejorar la experiencia del usuario. Al continuar navegando, usted acepta el uso de cookies.",
+      "cookie_use_warning_disclaimer": "Las cookies son pequeños archivos de texto que se almacenan en su dispositivo cuando visita un sitio. Ayudan a recordar sus preferencias e información de inicio de sesión, haciendo su experiencia más personalizada y eficiente."
     },
     "terms_of_use_markdown": "",
     "privacy_policy_markdown": ""

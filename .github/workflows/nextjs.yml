@@ -1,0 +1,47 @@
+name: CI Next.js
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+      - reopened
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Install and Build Next.js
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_API_BASE_URL: https://api.agrofast.tech
+    steps:
+      - name: Repository checkout
+        uses: actions/checkout@v4
+
+      - name: Node.js Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Cache NPM dependencies and Next.js build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: Install NPM dependencies
+        run: npm install
+
+      - name: Build Next.js
+        run: npm run build

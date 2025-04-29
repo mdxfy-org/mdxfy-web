@@ -14,6 +14,7 @@ import { validateFingerprint } from "@/http/validate-fingerprint";
 import { AUTH_BROWSER_AGENT_KEY } from "@/middleware";
 import { useToast } from "@/service/toast";
 import { useTranslations } from "next-intl";
+import { cookieOptions } from "@/service/cookie";
 
 interface BrowserAgentContextProps {
   isLoaded: boolean;
@@ -53,7 +54,7 @@ export const BrowserAgentProvider: React.FC<{ children: ReactNode }> = ({
     (fingerprint: string) => {
       setBrowserAgent(fingerprint);
       setBrowserFingerprint(fingerprint);
-      setCookie(AUTH_BROWSER_AGENT_KEY, fingerprint);
+      setCookie(AUTH_BROWSER_AGENT_KEY, fingerprint, cookieOptions);
     },
     [setCookie]
   );
@@ -72,7 +73,7 @@ export const BrowserAgentProvider: React.FC<{ children: ReactNode }> = ({
     }
     try {
       const response = await validateFingerprint(storedFingerprint);
-      const newFingerprint = response.data.data?.fingerprint;
+      const newFingerprint = response.data?.fingerprint;
       if (newFingerprint) {
         updateBrowserAgent(newFingerprint);
       } else if (storedFingerprint && validateBrowserAgent(storedFingerprint)) {
@@ -81,13 +82,13 @@ export const BrowserAgentProvider: React.FC<{ children: ReactNode }> = ({
         toast.error({
           description: t("Messages.errors.failed_to_get_browser_agent"),
         });
-        removeCookie(AUTH_BROWSER_AGENT_KEY);
+        removeCookie(AUTH_BROWSER_AGENT_KEY, cookieOptions);
       }
     } catch {
       toast.error({
         description: t("Messages.errors.failed_to_get_browser_agent"),
       });
-      removeCookie(AUTH_BROWSER_AGENT_KEY);
+      removeCookie(AUTH_BROWSER_AGENT_KEY, cookieOptions);
     } finally {
       setIsLoaded(true);
     }

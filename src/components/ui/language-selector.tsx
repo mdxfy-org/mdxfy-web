@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import nextConfig from "../../../next.config";
-import { Globe02Icon, LanguageSkillIcon } from "@hugeicons/react";
 import { languages } from "@/internationalization/languages";
 import { cn } from "@/lib/utils";
+import { Global, Planet } from "@solar-icons/react";
 
 interface LanguageSelectorProps extends Omit<HeroUISelectProps, "children"> {
   className?: string;
@@ -24,16 +24,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
 
   const handleRouteChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedLocale = event.target.value;
-    let newPath = router.asPath;
-
-    newPath = newPath.replace(/^\/(portfolio|web|legal)/, "");
-
-    if (!newPath.startsWith("/")) {
-      newPath = "/" + newPath;
-    }
-
-    router.push(newPath, undefined, { locale: selectedLocale });
+    router.push(router.asPath, undefined, { locale: event.target.value });
   };
 
   return (
@@ -66,10 +57,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
               visible: { opacity: 1, scale: 1 },
             }}
           >
-            <Globe02Icon
+            <Global
               size={16}
-              type="rounded"
-              variant="stroke"
               className="text-default-700 text-xl pointer-events-none"
             />
           </motion.div>
@@ -82,10 +71,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
               visible: { opacity: 1, scale: 1 },
             }}
           >
-            <LanguageSkillIcon
+            <Planet
               size={16}
-              type="rounded"
-              variant="stroke"
               className="text-default-700 text-xl pointer-events-none"
             />
           </motion.div>

@@ -4,12 +4,22 @@ import {
   AUTHENTICATED_KEY,
 } from "@/middleware";
 import axios from "axios";
+import { getCurrentOrigin, isIpAddress } from "@/service/env";
 import { Cookies } from "react-cookie";
+import { cookieOptions } from "./cookie";
 
 const cookies = new Cookies();
 
-const api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL}/api`,
+const localOrigin = getCurrentOrigin();
+const hostname =
+  typeof window !== "undefined" ? window.location.hostname : "localhost";
+
+const apiBaseUrl = isIpAddress(hostname)
+  ? `${localOrigin.replace(/:3030$/, "")}`
+  : process.env.NEXT_PUBLIC_API_BASE_URL;
+
+export const api = axios.create({
+  baseURL: `${apiBaseUrl}/api`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -45,27 +55,43 @@ api.interceptors.request.use(
 );
 
 api.interceptors.response.use(
-  (response) => response,
+  ({ data, request,...response }) => {
+    return {
+      ...response,
+      request: {
+        ...request,
+      },
+      ...data,
+    };
+  },
   (error) => {
     const { status, data } = error.response;
-
     switch (status) {
       case 201:
       case 204:
         break;
       case 401:
-        if (["browser_agent", "invalid_token"].includes(data?.code)) {
-          cookies.remove(AUTH_BROWSER_AGENT_KEY);
-          cookies.remove(AUTHENTICATED_KEY);
-          cookies.remove(AUTH_TOKEN_KEY);
+        if (["browser_agent", "invalid_token"].includes(data?.data?.code)) {
+          cookies.remove(AUTH_BROWSER_AGENT_KEY, cookieOptions);
+          cookies.remove(AUTHENTICATED_KEY, cookieOptions);
+          cookies.remove(AUTH_TOKEN_KEY, cookieOptions);
           window.location.reload();
         }
-        return Promise.reject(error);
+        return Promise.reject({
+          ...error,
+          data: {
+            ...data,
+            status,
+          },
+        });
       default:
-        if (data?.error) {
-          return Promise.reject(data.error);
-        }
-        return Promise.reject(error);
+        return Promise.reject({
+          ...error,
+          data: {
+            ...data,
+            status,
+          },
+        });
     }
   }
 );

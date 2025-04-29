@@ -1,10 +1,50 @@
 {
+  "Form": {
+    "update_user": {
+      "title": "Atualizar conta",
+      "description": "Deseja realmente atualizar as informações da sua conta?",
+      "confirm": "Atualizar",
+      "cancel": "Cancelar"
+    }
+  },
   "UI": {
     "tooltips": {
       "write_number": {
         "title": "Digite seu número",
         "info": "Escreva seu número de telefone com DDD.",
         "example": "Seu número de telefone deve ser formatado da seguinte maneira: "
+      }
+    },
+    "input": {
+      "error": {
+        "invalid": "Campo inválido",
+        "required": "Campo obrigatório",
+        "not_match": "Os campos não coincidem",
+        "min_items": "Numero mínimo de itens: {min}",
+        "max_items": "Numero máximo de itens: {max}"
+      }
+    },
+    "input_group": {
+      "button": "{count, plural, =0 {Cadastrar um {name}} =1 {Um {name} cadastrado} other {# {name} cadastrados}}",
+      "item": "Item",
+      "item_number": "Item numero",
+      "insert": {
+        "title": "Adicionar {item}",
+        "description": "Confirmar valores e adicionar um novo {item}?",
+        "cancel": "Cancelar",
+        "confirm": "Adicionar"
+      },
+      "edit": {
+        "title": "Editar {item}",
+        "description": "Aplicar as alterações para este {item}?",
+        "cancel": "Cancelar",
+        "confirm": "Salvar"
+      },
+      "delete": {
+        "title": "Excluir {item}",
+        "description": "Tem certeza de que quer deletar este {item}?",
+        "cancel": "Cancelar",
+        "confirm": "Excluir"
       }
     },
     "info": {
@@ -19,6 +59,8 @@
       "enter": "Entrar",
       "continue": "Continuar",
       "cancel": "Cancelar",
+      "edit": "Editar",
+      "delete": "Excluir",
       "search": "Pesquisar",
       "understood": "Entendi",
       "resend_code": "Reenviar código",
@@ -29,25 +71,30 @@
       "code": "Código",
       "name": "Nome",
       "surname": "Sobrenome",
-      "username": "Nome de usuario",
       "email": "Email",
       "number": "Número",
       "password": "Senha",
       "password_confirm": "Confirmar senha",
       "new_password": "Nova senha",
-      "new_password_confirm": "Confirmar nova senha"
+      "new_password_confirm": "Confirmar nova senha",
+      "document": "Documento",
+      "documents": "Documentos",
+      "emission_date": "Data de emissão",
+      "document_type": "Tipo de documento",
+      "document_number": "Número"
     },
     "placeholders": {
       "write_code": "Digite o código",
       "write_name": "Digite seu nome",
       "write_surname": "Digite seu sobrenome",
-      "write_username": "Digite o nome de usuario",
       "write_email": "Digite seu email",
       "write_number": "Digite seu número",
       "write_password": "Digite sua senha",
       "write_password_confirm": "Confirme sua senha",
       "write_new_password": "Digite sua nova senha",
-      "write_new_password_confirm": "Confirme sua nova senha"
+      "write_new_password_confirm": "Confirme sua nova senha",
+      "write_document_type": "Selecione o tipo de documento",
+      "write_document_number": "Número do documento"
     },
     "messages": {
       "required_field": "Campo obrigatório",
@@ -58,7 +105,9 @@
       "create_account": "Criar conta",
       "create_new_password": "Criar nova senha",
       "inform_your_number": "Informe seu número",
-      "update_account": "Atualizar conta"
+      "update_account": "Atualizar conta",
+      "action_confirm": "Confirmar ação",
+      "action_confirm_text": "Você tem certeza que deseja realizar esta ação?"
     },
     "checkboxes": {
       "remember_me": "Lembrar-se de mim"
@@ -90,6 +139,7 @@
     },
     "errors": {
       "default": "Um erro inesperado ocorreu. Por favor, tente novamente mais tarde.",
+      "form": "Por favor, corrija os erros no formulario antes.",
       "name_required": "Nome é obrigatório",
       "surname_required": "Sobrenome é obrigatório",
       "number_required": "Número é obrigatório",
@@ -100,6 +150,7 @@
       "password_character": "A senha deve conter pelo menos um número, uma letra maiúscula e um caractere especial",
       "password_confirm_required": "Confirmação da senha é obrigatória",
       "password_not_coincide": "A senha e a confirmação não coincidem",
+      "documents_required": "Documentos são obrigatórios",
       "terms_and_privacy_agreement_required": "Você deve aceitar os Termos de Uso e a Política de Privacidade",
       "terms_and_privacy_agreement_not_accepted": "Os Termos de Uso ou a Política de Privacidade não foram aceitos",
       "not_implemented": "Não implementado",
@@ -160,12 +211,15 @@
       "terms_of_use_info_2": "Os materiais contidos neste site são protegidos pelas leis de direitos autorais e marcas comerciais aplicáveis.",
       "terms_of_use_info_3": "Para mais informações sobre como usamos seus dados, a pagina de <link>termos de uso</link> da nossa plataforma.",
       "privacy_policy": "Política de Privacidade",
-      "privacy_policy_info_1": "Sua privacidade é importante para nós. É política do MDxFy respeitar sua privacidade em relação a qualquer informação sua que possamos coletar no site MDxFy, e outros sites que possuímos e operamos.",
+      "privacy_policy_info_1": "Sua privacidade é importante para nós. É política do Agrofast respeitar sua privacidade em relação a qualquer informação sua que possamos coletar no site Agrofast, e outros sites que possuímos e operamos.",
       "privacy_policy_info_2": "Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.",
       "privacy_policy_info_3": "Para mais informações sobre como usamos seus dados, a pagina de <link>política de privacidade</link> da nossa plataforma.",
       "sign_in_terms": "Ao continuar, enviaremos um código de validação no número informado. Podem ser aplicadas taxas de dados e mensagens.",
       "login_terms": "Ao continuar, enviaremos um código de validação no número informado. Podem ser aplicadas taxas de dados e mensagens.",
-      "mailing_list": "Desejo receber e-mails promocionais da MDxFy."
+      "mailing_list": "Desejo receber e-mails promocionais da Agrofast.",
+      "cookie_use_warning_title": "Aviso de uso de cookies",
+      "cookie_use_warning_description": "Nossa aplicação faz uso de cookies para melhorar a experiência do usuário. Ao continuar navegando, você concorda com o uso de cookies.",
+      "cookie_use_warning_disclaimer": "Os cookies são pequenos arquivos de texto que são armazenados no seu dispositivo quando você visita um site. Eles ajudam a lembrar suas preferências e informações de login, tornando sua experiência mais personalizada e eficiente."
     },
     "terms_of_use_markdown": "",
     "privacy_policy_markdown": ""

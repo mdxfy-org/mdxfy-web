@@ -1,10 +1,9 @@
-import Checkbox from "@/components/checkbox";
+import Checkbox from "@/components/input/checkbox";
 import Form from "@/components/form";
-import Input from "@/components/input";
+import Input from "@/components/input/input";
 import Link from "@/components/link";
 import { PrivacyPolicy, TermsOfUse } from "@/components/ui/platform-agreements";
 import { useAuth } from "@/contexts/auth-provider";
-import { useLanguage } from "@/contexts/language-provider";
 import { useOverlay } from "@/contexts/overlay-provider";
 import { signUp } from "@/http/user/sign-up";
 import { useToast } from "@/service/toast";
@@ -19,12 +18,12 @@ import {
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { JSX, useState } from "react";
+import { FormValues } from "@/types/form";
 
 const SignInForm: React.FC = () => {
   const t = useTranslations();
   const router = useRouter();
   const { setIsLoading } = useOverlay();
-  const { translateResponse } = useLanguage();
   const { setUser, setToken } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -44,26 +43,22 @@ const SignInForm: React.FC = () => {
     onOpen();
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-
+  const handleSubmit = (data: FormValues) => {
     setIsLoading(true);
 
     signUp(data)
-      .then(({ data }) => {
-        setUser(data.user);
-        setToken(data.token);
-        router.push(`/auth-code`);
+      .then(({ user, token }) => {
+        setUser(user);
+        setToken(token);
+        router.push(`/web/auth-code`);
       })
-      .catch(({ response: { data: error } }) => {
-        const fields = translateResponse(error.errors);
-        if (fields["password"]) {
+      .catch(({ data: error }) => {
+        if (error.errors["password"]) {
           toast.error({
-            description: fields["password"],
+            description: error.errors["password"],
           });
         }
-        setErrors(fields);
+        setErrors(error.errors);
       })
       .finally(() => {
         setIsLoading(false);
@@ -105,10 +100,11 @@ const SignInForm: React.FC = () => {
           isRequired
         />
         <Input
-          name="username"
-          label={t("UI.labels.username")}
-          placeholder={t("UI.placeholders.write_username")}
-          type="text"
+          name="surname"
+          label={t("UI.labels.surname")}
+          placeholder={t("UI.placeholders.write_surname")}
+          type="name"
+          autoCapitalize="words"
           isRequired
         />
         <Input
@@ -178,10 +174,10 @@ const SignInForm: React.FC = () => {
           {t("UI.buttons.continue")}
         </Button>
       </Form>
-      <p className="text-small text-center">
+      <p className="pb-4 text-small text-center">
         <Link
           href={{
-            pathname: "/login",
+            pathname: "/web/login",
             query: {
               email: email,
             },

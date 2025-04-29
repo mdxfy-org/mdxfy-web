@@ -1,0 +1,5 @@
+[phases.setup]
+cmds = [
+  # "echo \"@hugeicons-pro:registry=https://npm.hugeicons.com\" > .npmrc",
+  # "echo \"//npm.hugeicons.com/:_authToken=${LIB_HUGEICONS}\" >> .npmrc",
+]

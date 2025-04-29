@@ -15,6 +15,19 @@ export interface LinkProps extends NextLinkProps {
   className?: string;
 }
 
+export const formatLink = (href: HrefProps) => {
+  const { pathname, query } = href;
+  const queryString = new URLSearchParams(
+    Object.entries(query || {}).reduce((acc, [key, value]) => {
+      if (value && value !== "") {
+        acc[key] = String(value);
+      }
+      return acc;
+    }, {} as Record<string, string>)
+  ).toString();
+  return `${pathname}${queryString ? `?${queryString}` : ""}`;
+};
+
 const Link: React.FC<LinkProps> = ({
   href,
   target,
@@ -28,16 +41,7 @@ const Link: React.FC<LinkProps> = ({
     if (typeof href === "string") {
       setFormattedHref(href);
     } else {
-      const { pathname, query } = href;
-      const queryString = new URLSearchParams(
-        Object.entries(query || {}).reduce((acc, [key, value]) => {
-          if (value && value !== "") {
-            acc[key] = String(value);
-          }
-          return acc;
-        }, {} as Record<string, string>)
-      ).toString();
-      setFormattedHref(`${pathname}${queryString ? `?${queryString}` : ""}`);
+      setFormattedHref(formatLink(href));
     }
   }, [href]);
 

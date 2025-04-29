@@ -7,9 +7,8 @@ export type Success<T = undefined> = T extends undefined
     }
   : {
       message: string;
-      data: T;
       success: boolean;
-    };
+    } & T;
 
 export type Error<T = undefined> = (T extends undefined
   ? {
@@ -20,7 +19,6 @@ export type Error<T = undefined> = (T extends undefined
   : {
       message: string;
       errors?: Record<string, string[]>;
-      data: T;
       success: boolean;
-    }) &
+    } & T) &
   AxiosError;

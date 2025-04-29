@@ -15,6 +15,7 @@ import { getMe } from "@/http/user/get-me";
 import { AUTH_TOKEN_KEY, AUTHENTICATED_KEY } from "@/middleware";
 import { User } from "@/types/user";
 import { useOverlay } from "./overlay-provider";
+import { cookieOptions } from "@/service/cookie";
 
 interface AuthContextProps {
   token: string | undefined;
@@ -54,21 +55,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       if (tokenValue) {
         setAuthTokenState(tokenValue);
         setBearerToken(tokenValue);
-        setCookie(AUTH_TOKEN_KEY, tokenValue);
+        setCookie(AUTH_TOKEN_KEY, tokenValue, cookieOptions);
       } else {
         setAuthTokenState(undefined);
-        removeCookie(AUTHENTICATED_KEY);
-        removeCookie(AUTH_TOKEN_KEY);
+        removeCookie(AUTHENTICATED_KEY, cookieOptions);
+        removeCookie(AUTH_TOKEN_KEY, cookieOptions);
         delete api.defaults.headers["Authorization"];
       }
     },
     [setCookie, removeCookie]
   );
 
-  const logout = useCallback(() => {
+  const logout = useCallback(() => {    
     setUser(undefined);
     setToken(undefined);
-    router.push("/login", undefined, { locale: router.locale });
+    router.push("/web/login", undefined, { locale: router.locale });
   }, [router, setToken]);
 
   const fetchMe = useCallback(async () => {
@@ -80,10 +81,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       setToken(storedToken);
       setBearerToken(storedToken);
       getMe()
-        .then(({ data }) => {
+        .then(({ data }) => {          
           setUser(data.user);
           if (data.authenticated) {
-            setCookie(AUTHENTICATED_KEY, data.authenticated);
+            setCookie(AUTHENTICATED_KEY, data.authenticated, cookieOptions);
             return;
           }
           if (

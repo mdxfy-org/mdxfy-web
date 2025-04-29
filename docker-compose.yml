@@ -1,0 +1,7 @@
+services:
+  nextjs:
+    build: .
+    ports:
+      - 3030:3000
+    volumes:
+      - ./:/app
