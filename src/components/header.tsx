@@ -2,7 +2,6 @@ import React from "react";
 import Mdxfy from "@/components/ui/mdxfy";
 import dynamic from "next/dynamic";
 import { LazyThemeSwitcher } from "@/components/ui/theme-switcher";
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { LazyLanguageSelector } from "@/components/ui/language-selector";
 import { cn, getPortfolioUrl, getWebUrl } from "@/lib/utils";

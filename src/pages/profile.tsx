@@ -2,7 +2,7 @@ import Body from "@/components/body";
 import { Button, Form, Spacer } from "@heroui/react";
 import { useState } from "react";
 import { numberInputMask } from "@/lib/utils";
-import Input from "@/components/input";
+import Input from "@/components/input/input";
 import { useTranslations } from "next-intl";
 import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
 import Head from "next/head";
@@ -13,7 +13,7 @@ import { useAuth } from "@/contexts/auth-provider";
 import userPicture from "@public/img/user-default.png";
 import { useLanguage } from "@/contexts/language-provider";
 import PhoneNumberHelper from "@/components/ux/phone-number-helper";
-import PictureInput from "@/components/picture-input";
+import PictureInput from "@/components/input/picture-input";
 import { useToast } from "@/service/toast";
 import { uploadPicture } from "@/http/user/upload-picture";
 
@@ -53,8 +53,8 @@ export default function Profile() {
   const handleSubmitPicture = async (file: FormData) => {
     setIsLoading(true);
     uploadPicture(file)
-      .then(({ data }) => {
-        setUser(data.user);
+      .then(({ user }) => {
+        setUser(user);
         toast.success({
           description: t("Messages.success.image_uploaded_successfully"),
         });
