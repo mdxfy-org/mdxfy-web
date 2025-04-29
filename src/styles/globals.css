@@ -24,3 +24,8 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+.editor-header * svg {
+  color: inherit !important;
+  fill: currentColor !important;
+}

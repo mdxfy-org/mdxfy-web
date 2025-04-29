@@ -27,11 +27,12 @@ export const getStaticPropsWithMessages = async ({
 }: {
   locale: string;
 }) => {
-  const [base, legal, portfolio, web] = await Promise.all([
+  const [base, legal, portfolio, web, mdxEditor] = await Promise.all([
     import(`../../messages/${locale}/default.json`),
     import(`../../messages/${locale}/legal.json`),
     import(`../../messages/${locale}/portfolio.json`),
     import(`../../messages/${locale}/web.json`),
+    import(`../../messages/${locale}/mdx-editor.json`),
   ]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,6 +59,7 @@ export const getStaticPropsWithMessages = async ({
   deepMerge(messages, portfolio.default);
   deepMerge(messages, legal.default);
   deepMerge(messages, web.default);
+  deepMerge(messages, mdxEditor.default);
 
   return { props: { messages } };
 };

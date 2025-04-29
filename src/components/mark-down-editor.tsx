@@ -2,14 +2,14 @@
 import {
   BlockTypeSelect,
   BoldItalicUnderlineToggles,
-  ChangeAdmonitionType,
-  ChangeCodeMirrorLanguage,
   CodeToggle,
   CreateLink,
   diffSourcePlugin,
   DiffSourceToggleWrapper,
   imagePlugin,
+  InsertCodeBlock,
   InsertTable,
+  ListsToggle,
   Separator,
   tablePlugin,
   thematicBreakPlugin,
@@ -20,6 +20,7 @@ import {
 import "@mdxeditor/editor/style.css";
 import React from "react";
 import defaultText from "./debug/mdx-editor-test";
+import { useTranslations } from "next-intl";
 const {
   MDXEditor,
   codeBlockPlugin,
@@ -39,8 +40,8 @@ const PlainTextCodeEditorDescriptor: CodeBlockEditorDescriptor = {
     return (
       <div onKeyDown={(e) => e.nativeEvent.stopImmediatePropagation()}>
         <textarea
-          rows={3}
-          cols={20}
+          rows={props.code.split("\n").length}
+          className="rounded-md min-w-full max-w-full resize-none"
           defaultValue={props.code}
           onChange={(e) => cb.setCode(e.target.value)}
         />
@@ -50,6 +51,8 @@ const PlainTextCodeEditorDescriptor: CodeBlockEditorDescriptor = {
 };
 
 const Editor = () => {
+  const t = useTranslations();
+
   const imageUploadHandler = async (image: File) => {
     const formData = new FormData();
     formData.append("image", image);
@@ -63,7 +66,11 @@ const Editor = () => {
 
   return (
     <MDXEditor
-      className="rounded-md ring-1 ring-default-200 w-full overflow-hidden prose"
+      className="bg-default-100 rounded-md ring-1 ring-default-200 w-full overflow-hidden"
+      contentEditableClassName="prose !w-full !max-w-full"
+      translation={(key, _, interpolations) => {
+        return t(key, interpolations);
+      }}
       markdown={defaultText}
       plugins={[
         codeBlockPlugin({
@@ -77,17 +84,34 @@ const Editor = () => {
         thematicBreakPlugin(),
         markdownShortcutPlugin(),
         imagePlugin({ imageUploadHandler }),
+        diffSourcePlugin(),
         toolbarPlugin({
-          toolbarClassName: "my-classname",
+          toolbarClassName: "editor-header sticky top-0 z-10 !bg-default-200 !*:text-neutral-50",
           toolbarContents: () => (
             <>
               <BoldItalicUnderlineToggles />
               <BlockTypeSelect />
+              
+              <Separator />
+
               <UndoRedo />
+              
+              <Separator />
+
+              <ListsToggle />
+
+              <Separator />
+
               <CodeToggle />
+              <InsertCodeBlock />
               <CreateLink />
               <InsertTable />
+              
               <Separator />
+
+              <DiffSourceToggleWrapper options={["rich-text", "source"]}>
+                <></>
+              </DiffSourceToggleWrapper>
             </>
           ),
         }),

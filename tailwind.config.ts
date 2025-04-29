@@ -9,6 +9,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       typography: (theme: any) => ({
         DEFAULT: {
           css: {
@@ -38,6 +39,9 @@ const config: Config = {
               marginBottom: "0.3em",
               paddingLeft: "1.25em",
             },
+            hr: {
+              marginBottom: "0.5em",
+            }
           },
         },
       }),
