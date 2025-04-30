@@ -26,6 +26,22 @@ body {
 }
 
 .editor-header * svg {
-  color: inherit !important;
-  fill: currentColor !important;
+  /* color: inherit !important;
+  fill: currentColor !important; */
+}
+
+.editor-header * button {
+  @apply bg-default-100
+}
+
+.editor-content * table {
+  @apply mx-2 my-2 max-w-[calc(100%-1rem)];
+}
+
+.editor-content * table thead tr th {
+  @apply py-0
+}
+
+.editor-content * table * {
+  @apply border-default-300
 }
