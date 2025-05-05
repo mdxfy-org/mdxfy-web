@@ -63,7 +63,7 @@ const UserOptionsButton: React.FC = () => {
           <p className="p-1 w-full text-start">{user?.name}</p>
         </Skeleton>
         <Divider className={!user ? "hidden" : ""} />
-        <IconOption href="/web/profile" icon={<Settings />}>
+        <IconOption href="/profile" icon={<Settings />}>
           {t("UI.redirects.profile")}
         </IconOption>
         <IconOption
@@ -76,7 +76,7 @@ const UserOptionsButton: React.FC = () => {
         </IconOption>
         <IconOption
           onClick={logout}
-          href="/web/login"
+          href="/login"
           icon={<Logout2 />}
           confirmAction
           confirmActionInfo={{

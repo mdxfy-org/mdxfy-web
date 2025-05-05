@@ -19,7 +19,6 @@ import {
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import React from "react";
-import defaultText from "./debug/mdx-editor-test";
 import { useTranslations } from "next-intl";
 import api from "@/service/api";
 const {
@@ -51,8 +50,15 @@ const PlainTextCodeEditorDescriptor: CodeBlockEditorDescriptor = {
   },
 };
 
-const Editor = () => {
+export interface EditorProps {
+  value?: string;
+  onChange?: (value: string) => void;
+}
+
+const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
   const t = useTranslations();
+
+  const [text, setText] = React.useState(value ?? "");
 
   const imageUploadHandler = async (image: File) => {
     const formData = new FormData();
@@ -71,6 +77,11 @@ const Editor = () => {
     }
   };
 
+  const handleChange = (newText: string) => {
+    setText(newText);
+    onChange?.(newText);
+  };
+
   return (
     <MDXEditor
       className="bg-default-100 rounded-md ring-1 ring-default-200 w-full overflow-hidden"
@@ -78,7 +89,8 @@ const Editor = () => {
       translation={(key, _, interpolations) => {
         return t(key, interpolations);
       }}
-      markdown={defaultText}
+      markdown={text}
+      onChange={handleChange}
       plugins={[
         codeBlockPlugin({
           codeBlockEditorDescriptors: [PlainTextCodeEditorDescriptor],
@@ -93,16 +105,17 @@ const Editor = () => {
         imagePlugin({ imageUploadHandler }),
         diffSourcePlugin(),
         toolbarPlugin({
-          toolbarClassName: "editor-header sticky top-0 z-10 !bg-default-200 !*:text-neutral-50 ",
+          toolbarClassName:
+            "editor-header sticky top-0 z-10 !bg-default-200 !*:text-neutral-50 ",
           toolbarContents: () => (
             <>
               <BoldItalicUnderlineToggles />
               <BlockTypeSelect />
-              
+
               <Separator />
 
               <UndoRedo />
-              
+
               <Separator />
 
               <ListsToggle />
@@ -113,7 +126,7 @@ const Editor = () => {
               <InsertCodeBlock />
               <CreateLink />
               <InsertTable />
-              
+
               <Separator />
 
               <DiffSourceToggleWrapper options={["rich-text", "source"]}>

@@ -50,7 +50,7 @@ const SignInForm: React.FC = () => {
       .then(({ user, token }) => {
         setUser(user);
         setToken(token);
-        router.push(`/web/auth-code`);
+        router.push(`/auth-code`);
       })
       .catch(({ data: error }) => {
         if (error.errors["password"]) {
@@ -100,9 +100,9 @@ const SignInForm: React.FC = () => {
           isRequired
         />
         <Input
-          name="surname"
-          label={t("UI.labels.surname")}
-          placeholder={t("UI.placeholders.write_surname")}
+          name="username"
+          label={t("UI.labels.username")}
+          placeholder={t("UI.placeholders.write_username")}
           type="name"
           autoCapitalize="words"
           isRequired
@@ -177,7 +177,7 @@ const SignInForm: React.FC = () => {
       <p className="pb-4 text-small text-center">
         <Link
           href={{
-            pathname: "/web/login",
+            pathname: "/login",
             query: {
               email: email,
             },

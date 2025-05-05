@@ -70,7 +70,7 @@
     "labels": {
       "code": "Código",
       "name": "Nombre",
-      "surname": "Apellido",
+      "username": "Apellido",
       "email": "Correo electrónico",
       "number": "Número",
       "password": "Contraseña",
@@ -86,7 +86,7 @@
     "placeholders": {
       "write_code": "Escriba el código",
       "write_name": "Escriba su nombre",
-      "write_surname": "Escriba su apellido",
+      "write_username": "Escriba su apellido",
       "write_email": "Escriba su correo",
       "write_number": "Escriba su número",
       "write_password": "Escriba su contraseña",
@@ -140,7 +140,7 @@
     "errors": {
       "default": "Ocurrió un error inesperado. Por favor, inténtelo de nuevo más tarde.",
       "name_required": "El nombre es obligatorio",
-      "surname_required": "El apellido es obligatorio",
+      "username_required": "El apellido es obligatorio",
       "number_required": "El número es obligatorio",
       "invalid_number": "Número inválido",
       "invalid_email": "Correo electrónico inválido",

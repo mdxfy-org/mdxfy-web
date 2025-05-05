@@ -70,7 +70,7 @@
     "labels": {
       "code": "Código",
       "name": "Nome",
-      "surname": "Sobrenome",
+      "username": "Nome de usuario",
       "email": "Email",
       "number": "Número",
       "password": "Senha",
@@ -86,7 +86,7 @@
     "placeholders": {
       "write_code": "Digite o código",
       "write_name": "Digite seu nome",
-      "write_surname": "Digite seu sobrenome",
+      "write_username": "Digite o nome de usuário",
       "write_email": "Digite seu email",
       "write_number": "Digite seu número",
       "write_password": "Digite sua senha",
@@ -141,7 +141,7 @@
       "default": "Um erro inesperado ocorreu. Por favor, tente novamente mais tarde.",
       "form": "Por favor, corrija os erros no formulario antes.",
       "name_required": "Nome é obrigatório",
-      "surname_required": "Sobrenome é obrigatório",
+      "username_required": "Nome de usuario é obrigatório",
       "number_required": "Número é obrigatório",
       "invalid_number": "Número inválido",
       "invalid_email": "Email inválido",

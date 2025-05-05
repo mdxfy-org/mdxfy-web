@@ -1,6 +1,8 @@
 import Layout from "@/components/layout";
 import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
+import { GetStaticPaths } from "next";
 import { useTranslations } from "next-intl";
+import { Params } from "next/dist/server/request/params";
 import Head from "next/head";
 
 export default function Index() {
@@ -14,11 +16,15 @@ export default function Index() {
         <meta name="description" content={pt("meta.description")} />
       </Head>
       <Layout className="flex flex-col gap-10 pt-20 w-full">
-        <section className="flex flex-col items-start gap-6 mx-auto p-4 max-w-[912px] container">
-        </section>
+        <section className="flex flex-col items-start gap-6 mx-auto p-4 max-w-[912px] container"></section>
       </Layout>
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths<Params> = async () => ({
+  paths: [],
+  fallback: "blocking",
+});
 
 export const getStaticProps = getWebStaticPropsWithMessages;

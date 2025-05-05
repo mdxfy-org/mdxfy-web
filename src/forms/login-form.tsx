@@ -83,7 +83,7 @@ const LoginForm: React.FC = () => {
               {t("UI.checkboxes.remember_me")}
             </Checkbox>
             <Link
-              href="/web/reset-password"
+              href="/reset-password"
               className="hover:opacity-80 min-w-max font-medium text-primary text-sm hover:underline transition-all"
             >
               {t("UI.redirects.forgot_password")}
@@ -97,7 +97,7 @@ const LoginForm: React.FC = () => {
           <p className="text-small text-center">
             <Link
               href={{
-                pathname: "/web/sign-up",
+                pathname: "/sign-up",
                 query: {
                   email: email,
                 },

@@ -113,14 +113,14 @@ export default function Profile() {
               />
               <Input
                 className="text-gray-700 dark:text-gray-200"
-                label={t("UI.labels.surname")}
+                label={t("UI.labels.username")}
                 labelPlacement="outside"
-                name="surname"
-                placeholder={t("UI.placeholders.write_surname")}
+                name="username"
+                placeholder={t("UI.placeholders.write_username")}
                 type="name"
                 autoCapitalize="words"
                 variant="bordered"
-                value={user?.surname}
+                value={user?.username}
               />
               <Input
                 name="number"

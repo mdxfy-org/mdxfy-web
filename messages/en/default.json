@@ -70,7 +70,7 @@
     "labels": {
       "code": "Code",
       "name": "Name",
-      "surname": "Surname",
+      "username": "Username",
       "email": "Email",
       "number": "Number",
       "password": "Password",
@@ -86,7 +86,7 @@
     "placeholders": {
       "write_code": "Enter the code",
       "write_name": "Enter your name",
-      "write_surname": "Enter your surname",
+      "write_username": "Enter your username",
       "write_email": "Enter your email",
       "write_number": "Enter your phone number",
       "write_password": "Enter your password",
@@ -140,7 +140,7 @@
     "errors": {
       "default": "An unexpected error occurred. Please try again later.",
       "name_required": "Name is required",
-      "surname_required": "Surname is required",
+      "username_required": "Username is required",
       "number_required": "Number is required",
       "invalid_number": "Invalid number",
       "invalid_email": "Invalid email",

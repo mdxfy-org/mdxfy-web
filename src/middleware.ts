@@ -69,8 +69,6 @@ const publicMatcher = [
 ];
 
 export function middleware(request: NextRequest) {
-  return NextResponse.next();
-
   if (publicMatcher.some((path) => request.nextUrl.pathname.startsWith(path))) {
     return NextResponse.next();
   }

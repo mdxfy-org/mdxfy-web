@@ -51,14 +51,14 @@ const ResetPasswordForm: React.FC = () => {
           </Button>
           <div className="flex justify-between text-small text-center">
             <Link
-              href="/web/sign-up"
+              href="/sign-up"
               className="hover:opacity-80 font-medium text-primary text-sm hover:underline transition-all"
             >
               {t("UI.redirects.create_account")}
             </Link>
             <Link
               href={{
-                pathname: "/web/login",
+                pathname: "/login",
                 query: {
                   email: email,
                 },
