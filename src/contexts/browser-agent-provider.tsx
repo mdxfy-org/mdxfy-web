@@ -5,7 +5,6 @@ import React, {
   useState,
   useEffect,
   useCallback,
-  useRef,
 } from "react";
 import { useCookies } from "react-cookie";
 import { validateBrowserAgent } from "@/lib/validations";
@@ -46,7 +45,6 @@ export const BrowserAgentProvider: React.FC<{ children: ReactNode }> = ({
     undefined
   );
   const [isLoaded, setIsLoaded] = useState(false);
-  const fetchInProgress = useRef(false);
   const toast = useToast();
   const t = useTranslations();
 
@@ -65,11 +63,10 @@ export const BrowserAgentProvider: React.FC<{ children: ReactNode }> = ({
       new URL(process.env.NEXT_PUBLIC_WEB_BASE_URL || "").hostname
     )
       return;
-    if (fetchInProgress.current) return;
-    fetchInProgress.current = true;
     const storedFingerprint = cookies[AUTH_BROWSER_AGENT_KEY] || "";
     if (storedFingerprint) {
       updateBrowserAgent(storedFingerprint);
+      return;
     }
     try {
       const response = await validateFingerprint(storedFingerprint);
@@ -81,7 +78,7 @@ export const BrowserAgentProvider: React.FC<{ children: ReactNode }> = ({
       } else {
         toast.error({
           description: t("Messages.errors.failed_to_get_browser_agent"),
-        });
+        });        
         removeCookie(AUTH_BROWSER_AGENT_KEY, cookieOptions);
       }
     } catch {
