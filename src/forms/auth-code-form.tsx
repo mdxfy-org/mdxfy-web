@@ -29,7 +29,7 @@ const AuthCodeForm: React.FC = () => {
 
   const { setIsLoading } = useOverlay();
   const [isDataLoading, setIsDataLoading] = useState(false);
-  const { user, setUser, setToken, logout } = useAuth();
+  const { user, firstLogin, setUser, setToken, logout } = useAuth();
 
   const [errors, setErrors] = useState<Record<string, string | string[]>>({});
 
@@ -129,10 +129,10 @@ const AuthCodeForm: React.FC = () => {
       >
         {user?.name && (
           <p className="pb-2 font-semibold text-gray-700 dark:text-gray-200 text-xl text-left">
-            {t("UI.titles.welcome_again", { name: user?.name })}
-            <span aria-label="emoji" className="ml-2" role="img">
+            {t(`UI.titles.${firstLogin ? "first_welcome" : "welcome_again"}`, { name: user?.name })}
+            <div aria-label="emoji" className="inline-block ml-2 pr-2 pb-2 animate-normal animate-thrice animate-wiggle-more animate-duration-[400ms] animate-ease-in-out" role="img">
               👋
-            </span>
+            </div>
           </p>
         )}
       </Skeleton>

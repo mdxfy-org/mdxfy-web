@@ -28,7 +28,7 @@ export const getBaseUrl = (): string => {
   if (cachedBaseUrl) return cachedBaseUrl;
 
   if (!isDevelopment()) {
-    return process.env.NEXT_PUBLIC_WEB_BASE_URL ?? "https://agrofast.tech"
+    return process.env.NEXT_PUBLIC_WEB_BASE_URL ?? "https://mdxfy.tech"
   }
 
   const hostname =

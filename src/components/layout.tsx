@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ className, children, hideHeader, hideFo
       {!hideHeader && <Header />}
       <main
         className={cn(
-          "bg-slate-50 dark:bg-neutral-900 pb-16 sm:pb-4 w-full min-h-svh overflow-hidden overflow-y-auto transition-colors",
+          "bg-slate-50 dark:bg-neutral-900 sm:pb-4 w-full overflow-hidden overflow-y-auto transition-colors",
           className
         )}
       >

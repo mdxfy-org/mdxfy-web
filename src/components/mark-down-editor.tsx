@@ -58,8 +58,6 @@ export interface EditorProps {
 const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
   const t = useTranslations();
 
-  const [text, setText] = React.useState(value ?? "");
-
   const imageUploadHandler = async (image: File) => {
     const formData = new FormData();
     formData.append("image", image);
@@ -77,11 +75,6 @@ const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
     }
   };
 
-  const handleChange = (newText: string) => {
-    setText(newText);
-    onChange?.(newText);
-  };
-
   return (
     <MDXEditor
       className="bg-default-100 rounded-md ring-1 ring-default-200 w-full overflow-hidden"
@@ -89,8 +82,8 @@ const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
       translation={(key, _, interpolations) => {
         return t(key, interpolations);
       }}
-      markdown={text}
-      onChange={handleChange}
+      markdown={value ?? ""}
+      onChange={onChange}      
       plugins={[
         codeBlockPlugin({
           codeBlockEditorDescriptors: [PlainTextCodeEditorDescriptor],

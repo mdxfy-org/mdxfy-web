@@ -101,6 +101,7 @@
       "fill_this_field": "Preencha este campo"
     },
     "titles": {
+      "first_welcome": "Seja bem-vindo, {name}!",
       "welcome_again": "Bem-vindo de volta, {name}!",
       "create_account": "Criar conta",
       "create_new_password": "Criar nova senha",

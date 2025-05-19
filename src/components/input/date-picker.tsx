@@ -8,8 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "../form";
 import { useRouter } from "next/router";
 import { parseQueryDate } from "@/lib/utils";
-import {parseDate} from "@internationalized/date";
-
+import { parseDate } from "@internationalized/date";
 
 export type DatePickerValue = CalendarDate | null | undefined;
 
@@ -63,16 +62,21 @@ const DatePicker: React.FC<DatePickerProps> = ({
           const val = parseQueryDate(queryValue as string);
           changeValue(val as unknown as DatePickerValue);
           setHasFirstRender(true);
-        } catch (e) {
-          console.log("Invalid date format in query", e);
-        }
+        } catch {}
       }
     }
   }, [queryCollectable, name, changeValue, router.query, hasFirstRender]);
 
   useEffect(() => {
     if (name && form && form.values?.[name]) {
-      changeValue(typeof form.values?.[name] === "string" ? parseDate(form.values?.[name]) : form.values?.[name]);
+      const formValue = form.values?.[name];
+      changeValue(
+        typeof formValue === "string"
+          ? parseDate(
+              formValue.includes("T") ? formValue.split("T")[0] : formValue
+            )
+          : formValue
+      );
     }
   }, [value, form, name, changeValue]);
 
@@ -91,7 +95,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       value={inputValue}
       onChange={(val) => {
         onChange?.(val);
-        changeValue(val);
+        changeValue(val as unknown as DatePickerValue);
       }}
       classNames={{
         base: "relative gap-1 !pb-0",

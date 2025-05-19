@@ -1,13 +1,12 @@
-import Layout from "@/components/layout";
-import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
-import { GetStaticPaths } from "next";
+import Body from "@/components/body";
 import { useTranslations } from "next-intl";
-import { Params } from "next/dist/server/request/params";
+import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
 import Head from "next/head";
+import { GetStaticPaths } from "next";
+import { Params } from "next/dist/server/request/params";
 
-export default function Index() {
-  // const t = useTranslations();
-  const pt = useTranslations("Pages.Index");
+export default function Profile() {
+  const pt = useTranslations("Pages.SignUp");
 
   return (
     <>
@@ -15,9 +14,9 @@ export default function Index() {
         <title>{pt("meta.title")}</title>
         <meta name="description" content={pt("meta.description")} />
       </Head>
-      <Layout className="flex flex-col gap-10 w-full">
-        <section className="flex flex-col items-start gap-6 mx-auto p-4 max-w-[912px] container"></section>
-      </Layout>
+      <Body className="flex flex-row justify-center">
+        <div className="flex flex-col flex-1 container"></div>
+      </Body>
     </>
   );
 }
