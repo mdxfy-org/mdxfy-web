@@ -50,12 +50,12 @@ const LoginForm: React.FC = () => {
   return (
     <>
       <Form
-        className="flex flex-col flex-1 gap-4"
+        className="flex flex-col flex-1 md:flex-none items-center gap-4"
         validationBehavior="native"
         validationErrors={errors}
         onSubmit={handleSubmit}
       >
-        <div className="flex flex-col flex-1 md:flex-auto gap-4 w-full">
+        <div className="flex flex-col gap-4 w-full">
           <Input
             id="email"
             name="email"
@@ -90,7 +90,7 @@ const LoginForm: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col flex-1 md:flex-none justify-end gap-4 w-full">
           <Button className="w-full" color="primary" type="submit">
             {t("UI.buttons.enter")}
           </Button>

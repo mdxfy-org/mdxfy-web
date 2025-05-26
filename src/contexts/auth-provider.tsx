@@ -21,6 +21,7 @@ interface AuthContextProps {
   token: string | undefined;
   setToken: (token: string | undefined) => void;
   user: User | undefined;
+  firstLogin: boolean;
   setUser: (user: User | undefined) => void;
   logout: () => void;
 }
@@ -47,6 +48,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   ]);
   const [token, setAuthTokenState] = useState<string | undefined>(undefined);
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [firstLogin, setFirstLogin] = useState<boolean>(false);
 
   const fetchInProgress = useRef(false);
 
@@ -66,7 +68,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     [setCookie, removeCookie]
   );
 
-  const logout = useCallback(() => {    
+  const logout = useCallback(() => {
     setUser(undefined);
     setToken(undefined);
     router.push("/login", undefined, { locale: router.locale });
@@ -81,8 +83,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       setToken(storedToken);
       setBearerToken(storedToken);
       getMe()
-        .then(({ data }) => {          
+        .then(({ data }) => {
           setUser(data.user);
+          setFirstLogin(data.first_login);
           if (data.authenticated) {
             setCookie(AUTHENTICATED_KEY, data.authenticated, cookieOptions);
             return;
@@ -123,7 +126,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   }, [fetchMe]);
 
   return (
-    <AuthContext.Provider value={{ token, setToken, user, setUser, logout }}>
+    <AuthContext.Provider
+      value={{ token, setToken, user, firstLogin, setUser, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

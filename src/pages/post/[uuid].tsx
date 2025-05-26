@@ -15,7 +15,7 @@ export default function Index() {
         <title>{pt("meta.title")}</title>
         <meta name="description" content={pt("meta.description")} />
       </Head>
-      <Layout className="flex flex-col gap-10 pt-20 w-full">
+      <Layout className="flex flex-col gap-10 w-full">
         <section className="flex flex-col items-start gap-6 mx-auto p-4 max-w-[912px] container"></section>
       </Layout>
     </>

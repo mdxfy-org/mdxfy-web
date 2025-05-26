@@ -17,8 +17,7 @@ const Body: React.FC<BodyProps> = ({ className, children, hideHeader, hideFooter
       {!hideHeader && <Header />}
       <main
         className={cn(
-          "bg-slate-50 dark:bg-neutral-900 w-full h-min min-h-svh transition-colors",
-          !hideHeader && "pt-16",
+          "bg-slate-50 dark:bg-neutral-900 w-full h-min transition-colors",
           !hideFooter && "pb-16 sm:pb-4",
           className
         )}

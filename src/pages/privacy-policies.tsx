@@ -23,7 +23,7 @@ export default function PrivacyPolicies() {
           content={t("Pages.PrivacyPolicies.meta.description")}
         />
       </Head>
-      <Layout className="flex flex-col gap-8 pt-20 w-full">
+      <Layout className="flex flex-col gap-8 w-full">
         <section className="flex flex-col items-start gap-4 mx-auto p-4 container">
           <MainTitle>{pp("main_title")}</MainTitle>
           <section id="section_1" className="mt-8 w-full">
