@@ -4,11 +4,11 @@ import { useState } from "react";
 import { numberInputMask } from "@/lib/utils";
 import Input from "@/components/input/input";
 import { useTranslations } from "next-intl";
-import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
+import { getStaticPropsWithMessages } from "@/lib/get-static-props";
 import Head from "next/head";
 import api from "@/service/api";
 import { useOverlay } from "@/contexts/overlay-provider";
-import { useAuth } from "@/contexts/auth-provider";
+import { useUser } from "@/contexts/auth-provider";
 
 import userPicture from "@public/img/user-default.png";
 import { useLanguage } from "@/contexts/language-provider";
@@ -23,7 +23,7 @@ export default function Profile() {
   const toast = useToast();
 
   const { translateResponse } = useLanguage();
-  const { user, setUser } = useAuth();
+  const { user, setUser } = useUser();
   const { setIsLoading } = useOverlay();
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -172,4 +172,4 @@ export default function Profile() {
   );
 }
 
-export const getStaticProps = getWebStaticPropsWithMessages;
+export const getStaticProps = getStaticPropsWithMessages;

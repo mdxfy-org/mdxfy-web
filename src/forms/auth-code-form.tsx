@@ -1,4 +1,4 @@
-import { useAuth } from "@/contexts/auth-provider";
+import { useUser } from "@/contexts/auth-provider";
 import { useOverlay } from "@/contexts/overlay-provider";
 import { cn } from "@/lib/utils";
 import { Button, Form, Skeleton, Spacer } from "@heroui/react";
@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAuthCodeLength } from "@/http/get-auth-code-length";
 import { auth, AuthError } from "@/http/user/auth";
 import { useToast } from "@/service/toast";
-import { useCountdown } from "@/lib/useCountdown";
+import { useCountdown } from "@/hooks/use-countdown";
 import { resendCode } from "@/http/user/resend-code";
 import { AxiosError } from "axios";
 import InputOtp from "@/components/input/input-otp";
@@ -29,7 +29,7 @@ const AuthCodeForm: React.FC = () => {
 
   const { setIsLoading } = useOverlay();
   const [isDataLoading, setIsDataLoading] = useState(false);
-  const { user, setUser, setToken, logout } = useAuth();
+  const { user, setUser, setToken, logout } = useUser();
 
   const [errors, setErrors] = useState<Record<string, string | string[]>>({});
 

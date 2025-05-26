@@ -1,7 +1,7 @@
 import Body from "@/components/body";
 import MDxFy from "@/components/ui/mdxfy";
 import { useTranslations } from "next-intl";
-import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
+import { getStaticPropsWithMessages } from "@/lib/get-static-props";
 import Head from "next/head";
 import RecoverTokenForm from "@/forms/recover-token-form";
 
@@ -32,4 +32,4 @@ export default function RecoverToken() {
   );
 }
 
-export const getStaticProps = getWebStaticPropsWithMessages;
+export const getStaticProps = getStaticPropsWithMessages;

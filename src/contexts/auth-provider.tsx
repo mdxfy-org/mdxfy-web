@@ -27,7 +27,7 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-export const useAuth = (): AuthContextProps => {
+export const useUser = (): AuthContextProps => {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error("useUser must be used within an AuthProvider");

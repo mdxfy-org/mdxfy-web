@@ -1,5 +1,5 @@
 import Layout from "@/components/layout";
-import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
+import { getStaticPropsWithMessages } from "@/lib/get-static-props";
 import { GetStaticPaths } from "next";
 import { useTranslations } from "next-intl";
 import { Params } from "next/dist/server/request/params";
@@ -27,4 +27,4 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => ({
   fallback: "blocking",
 });
 
-export const getStaticProps = getWebStaticPropsWithMessages;
+export const getStaticProps = getStaticPropsWithMessages;

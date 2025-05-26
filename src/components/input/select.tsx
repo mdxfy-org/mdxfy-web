@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { cn } from "@/lib/utils";
 import { useGroup } from "@/components/input/group/input-group";
-import { useForm } from "../form";
+import { useForm } from "../form/form";
 import { Options } from "@/types/options";
 
 export interface SelectProps extends HeroUISelectProps {
@@ -102,7 +102,7 @@ const Select: React.FC<SelectProps> = ({
       name={name}
       classNames={{
         base: "relative",
-        label: "top-6 !-translate-y-[3.10em]",
+        label: "top-6 !-translate-y-[3.10em] text-foreground",
         helperWrapper: "absolute -bottom-[20px] -left-0.5 max-w-full",
         errorMessage: "truncate",
         listbox: "!transition-colors !duration-100 ",
@@ -111,7 +111,7 @@ const Select: React.FC<SelectProps> = ({
       labelPlacement="outside"
       variant="bordered"
       className={cn(
-        "text-gray-700 dark:text-gray-200 transition-colors duration-100",
+        "text-gray-700 dark:text-gray-200 transition-colors duration-100 select",
         className,
         disabled && "opacity-50 pointer-events-none"
       )}

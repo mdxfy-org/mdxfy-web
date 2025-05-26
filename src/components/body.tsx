@@ -13,7 +13,7 @@ interface BodyProps {
 const Body: React.FC<BodyProps> = ({ className, children, hideHeader, hideFooter }) => {
   return (
     <>
-      <Loading />
+      {/* <Loading /> */}
       {!hideHeader && <Header />}
       <main
         className={cn(

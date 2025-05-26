@@ -1,10 +1,10 @@
 import {
-  InputProps as HeroUIInputProps,
-  Input as HeroUIInput,
+  NumberInputProps as HeroUIINumberInputProps,
+  NumberInput as HeroUINumberInput,
 } from "@heroui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { cn } from "@/lib/utils";
 import PasswordVisibilityToggle from "../ux/password-visibility-toggle";
 import {
@@ -18,18 +18,16 @@ export type InputFormatInfo = {
   group?: InputGroupProviderProps;
 };
 
-export interface InputProps extends HeroUIInputProps {
-  format?: (value: string, info: InputFormatInfo) => string;
+export interface NumberInputProps extends HeroUIINumberInputProps {
   queryCollectable?: boolean;
   taggableVisibility?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({
+const NumberInput: React.FC<NumberInputProps> = ({
   name: inputName,
   value,
-  format,
   className,
-  queryCollectable = false,
+  // queryCollectable = false,
   taggableVisibility,
   disabled,
   onChange,
@@ -39,7 +37,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const ref = useRef<HTMLInputElement>(null);
 
-  const router = useRouter();
+  // const router = useRouter();
   const t = useTranslations();
   const form = useForm();
   const group = useGroup();
@@ -47,7 +45,7 @@ const Input: React.FC<InputProps> = ({
   const name = inputName && group ? group.getFieldName(inputName) : inputName;
   const isFieldRequired = required ?? isRequired ?? false;
 
-  const [hasFirstRender, setHasFirstRender] = useState(false);
+  // const [hasFirstRender, setHasFirstRender] = useState(false);
   const [inputValue, setInputValue] = useState(
     value ?? form?.values?.[name] ?? ""
   );
@@ -56,10 +54,8 @@ const Input: React.FC<InputProps> = ({
   const togglePassVisibility = () => setIsPassVisible(!isPassVisible);
 
   const changeValue = useCallback(
-    (newValue?: string) => {
-      const finalValue = format
-        ? format(newValue ?? "", { form, group })
-        : newValue ?? "";
+    (newValue?: number) => {
+      const finalValue = newValue ?? "";
       if (name && form) {
         form.setValue(name, finalValue);
         form.setError(name, undefined);
@@ -69,23 +65,23 @@ const Input: React.FC<InputProps> = ({
         target: { value: finalValue },
       } as unknown as React.ChangeEvent<HTMLInputElement>);
     },
-    [name, form, group, onChange, format]
+    [name, form, onChange]
   );
 
   useEffect(() => {
     setInputValue(value ?? "");
   }, [value, setInputValue]);
 
-  useEffect(() => {
-    if (queryCollectable && name && router.query[name] && !hasFirstRender) {
-      const queryValue = router.query[name];
-      if (queryValue) {
-        const val = queryValue as string;
-        changeValue(val);
-        setHasFirstRender(true);
-      }
-    }
-  }, [queryCollectable, name, changeValue, router.query, hasFirstRender]);
+  // useEffect(() => {
+  //   if (queryCollectable && name && router.query[name] && !hasFirstRender) {
+  //     const queryValue = router.query[name];
+  //     if (queryValue) {
+  //       const val = queryValue as string;
+  //       changeValue(val);
+  //       setHasFirstRender(true);
+  //     }
+  //   }
+  // }, [queryCollectable, name, changeValue, router.query, hasFirstRender]);
 
   useEffect(() => {
     if (name && form && form.values?.[name]) {
@@ -103,13 +99,13 @@ const Input: React.FC<InputProps> = ({
   }, [group, inputName, props.type, isFieldRequired]);
 
   return (
-    <HeroUIInput
+    <HeroUINumberInput
       ref={ref}
       name={name}
       classNames={{
         base: "!relative",
-        label: "!top-6 !-translate-y-[3.25em] start-0 text-foreground",
-        helperWrapper: "!absolute !-bottom-[20px] !-left-0.5 max-w-full",
+        label: "!top-6 !-translate-y-[3.25em] start-0",
+        helperWrapper: "!absolute !-bottom-[24px] !-left-0.5 max-w-full",
         errorMessage: "!truncate",
         input: "!transition-colors !duration-100",
         inputWrapper: "!transition-colors !duration-100",
@@ -124,12 +120,17 @@ const Input: React.FC<InputProps> = ({
       value={inputValue}
       errorMessage={(v) => {
         if (!v && form && name) {
-          
           form.setError(name, undefined);
         }
         return v.validationErrors;
       }}
-      onChange={(e) => changeValue(e.target.value)}
+      onChange={(e) => {
+        if (typeof e === "number") {
+          changeValue(e);
+        } else {
+          changeValue(Number(e.target.value.replace(/[^0-9]/g, "")));
+        }
+      }}
       endContent={
         taggableVisibility &&
         props.type === "password" && (
@@ -160,4 +161,4 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
+export default NumberInput;

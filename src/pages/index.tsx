@@ -1,5 +1,5 @@
 import Layout from "@/components/layout";
-import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
+import { getStaticPropsWithMessages } from "@/lib/get-static-props";
 import { useTranslations } from "next-intl";
 import Head from "next/head";
 
@@ -21,4 +21,4 @@ export default function Index() {
   );
 }
 
-export const getStaticProps = getWebStaticPropsWithMessages;
+export const getStaticProps = getStaticPropsWithMessages;

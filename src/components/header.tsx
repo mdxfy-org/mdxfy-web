@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { LazyLanguageSelector } from "@/components/ui/language-selector";
 import { cn, getPortfolioUrl, getWebUrl } from "@/lib/utils";
 import Link from "@/components/link";
-import { useAuth } from "@/contexts/auth-provider";
+import { useUser } from "@/contexts/auth-provider";
 import UserOptionsButton from "./ux/user-options-button";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/navbar";
 
@@ -25,7 +25,7 @@ const LanguageSelector = dynamic(
 
 const Header: React.FC = () => {
   const t = useTranslations();
-  const { user } = useAuth();
+  const { user } = useUser();
 
   return (
     <Navbar

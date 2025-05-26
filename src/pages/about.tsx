@@ -1,5 +1,5 @@
 import Layout from "@/components/layout";
-import { getPortfolioStaticPropsWithMessages } from "@/lib/getStaticProps";
+import { getStaticPropsWithMessages } from "@/lib/get-static-props";
 import { useTranslations } from "next-intl";
 import Head from "next/head";
 
@@ -20,4 +20,4 @@ export default function About() {
   );
 }
 
-export const getStaticProps = getPortfolioStaticPropsWithMessages;
+export const getStaticProps = getStaticPropsWithMessages;

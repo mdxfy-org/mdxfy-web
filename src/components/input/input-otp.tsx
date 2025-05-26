@@ -5,7 +5,7 @@ import {
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { useGroup } from "@/components/input/group/input-group";
-import { useForm } from "../form";
+import { useForm } from "../form/form";
 
 export interface InputOtpProps extends HeroUIInputOptProps {
   length: number;

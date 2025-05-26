@@ -1,6 +1,6 @@
 import {
-  InputProps as HeroUIInputProps,
-  Input as HeroUIInput,
+  TextAreaProps as HeroUITextAreaProps,
+  Textarea as HeroUITextarea,
 } from "@heroui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -18,13 +18,13 @@ export type InputFormatInfo = {
   group?: InputGroupProviderProps;
 };
 
-export interface InputProps extends HeroUIInputProps {
+export interface TextAreaProps extends HeroUITextAreaProps {
   format?: (value: string, info: InputFormatInfo) => string;
   queryCollectable?: boolean;
   taggableVisibility?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({
+const Textarea: React.FC<TextAreaProps> = ({
   name: inputName,
   value,
   format,
@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = ({
   isRequired,
   ...props
 }) => {
-  const ref = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLTextAreaElement>(null);
 
   const router = useRouter();
   const t = useTranslations();
@@ -103,12 +103,12 @@ const Input: React.FC<InputProps> = ({
   }, [group, inputName, props.type, isFieldRequired]);
 
   return (
-    <HeroUIInput
+    <HeroUITextarea
       ref={ref}
       name={name}
       classNames={{
         base: "!relative",
-        label: "!top-6 !-translate-y-[3.25em] start-0 text-foreground",
+        label: "!translate-y-[4.5px] start-0 text-foreground",
         helperWrapper: "!absolute !-bottom-[20px] !-left-0.5 max-w-full",
         errorMessage: "!truncate",
         input: "!transition-colors !duration-100",
@@ -160,4 +160,4 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
+export default Textarea;

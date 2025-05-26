@@ -1,9 +1,9 @@
 import Checkbox from "@/components/input/checkbox";
-import Form from "@/components/form";
+import Form from "@/components/form/form";
 import Input from "@/components/input/input";
 import Link from "@/components/link";
 import { PrivacyPolicy, TermsOfUse } from "@/components/ui/platform-agreements";
-import { useAuth } from "@/contexts/auth-provider";
+import { useUser } from "@/contexts/auth-provider";
 import { useOverlay } from "@/contexts/overlay-provider";
 import { signUp } from "@/http/user/sign-up";
 import { useToast } from "@/service/toast";
@@ -24,7 +24,7 @@ const SignInForm: React.FC = () => {
   const t = useTranslations();
   const router = useRouter();
   const { setIsLoading } = useOverlay();
-  const { setUser, setToken } = useAuth();
+  const { setUser, setToken } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 

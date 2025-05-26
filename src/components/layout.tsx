@@ -13,7 +13,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ className, children, hideHeader, hideFooter }) => {
   return (
     <>
-      <Loading />
+      {/* <Loading /> */}
       {!hideHeader && <Header />}
       <main
         className={cn(

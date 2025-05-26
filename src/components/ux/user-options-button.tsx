@@ -2,7 +2,7 @@ import { Logout2, Settings } from "@solar-icons/react";
 import IconOption from "../ui/icon-option";
 import { useTheme } from "next-themes";
 import ThemeUserFeedback from "./theme-user-feedback";
-import { useAuth } from "@/contexts/auth-provider";
+import { useUser } from "@/contexts/auth-provider";
 import { useTranslations } from "next-intl";
 import userPicture from "@public/img/user-default.png";
 import {
@@ -21,7 +21,7 @@ import { useState } from "react";
 const UserOptionsButton: React.FC = () => {
   const t = useTranslations();
   const { theme, setTheme } = useTheme();
-  const { user, logout } = useAuth();
+  const { user, logout } = useUser();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 

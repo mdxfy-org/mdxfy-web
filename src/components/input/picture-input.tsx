@@ -4,7 +4,7 @@ import imageDefault from "@public/img/image-default.png";
 import Cropper, { Area } from "react-easy-crop";
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { useForm } from "../form";
+import { useForm } from "../form/form";
 import { useTranslations } from "next-intl";
 import {
   Modal,

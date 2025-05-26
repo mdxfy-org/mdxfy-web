@@ -1,7 +1,7 @@
 import Body from "@/components/body";
 import MDxFy from "@/components/ui/mdxfy";
 import { useTranslations } from "next-intl";
-import { getWebStaticPropsWithMessages } from "@/lib/getStaticProps";
+import { getStaticPropsWithMessages } from "@/lib/get-static-props";
 import Head from "next/head";
 import LoginForm from "@/forms/login-form";
 
@@ -32,4 +32,4 @@ export default function Login() {
   );
 }
 
-export const getStaticProps = getWebStaticPropsWithMessages;
+export const getStaticProps = getStaticPropsWithMessages;

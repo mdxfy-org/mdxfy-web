@@ -16,7 +16,9 @@ import {
 } from "react";
 
 export type Validation = () => void;
-export type Validations = Record<string, ValidationError>;
+export type Validations = Record<string, Validation>;
+export type Getter = () => FormValue | FormValue[] | undefined;
+export type Getters = Record<string, Getter>;
 
 export interface FormProps extends HeroUIFormProps {
   children?: React.ReactNode;
@@ -32,6 +34,8 @@ export interface FormProviderProps {
   setError: (address: string, error: ValidationError) => void;
   validations: Validations;
   setValidation: (address: string, validation: Validation) => void;
+  getters: Getters;
+  setGetter: (address: string, getter: Getter) => void;
 }
 
 const FormProvider = createContext<FormProviderProps | undefined>(undefined);
@@ -55,6 +59,7 @@ const Form: React.FC<FormProps> = ({
 
   const [errors, setErrors] = useState<FormErrors>(validationErrors ?? {});
   const [validations, setValidations] = useState<Validations>({});
+  const [getters, setGetters] = useState<Getters>({});
 
   const notifyError = useCallback(() => {
     if (Object.keys(errors).length > 0) {
@@ -76,21 +81,18 @@ const Form: React.FC<FormProps> = ({
     });
   }, []);
 
-  const setValue = useCallback(
-    (address: string, value?: FormValue) => {
-      setValues((prevValues: FormValues) => {
-        const newValues = { ...prevValues };
-        if (value === undefined) {
-          delete newValues[address];
-        } else {
-          newValues[address] = value;
-        }
-        // setError(address, undefined);
-        return newValues;
-      });
-    },
-    []
-  );
+  const setValue = useCallback((address: string, value?: FormValue) => {
+    setValues((prevValues: FormValues) => {
+      const newValues = { ...prevValues };
+      if (value === undefined) {
+        delete newValues[address];
+      } else {
+        newValues[address] = value;
+      }
+      // setError(address, undefined);
+      return newValues;
+    });
+  }, []);
 
   const setValidation = useCallback(
     (address: string, validation: Validation) => {
@@ -107,6 +109,18 @@ const Form: React.FC<FormProps> = ({
     []
   );
 
+  const setGetter = useCallback((address: string, getter: Getter) => {
+    setGetters((prevGetters: Getters) => {
+      const newGetters = { ...prevGetters };
+      if (getter === undefined) {
+        delete newGetters[address];
+      } else {
+        newGetters[address] = getter;
+      }
+      return newGetters;
+    });
+  }, []);
+
   const onSubmitHandle = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     Object.keys(validations).forEach((key) => {
@@ -117,8 +131,14 @@ const Form: React.FC<FormProps> = ({
     });
     const hasErrors = Object.keys(errors).length > 0;
     if (!hasErrors) {
-      const data = Object.fromEntries(new FormData(event.currentTarget));
-      const nestedData = toNested(data);
+      const getterValues = Object.fromEntries(
+        Object.entries(getters).map(([address, getter]) => [address, getter()])
+      );
+      const formData = Object.fromEntries(new FormData(event.currentTarget));
+      const nestedData = {
+        ...toNested(formData),
+        ...getterValues,
+      };
 
       onSubmit?.(nestedData);
       return;
@@ -149,6 +169,8 @@ const Form: React.FC<FormProps> = ({
           setError,
           validations,
           setValidation,
+          getters,
+          setGetter,
         }}
       >
         <HeroUIForm

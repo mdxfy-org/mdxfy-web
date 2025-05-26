@@ -1,33 +1,5 @@
-export const getPortfolioStaticPropsWithMessages = async ({
-  locale = "pt-BR",
-}: {
-  locale: string;
-}) => {
-  return getStaticPropsWithMessages({ locale: locale });
-};
-
-export const getWebStaticPropsWithMessages = async ({
-  locale = "pt-BR",
-}: {
-  locale: string;
-}) => {
-  return getStaticPropsWithMessages({ locale: locale });
-};
-
-export const getLegalStaticPropsWithMessages = async ({
-  locale = "pt-BR",
-}: {
-  locale: string;
-}) => {
-  return getStaticPropsWithMessages({ locale: locale });
-};
-
-export const getStaticPropsWithMessages = async ({
-  locale = "pt-BR",
-}: {
-  locale: string;
-}) => {
-  const [base, legal, portfolio, web, mdxEditor] = await Promise.all([
+const getMessages = async (locale: string) => {
+  const [base, legal, portfolio, web, mdx_editor] = await Promise.all([
     import(`../../messages/${locale}/default.json`),
     import(`../../messages/${locale}/legal.json`),
     import(`../../messages/${locale}/portfolio.json`),
@@ -54,12 +26,14 @@ export const getStaticPropsWithMessages = async ({
     return target;
   };
 
-  const messages = {}; 
+  const messages = {};
   deepMerge(messages, base.default);
   deepMerge(messages, portfolio.default);
   deepMerge(messages, legal.default);
   deepMerge(messages, web.default);
-  deepMerge(messages, mdxEditor.default);
+  deepMerge(messages, mdx_editor.default);
 
-  return { props: { messages } };
+  return messages;
 };
+
+export default getMessages;

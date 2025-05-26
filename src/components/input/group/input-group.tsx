@@ -1,4 +1,4 @@
-import { FormProviderProps, useForm } from "@/components/form";
+import { FormProviderProps, useForm } from "@/components/form/form";
 import { toNested } from "@/lib/nested";
 import { cn } from "@/lib/utils";
 import { useDisclosure } from "@heroui/react";
