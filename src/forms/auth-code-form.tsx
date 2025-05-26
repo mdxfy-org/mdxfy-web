@@ -29,7 +29,7 @@ const AuthCodeForm: React.FC = () => {
 
   const { setIsLoading } = useOverlay();
   const [isDataLoading, setIsDataLoading] = useState(false);
-  const { user, firstLogin, setUser, setToken, logout } = useAuth();
+  const { user, firstLogin, setUser, setToken, logout } = useUser();
 
   const [errors, setErrors] = useState<Record<string, string | string[]>>({});
 
@@ -198,12 +198,6 @@ const AuthCodeForm: React.FC = () => {
             </Link>
           </p>
         </div>
-      </Form>
-    </>
-  );
-};
-
-export default AuthCodeForm;
       </Form>
     </>
   );
