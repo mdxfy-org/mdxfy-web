@@ -1,9 +1,7 @@
-import { isProduction } from "./env";
-
 export const cookieOptions = {
   path: "/",
   maxAge: 60 * 60 * 24 * 7,
   httpOnly: false,
-  secure: isProduction(),
+  secure: false,// isProduction(),
   sameSite: "lax" as const,
 };

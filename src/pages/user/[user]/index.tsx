@@ -25,7 +25,7 @@ export default function UserPosts() {
   useEffect(() => {
     if (!router.isReady) return;
     const { user } = router.query as Params;
-    if (!user) return;
+    if (!user || posts) return;
     api
       .get(`/post/user/${user}`)
       .then(({ data }) => {
@@ -35,7 +35,7 @@ export default function UserPosts() {
       .catch(() => {
         // router.push("/post");
       });
-  }, [router]);
+  }, [router, posts]);
   return (
     <>
       <Head>

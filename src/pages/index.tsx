@@ -19,7 +19,7 @@ export default function UserPosts() {
   const [posts, setPosts] = useState<Post[]>();
 
   useEffect(() => {
-    if (!router.isReady && posts) return;
+    if (!router.isReady || posts) return;
     api
       .get(`/post`)
       .then(({ data }) => {

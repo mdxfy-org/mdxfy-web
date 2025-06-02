@@ -23,7 +23,7 @@ export default function Index() {
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router.isReady || post) return;
     const { uuid } = router.query as Params;
     if (!uuid) return;
     api
@@ -35,7 +35,7 @@ export default function Index() {
       .catch(() => {
         // router.push("/post");
       });
-  }, [router]);
+  }, [router, post]);
 
   return (
     <>
