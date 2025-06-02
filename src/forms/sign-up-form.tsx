@@ -28,6 +28,8 @@ const SignInForm: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
+  const [isLoading, setLoading] = useState<boolean>(false);
+
   const [email, setEmail] = useState<string>("");
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -45,7 +47,7 @@ const SignInForm: React.FC = () => {
 
   const handleSubmit = (data: FormValues) => {
     setIsLoading(true);
-
+    setLoading(true);
     signUp(data)
       .then(({ user, token }) => {
         setUser(user);
@@ -62,6 +64,7 @@ const SignInForm: React.FC = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        setLoading(false);
       });
   };
 
@@ -170,7 +173,12 @@ const SignInForm: React.FC = () => {
         <p className="text-gray-700 dark:text-gray-200 text-small text-start">
           {t("Legal.agreements.sign_in_terms")}
         </p>
-        <Button className="w-full" color="primary" type="submit">
+        <Button
+          className="w-full"
+          color="primary"
+          type="submit"
+          isLoading={isLoading}
+        >
           {t("UI.buttons.continue")}
         </Button>
       </Form>

@@ -28,7 +28,8 @@ const AuthCodeForm: React.FC = () => {
   const [, setCookie] = useCookies([AUTHENTICATED_KEY]);
 
   const { setIsLoading } = useOverlay();
-  const [isDataLoading, setIsDataLoading] = useState(false);
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const { user, firstLogin, setUser, setToken, logout } = useUser();
 
   const [errors, setErrors] = useState<Record<string, string | string[]>>({});
@@ -46,6 +47,7 @@ const AuthCodeForm: React.FC = () => {
   const handleResendCode = async () => {
     if (timer <= 0) {
       setIsLoading(true);
+      setLoading(true);
       resendCode()
         .then(() => {
           toast.success({
@@ -60,6 +62,7 @@ const AuthCodeForm: React.FC = () => {
         })
         .finally(() => {
           setIsLoading(false);
+          setLoading(false);
         });
     } else {
       toast.warning({
@@ -73,6 +76,7 @@ const AuthCodeForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.currentTarget));
+    setLoading(true);
     setIsLoading(true);
     auth(String(formData["code"]))
       .then(({ data }) => {
@@ -110,6 +114,7 @@ const AuthCodeForm: React.FC = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        setLoading(false);
       });
   };
 
@@ -129,8 +134,14 @@ const AuthCodeForm: React.FC = () => {
       >
         {user?.name && (
           <p className="pb-2 font-semibold text-gray-700 dark:text-gray-200 text-xl text-left">
-            {t(`UI.titles.${firstLogin ? "first_welcome" : "welcome_again"}`, { name: user?.name })}
-            <div aria-label="emoji" className="inline-block ml-2 pr-2 pb-2 animate-normal animate-thrice animate-wiggle-more animate-duration-[400ms] animate-ease-in-out" role="img">
+            {t(`UI.titles.${firstLogin ? "first_welcome" : "welcome_again"}`, {
+              name: user?.name,
+            })}
+            <div
+              aria-label="emoji"
+              className="inline-block ml-2 pr-2 pb-2 animate-normal animate-thrice animate-wiggle-more animate-duration-[400ms] animate-ease-in-out"
+              role="img"
+            >
               👋
             </div>
           </p>
@@ -189,7 +200,12 @@ const AuthCodeForm: React.FC = () => {
           <Spacer y={16} />
         </div>
         <div className="flex flex-col gap-4 w-full">
-          <Button className="w-full" color="primary" type="submit">
+          <Button
+            className="w-full"
+            color="primary"
+            type="submit"
+            isLoading={isLoading}
+          >
             {t("UI.buttons.continue")}
           </Button>
           <p className="w-full text-small text-center">

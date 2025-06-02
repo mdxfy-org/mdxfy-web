@@ -20,6 +20,8 @@ const LoginForm: React.FC = () => {
   const { setIsLoading } = useOverlay();
   const { setUser, setToken } = useUser();
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const [, setCookie] = useCookies([AUTHENTICATED_KEY]);
 
   const [email, setEmail] = useState<string>("");
@@ -27,6 +29,7 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit = (data: FormValues) => {
     setIsLoading(true);
+    setLoading(true);
     login(data)
       .then(({ token, user, auth }) => {
         setToken(token);
@@ -44,6 +47,7 @@ const LoginForm: React.FC = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        setLoading(false);
       });
   };
 
@@ -91,7 +95,12 @@ const LoginForm: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col flex-1 md:flex-none justify-end gap-4 w-full">
-          <Button className="w-full" color="primary" type="submit">
+          <Button
+            className="w-full"
+            color="primary"
+            type="submit"
+            isLoading={loading}
+          >
             {t("UI.buttons.enter")}
           </Button>
           <p className="text-small text-center">
