@@ -10,6 +10,7 @@ import {
   InsertCodeBlock,
   InsertTable,
   ListsToggle,
+  MDXEditorProps,
   Separator,
   tablePlugin,
   thematicBreakPlugin,
@@ -50,12 +51,16 @@ const PlainTextCodeEditorDescriptor: CodeBlockEditorDescriptor = {
   },
 };
 
-export interface EditorProps {
-  value?: string;
-  onChange?: (value: string) => void;
+export interface EditorProps extends MDXEditorProps {
+  readonly?: boolean;
 }
 
-const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
+const Editor: React.FC<EditorProps> = ({
+  markdown,
+  onChange,
+  readonly,
+  ...props
+}) => {
   const t = useTranslations();
 
   const imageUploadHandler = async (image: File) => {
@@ -79,11 +84,10 @@ const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
     <MDXEditor
       className="bg-default-100 rounded-md ring-1 ring-default-200 w-full overflow-hidden"
       contentEditableClassName="editor-content prose !w-full !max-w-full"
-      translation={(key, _, interpolations) => {
-        return t(key, interpolations);
-      }}
-      markdown={value ?? ""}
-      onChange={onChange}      
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      translation={(key, _, interpolations) => t(key as any, interpolations)}
+      markdown={markdown ?? ""}
+      onChange={onChange}
       plugins={[
         codeBlockPlugin({
           codeBlockEditorDescriptors: [PlainTextCodeEditorDescriptor],
@@ -97,38 +101,44 @@ const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
         markdownShortcutPlugin(),
         imagePlugin({ imageUploadHandler }),
         diffSourcePlugin(),
-        toolbarPlugin({
-          toolbarClassName:
-            "editor-header sticky top-0 z-10 !bg-default-200 !*:text-neutral-50 ",
-          toolbarContents: () => (
-            <>
-              <BoldItalicUnderlineToggles />
-              <BlockTypeSelect />
+        ...(!readonly
+          ? [
+              toolbarPlugin({
+                toolbarClassName:
+                  "editor-header sticky top-0 z-10 !bg-default-200 !*:text-neutral-50 ",
+                toolbarContents: () => (
+                  <>
+                    <BoldItalicUnderlineToggles />
+                    <BlockTypeSelect />
 
-              <Separator />
+                    <Separator />
 
-              <UndoRedo />
+                    <UndoRedo />
 
-              <Separator />
+                    <Separator />
 
-              <ListsToggle />
+                    <ListsToggle />
 
-              <Separator />
+                    <Separator />
 
-              <CodeToggle />
-              <InsertCodeBlock />
-              <CreateLink />
-              <InsertTable />
+                    <CodeToggle />
+                    <InsertCodeBlock />
+                    <CreateLink />
+                    <InsertTable />
 
-              <Separator />
+                    <Separator />
 
-              <DiffSourceToggleWrapper options={["rich-text", "source"]}>
-                <></>
-              </DiffSourceToggleWrapper>
-            </>
-          ),
-        }),
+                    <DiffSourceToggleWrapper options={["rich-text", "source"]}>
+                      <></>
+                    </DiffSourceToggleWrapper>
+                  </>
+                ),
+              }),
+            ]
+          : []),
       ]}
+      readOnly={readonly}
+      {...props}
     />
   );
 };

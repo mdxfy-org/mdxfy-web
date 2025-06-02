@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import Header from "@/components/header";
-import Loading from "@/components/loading";
 import Footer from "./footer";
 
 interface LayoutProps {

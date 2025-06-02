@@ -6,10 +6,11 @@ import type { useTranslations } from "next-intl";
 
 type Messages = typeof base & typeof web & typeof portfolio & typeof legal;
 
-declare global {
-  export type IntlMessages = Messages;
+declare module 'next-intl' {
   interface AppConfig {
+    Locale: (typeof routing.locales)[number];
     Messages: Messages;
+    Formats: typeof formats;
   }
 }
 

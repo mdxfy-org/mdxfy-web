@@ -69,7 +69,7 @@ const CrudForm: React.FC<CrudFormProps> = ({
         .then(() => {
           if (update) {
             toast.success({
-              description: t("Messages.success.user_updated_successfully"),
+              description: t("Messages.titles.success"),
             });
           } else {
             toast.success({

@@ -1,6 +1,5 @@
 import Header from "@/components/header";
 import { cn } from "@/lib/utils";
-import Loading from "@/components/loading";
 import Footer from "./footer";
 
 interface BodyProps {

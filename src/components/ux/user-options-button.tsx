@@ -1,7 +1,5 @@
-import { Logout2, Settings } from "@solar-icons/react";
+import { Logout2, Pen, Settings } from "@solar-icons/react";
 import IconOption from "../ui/icon-option";
-import { useTheme } from "next-themes";
-import ThemeUserFeedback from "./theme-user-feedback";
 import { useUser } from "@/contexts/auth-provider";
 import { useTranslations } from "next-intl";
 import userPicture from "@public/img/user-default.png";
@@ -20,25 +18,16 @@ import { useState } from "react";
 
 const UserOptionsButton: React.FC = () => {
   const t = useTranslations();
-  const { theme, setTheme } = useTheme();
   const { user, logout } = useUser();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
 
   if (!user) {
     return <LazyUserOptionsMenu />;
   }
 
   return (
-    <Popover
-      radius="sm"
-      placement="bottom-end"
-      offset={8}
-    >
+    <Popover radius="sm" placement="bottom-end" offset={8}>
       <PopoverTrigger>
         <Button
           radius="md"
@@ -67,13 +56,18 @@ const UserOptionsButton: React.FC = () => {
           {t("UI.redirects.profile")}
         </IconOption>
         <IconOption
+          href="/post"
+          className="md:hidden flex"
+          icon={<Pen weight="LineDuotone" size={22} />}
+        >{t("UI.redirects.new_post")}</IconOption>
+        {/* <IconOption
           href="/web"
           onClick={toggleTheme}
           className="md:hidden flex"
           icon={<ThemeUserFeedback />}
         >
           {t("UI.redirects.change_theme")}
-        </IconOption>
+        </IconOption> */}
         <IconOption
           onClick={logout}
           href="/login"

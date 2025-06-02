@@ -8,26 +8,33 @@ import Select from "@/components/input/select";
 import { SelectItem } from "@heroui/react";
 import { useState } from "react";
 import api from "@/service/api";
-import Form from "@/components/form";
+import Form from "@/components/form/form";
+import { useRouter } from "next/router";
 
 export default function Index() {
+  const router = useRouter();
   // const t = useTranslations();
   const pt = useTranslations("Pages.Index");
 
-  const [, setLoading] = useState(false);
-  const [post, ] = useState<string>("");
-  const [visibility, setVisibility] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+  const [post, setPost] = useState<string>("");
+  const [visibility, setVisibility] = useState<
+    "public" | "private" | "friends"
+  >("public");
 
   const handleSave = (as: "draft" | "post" = "post") => {
     if (!post) return;
     setLoading(true);
     api
       .post("/post", { content: post, visibility: visibility, as: as })
-      .then(() => {})
-      .catch(() => {})
-      .finally(() => {
-        setLoading(false);
-      });
+      .then(({ data }) => {
+        console.log(data);
+        router.push(`/post/${data.uuid}`);
+      })
+      .catch(() => {});
+    // .finally(() => {
+    //   setLoading(false);
+    // });
   };
 
   return (
@@ -38,10 +45,13 @@ export default function Index() {
       </Head>
       <Layout className="flex flex-col gap-10 w-full">
         <section className="flex flex-col items-start gap-6 mx-auto p-4 max-w-[912px] container">
-          <Form className="w-full" onSubmit={(data) => {
-            console.log(data);
-          }}>
-            <Editor value={post} />
+          <Form className="w-full">
+            <Editor
+              markdown={post}
+              onChange={(val) => {
+                setPost(val);
+              }}
+            />
             <div className="flex flex-row justify-between gap-4 w-full">
               <div>
                 <Select
@@ -49,8 +59,11 @@ export default function Index() {
                   placeholder="Selecione a visibilidade"
                   aria-label="Visibilidade"
                   className="w-[200px]"
+                  value={visibility}
                   onChange={(e) => {
-                    setVisibility(e.target.value);
+                    setVisibility(
+                      e.target.value as "public" | "private" | "friends"
+                    );
                   }}
                 >
                   <SelectItem key="public">Publico</SelectItem>
@@ -59,10 +72,19 @@ export default function Index() {
                 </Select>
               </div>
               <div className="flex flex-row gap-4">
-                <Button type="submit" onPress={() => handleSave("draft")}>
+                <Button
+                  isLoading={loading}
+                  type="submit"
+                  onPress={() => handleSave("draft")}
+                >
                   Salvar como rascunho
                 </Button>
-                <Button type="submit" onPress={() => handleSave("post")} color="primary">
+                <Button
+                  isLoading={loading}
+                  type="submit"
+                  onPress={() => handleSave("post")}
+                  color="primary"
+                >
                   Fazer post
                 </Button>
               </div>

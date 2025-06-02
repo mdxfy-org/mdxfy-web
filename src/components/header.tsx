@@ -1,22 +1,21 @@
 import React from "react";
 import Mdxfy from "@/components/ui/mdxfy";
-import dynamic from "next/dynamic";
-import { LazyThemeSwitcher } from "@/components/ui/theme-switcher";
-import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import Link from "@/components/link";
 import { useUser } from "@/contexts/auth-provider";
 import UserOptionsButton from "./ux/user-options-button";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/navbar";
 import CompactLanguageSelector from "./ux/compact-language-selector";
+import { Button, Link as HeroUILink } from "@heroui/react";
+import { Pen } from "@solar-icons/react";
 
-const ThemeSwitcher = dynamic(() => import("@/components/ui/theme-switcher"), {
-  ssr: false,
-  loading: () => <LazyThemeSwitcher />,
-});
+// const ThemeSwitcher = dynamic(() => import("@/components/ui/theme-switcher"), {
+//   ssr: false,
+//   loading: () => <LazyThemeSwitcher />,
+// });
 
 const Header: React.FC = () => {
-  const t = useTranslations();
+  // const t = useTranslations();
   const { user } = useUser();
 
   return (
@@ -26,24 +25,16 @@ const Header: React.FC = () => {
     >
       <NavbarBrand className="flex flex-row flex-1 justify-start items-center gap-4">
         <Link href="/">
-          <Mdxfy.Logo className="w-36 h-9 translate-y-1" />
+          <Mdxfy.Logo className="w-36 h-9" />
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden md:flex space-x-4" justify="center">
-        <NavbarItem>
+        {/* <NavbarItem>
           <Link
             href="/about"
             className="font-bold text-gray-700 hover:text-gray-900 dark:hover:text-gray-300 dark:text-gray-200 hover:underline"
           >
             {t("UI.redirects.about") as string}
-          </Link>
-        </NavbarItem>
-        {/* <NavbarItem>
-          <Link
-            href="/"
-            className="font-bold text-gray-700 hover:text-gray-900 dark:hover:text-gray-300 dark:text-gray-200 hover:underline"
-          >
-            {t("UI.redirects.application") as string}
           </Link>
         </NavbarItem> */}
       </NavbarContent>
@@ -53,8 +44,21 @@ const Header: React.FC = () => {
       >
         <CompactLanguageSelector />
         <NavbarItem>
-          <ThemeSwitcher className={cn(user ? "md:flex hidden" : "flex")} />
+          <Button
+            as={HeroUILink}
+            href="/post"
+            className={cn(
+              "bg-default-100 hover:bg-default-200 shadow-sm text-default-700 duration-100",
+              user ? "md:flex hidden" : "flex"
+            )}
+            isIconOnly
+          >
+            <Pen weight="LineDuotone" size={22} />
+          </Button>
         </NavbarItem>
+        {/* <NavbarItem>
+          <ThemeSwitcher className={cn(user ? "md:flex hidden" : "flex")} />
+        </NavbarItem> */}
         {user && (
           <NavbarItem className="flex justify-center items-center">
             <UserOptionsButton />
