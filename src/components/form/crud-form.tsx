@@ -96,7 +96,8 @@ const CrudForm: React.FC<CrudFormProps> = ({
       if (url) {
         api
           .get(url)
-          .then(({ data }) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .then(({ data }: any) => {
             setInitialData(data);
           })
           .catch(() => {

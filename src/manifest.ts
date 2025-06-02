@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Agrofast App",
-    short_name: "Agrofast",
-    description: "Agrofast portable version",
+    name: "MdxFy App",
+    short_name: "MdxFy",
+    description: "MdxFy portable version",
     start_url: "/",
     display: "fullscreen",
     background_color: "#f8fafc",
