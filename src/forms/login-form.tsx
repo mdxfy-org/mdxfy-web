@@ -86,12 +86,12 @@ const LoginForm: React.FC = () => {
             <Checkbox defaultSelected name="remember" value="true" size="sm">
               {t("UI.checkboxes.remember_me")}
             </Checkbox>
-            <Link
+            {/* <Link
               href="/reset-password"
               className="hover:opacity-80 min-w-max font-medium text-primary text-sm hover:underline transition-all"
             >
               {t("UI.redirects.forgot_password")}
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="flex flex-col flex-1 md:flex-none justify-end gap-4 w-full">

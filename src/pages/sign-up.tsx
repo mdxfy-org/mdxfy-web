@@ -15,8 +15,12 @@ export default function SignIn() {
         <title>{pt("meta.title")}</title>
         <meta name="description" content={pt("meta.description")} />
       </Head>
-      <Body className="flex flex-row justify-center" hideHeader hideFooter>
-        <div className="flex flex-col gap-4 px-4 md:px-8 py-6 w-full max-w-md min-h-max">
+      <Body
+        className="flex flex-row justify-center h-screen"
+        hideHeader
+        hideFooter
+      >
+        <div className="flex flex-col md:justify-center gap-4 p-4 md:px-8 md:py-6 w-full max-w-md min-h-max">
           <div className="flex flex-col items-center gap-2">
             <MDxFy.Logo className="w-min h-10" />
           </div>
