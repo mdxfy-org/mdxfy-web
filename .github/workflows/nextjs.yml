@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_API_BASE_URL: https://api.mdxfy.tech
+      NEXT_PUBLIC_WEB_BASE_URL: https://mdxfy.tech
     steps:
       - name: Repository checkout
         uses: actions/checkout@v4
