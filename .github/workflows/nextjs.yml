@@ -20,7 +20,7 @@ jobs:
     name: Install and Build Next.js
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_API_BASE_URL: https://api.agrofast.tech
+      NEXT_PUBLIC_API_BASE_URL: https://api.mdxfy.tech
     steps:
       - name: Repository checkout
         uses: actions/checkout@v4
