@@ -2,7 +2,6 @@
 import {
   BlockTypeSelect,
   BoldItalicUnderlineToggles,
-  BoldItalicUnderlineTogglesProps,
   codeMirrorPlugin,
   CodeToggle,
   CreateLink,
@@ -21,7 +20,6 @@ import {
   thematicBreakPlugin,
   toolbarPlugin,
   UndoRedo,
-  usePublisher,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import React from "react";
@@ -36,8 +34,6 @@ import {
   quotePlugin,
   markdownShortcutPlugin,
 } from "@mdxeditor/editor";
-import { Button, ButtonGroup, Select } from "@heroui/react";
-import { TextBold, TextItalic, TextUnderline } from "@solar-icons/react";
 
 const defaultSnippetContent = "".trim();
 
