@@ -75,6 +75,7 @@ const SignInForm: React.FC = () => {
         isOpen={isOpen}
         size="2xl"
         onClose={onClose}
+        placement="center"
       >
         <ModalContent className="m-1 md:m-0 max-h-[calc(100vh-8px)] md:max-h-[calc(100vh-4rem)]">
           {(onClose) => (
@@ -90,111 +91,106 @@ const SignInForm: React.FC = () => {
         </ModalContent>
       </Modal>
       <Form
-        className="flex flex-col gap-4"
+        className="flex flex-col flex-1 md:flex-none items-center gap-4"
         onSubmit={handleSubmit}
         validationErrors={errors}
       >
-        <Input
-          name="name"
-          label={t("UI.labels.name")}
-          placeholder={t("UI.placeholders.write_name")}
-          type="name"
-          autoCapitalize="words"
-          isRequired
-        />
-        <Input
-          name="username"
-          label={t("UI.labels.username")}
-          placeholder={t("UI.placeholders.write_username")}
-          type="name"
-          autoCapitalize="words"
-          isRequired
-        />
-        <Input
-          id="email"
-          name="email"
-          label={t("UI.labels.email")}
-          placeholder={t("UI.placeholders.write_email")}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          queryCollectable
-          type="email"
-          isRequired
-        />
-        <Input
-          name="password"
-          label={t("UI.labels.password")}
-          placeholder={t("UI.placeholders.write_password")}
-          type="password"
-          taggableVisibility
-          isRequired
-        />
-        <Input
-          name="password_confirm"
-          label={t("UI.labels.password_confirm")}
-          placeholder={t("UI.placeholders.write_password_confirm")}
-          type="password"
-          taggableVisibility
-          isRequired
-        />
-        <div>
-          <Checkbox defaultSelected name="remember" value="true" size="sm">
-            {t("UI.checkboxes.remember_me")}
-          </Checkbox>
-          <Checkbox name="terms_and_privacy_agreement" value="true" size="sm">
-            <>
-              {t.rich("Legal.agreements.accept_policy_and_terms", {
-                use: (chunks) => (
-                  <span
-                    onClick={() => {
-                      openTermsOfUse();
-                    }}
-                    className="hover:opacity-80 font-medium text-primary text-sm hover:underline transition-all cursor-pointer"
-                  >
-                    {chunks}
-                  </span>
-                ),
-                privacy: (chunks) => (
-                  <span
-                    onClick={() => {
-                      openPrivacyPolicy();
-                    }}
-                    className="hover:opacity-80 font-medium text-primary text-sm hover:underline transition-all cursor-pointer"
-                  >
-                    {chunks}
-                  </span>
-                ),
-              })}
-            </>
-          </Checkbox>
+        <div className="flex flex-col gap-4 w-full">
+          <Input
+            name="name"
+            label={t("UI.labels.name")}
+            placeholder={t("UI.placeholders.write_name")}
+            type="name"
+            autoCapitalize="words"
+            isRequired
+          />
+          <Input
+            id="email"
+            name="email"
+            label={t("UI.labels.email")}
+            placeholder={t("UI.placeholders.write_email")}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            queryCollectable
+            type="email"
+            isRequired
+          />
+          <Input
+            name="password"
+            label={t("UI.labels.password")}
+            placeholder={t("UI.placeholders.write_password")}
+            type="password"
+            taggableVisibility
+            isRequired
+          />
+          <Input
+            name="password_confirm"
+            label={t("UI.labels.password_confirm")}
+            placeholder={t("UI.placeholders.write_password_confirm")}
+            type="password"
+            isRequired
+          />
+          <div>
+            <Checkbox defaultSelected name="remember" value="true" size="sm">
+              {t("UI.checkboxes.remember_me")}
+            </Checkbox>
+            <Checkbox name="terms_and_privacy_agreement" value="true" size="sm">
+              <>
+                {t.rich("Legal.agreements.accept_policy_and_terms", {
+                  use: (chunks) => (
+                    <span
+                      onClick={() => {
+                        openTermsOfUse();
+                      }}
+                      className="hover:opacity-80 font-medium text-primary text-sm hover:underline transition-all cursor-pointer"
+                    >
+                      {chunks}
+                    </span>
+                  ),
+                  privacy: (chunks) => (
+                    <span
+                      onClick={() => {
+                        openPrivacyPolicy();
+                      }}
+                      className="hover:opacity-80 font-medium text-primary text-sm hover:underline transition-all cursor-pointer"
+                    >
+                      {chunks}
+                    </span>
+                  ),
+                })}
+              </>
+            </Checkbox>
+          </div>
+          <input type="hidden" name="language" value={router.locale} />
         </div>
-        <input type="hidden" name="language" value={router.locale} />
         <Spacer y={4} />
-        <p className="text-gray-700 dark:text-gray-200 text-small text-start">
-          {t("Legal.agreements.sign_in_terms")}
-        </p>
-        <Button
-          className="w-full"
-          color="primary"
-          type="submit"
-          isLoading={isLoading}
-        >
-          {t("UI.buttons.continue")}
-        </Button>
+        <div className="flex flex-col flex-1 md:flex-none justify-end gap-4 w-full">
+          {/* <p className="text-gray-700 dark:text-gray-200 text-small text-start">
+            {t("Legal.agreements.sign_in_terms")}
+          </p> */}
+          <Button
+            className="w-full"
+            color="primary"
+            type="submit"
+            isLoading={isLoading}
+          >
+            {t("UI.buttons.continue")}
+          </Button>
+          <p className="text-small text-center">
+            <Link
+              href={{
+                pathname: "/login",
+                query: {
+                  email: email,
+                },
+              }}
+              className="hover:opacity-80 font-medium text-primary text-sm hover:underline transition-all"
+            >
+              {t("UI.redirects.enter_existing_account")}
+            </Link>
+          </p>
+        </div>
       </Form>
-      <p className="text-small text-center">
-        <Link
-          href={{
-            pathname: "/login",
-            query: {
-              email: email,
-            },
-          }}
-          className="hover:opacity-80 font-medium text-primary text-sm hover:underline transition-all"
-        >
-          {t("UI.redirects.enter_existing_account")}
-        </Link>
-      </p>
     </>
   );
 };

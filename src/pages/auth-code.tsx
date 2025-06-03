@@ -5,7 +5,6 @@ import { getStaticPropsWithMessages } from "@/lib/get-static-props";
 import Head from "next/head";
 import AuthCodeForm from "@/forms/auth-code-form";
 
-
 export default function AuthCode() {
   const pt = useTranslations("Pages.AuthCode");
 
@@ -15,7 +14,11 @@ export default function AuthCode() {
         <title>{pt("meta.title")}</title>
         <meta name="description" content={pt("meta.description")} />
       </Head>
-      <Body className="flex flex-row" hideHeader>
+      <Body
+        className="flex flex-row justify-center h-screen"
+        hideHeader
+        hideFooter
+      >
         <div className="flex flex-[5] justify-center md:items-center max-h-svh overflow-hidden overflow-y-auto">
           <div className="flex flex-col gap-4 px-8 py-6 w-full max-w-md min-h-max">
             <div className="flex flex-col items-center gap-2">

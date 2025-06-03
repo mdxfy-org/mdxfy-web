@@ -26,6 +26,7 @@ const AuthCodeForm: React.FC = () => {
   const toast = useToast();
 
   const [, setCookie] = useCookies([AUTHENTICATED_KEY]);
+  const [code, setCode] = useState<string>("");
 
   const { setIsLoading } = useOverlay();
   const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
@@ -148,7 +149,7 @@ const AuthCodeForm: React.FC = () => {
         )}
       </Skeleton>
       <Form
-        className="flex flex-col flex-1 md:flex-auto"
+        className="flex flex-col flex-1 md:flex-none items-center gap-4"
         validationBehavior="native"
         validationErrors={errors}
         onSubmit={handleSubmit}
@@ -169,6 +170,8 @@ const AuthCodeForm: React.FC = () => {
                 name="code"
                 className="mb-2"
                 variant="bordered"
+                value={code}
+                onValueChange={setCode}
                 length={codeLength || 6}
                 queryCollectable
               />
@@ -204,6 +207,7 @@ const AuthCodeForm: React.FC = () => {
             className="w-full"
             color="primary"
             type="submit"
+            isDisabled={!code || code.length < (codeLength || 6)}
             isLoading={isLoading}
           >
             {t("UI.buttons.continue")}

@@ -18,7 +18,7 @@ export default function TermsOfUse() {
           content={t("Pages.TermsOfUse.meta.description")}
         />
       </Head>
-      <Layout className="flex flex-col gap-8 w-full">
+      <Layout className="flex flex-col gap-8 w-full" hideHeader hideFooter>
         <section className="flex flex-col items-start gap-4 mx-auto p-4 container">
           <MainTitle>{tou("main_title")}</MainTitle>
           <section id="section_1" className="mt-8 w-full">

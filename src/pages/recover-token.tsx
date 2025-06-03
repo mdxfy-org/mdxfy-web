@@ -15,7 +15,7 @@ export default function RecoverToken() {
         <title>{pt("meta.title")}</title>
         <meta name="description" content={pt("meta.description")} />
       </Head>
-      <Body className="flex flex-row justify-center" hideHeader>
+      <Body className="flex flex-row justify-center" hideHeader hideFooter>
         <div className="flex flex-col gap-4 px-4 md:px-8 py-6 w-full max-w-md min-h-max">
           <div className="flex flex-col items-center gap-2">
             <MDxFy.Logo className="w-40 h-10" />

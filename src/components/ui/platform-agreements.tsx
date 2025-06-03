@@ -20,7 +20,7 @@ export const TermsOfUse = () => {
             {t.rich("Legal.agreements.terms_of_use_info_3", {
               link: (chunks) => (
                 <Link
-                  href={`${getLegalUrl()}/terms-of-use`}
+                  href={"/terms-of-use"}
                   className="hover:opacity-80 font-medium text-primary hover:underline transition-all cursor-pointer"
                 >
                   {chunks}
@@ -50,7 +50,7 @@ export const PrivacyPolicy = () => {
             {t.rich("Legal.agreements.privacy_policy_info_3", {
               link: (chunks) => (
                 <Link
-                  href={`${getLegalUrl()}/privacy-policies`}
+                  href={"/privacy-policies"}
                   className="hover:opacity-80 font-medium text-primary hover:underline transition-all cursor-pointer"
                 >
                   {chunks}
