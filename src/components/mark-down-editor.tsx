@@ -2,6 +2,7 @@
 import {
   BlockTypeSelect,
   BoldItalicUnderlineToggles,
+  BoldItalicUnderlineTogglesProps,
   codeMirrorPlugin,
   CodeToggle,
   CreateLink,
@@ -11,6 +12,7 @@ import {
   InsertCodeBlock,
   InsertTable,
   ListsToggle,
+  MDXEditorMethods,
   MDXEditorProps,
   SandpackConfig,
   sandpackPlugin,
@@ -19,6 +21,7 @@ import {
   thematicBreakPlugin,
   toolbarPlugin,
   UndoRedo,
+  usePublisher,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import React from "react";
@@ -33,6 +36,8 @@ import {
   quotePlugin,
   markdownShortcutPlugin,
 } from "@mdxeditor/editor";
+import { Button, ButtonGroup, Select } from "@heroui/react";
+import { TextBold, TextItalic, TextUnderline } from "@solar-icons/react";
 
 const defaultSnippetContent = "".trim();
 
@@ -62,6 +67,8 @@ const Editor: React.FC<EditorProps> = ({
   readonly,
   ...props
 }) => {
+  const ref = React.useRef<MDXEditorMethods>(null);
+
   const t = useTranslations();
 
   const imageUploadHandler = async (image: File) => {
@@ -83,7 +90,8 @@ const Editor: React.FC<EditorProps> = ({
 
   return (
     <MDXEditor
-      className="bg-default-100 rounded-md ring-1 ring-default-200 w-full overflow-hidden"
+      ref={ref}
+      className="bg-default-100/15 border-2 border-default-200 hover:border-default-400 focus-within:!border-default-600 rounded-xl w-full overflow-hidden duration-200"
       contentEditableClassName="editor-content prose !w-full !max-w-full"
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       translation={(key, _, interpolations) => t(key as any, interpolations)}
@@ -129,9 +137,24 @@ const Editor: React.FC<EditorProps> = ({
           ? [
               toolbarPlugin({
                 toolbarClassName:
-                  "editor-header sticky top-0 z-10 !bg-default-200 !*:text-neutral-50 ",
+                  "editor-header sticky top-0 z-10 !bg-default-50 !*:text-neutral-50 ",
                 toolbarContents: () => (
                   <>
+                    {/* <ButtonGroup>
+                      <Button size="sm" onPress={() => {}} isIconOnly>
+                        <strong className="text-xl">B</strong>
+                      </Button>
+                      <Button size="sm" onPress={() => {}} isIconOnly>
+                        <span className="font-mono text-xl italic translate-y-[1px]">
+                          I
+                        </span>
+                      </Button>
+                      <Button size="sm" onPress={() => {}} isIconOnly>
+                        <span className="font-mono text-xl underline translate-y-[1px]">
+                          U
+                        </span>
+                      </Button>
+                    </ButtonGroup> */}
                     <BoldItalicUnderlineToggles />
                     <BlockTypeSelect />
 
@@ -152,7 +175,7 @@ const Editor: React.FC<EditorProps> = ({
 
                     <Separator />
 
-                    <DiffSourceToggleWrapper options={["rich-text", "source"]}>
+                    <DiffSourceToggleWrapper options={["rich-text", "source"]} SourceToolbar={''}>
                       <></>
                     </DiffSourceToggleWrapper>
                   </>
