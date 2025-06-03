@@ -129,6 +129,9 @@
       "download_app": "Descargar",
       "change_theme": "Cambiar tema",
       "logout": "Cerrar sesión"
+    },
+    "modal": {
+      "crop_title": "Recortar imagen"
     }
   },
   "Messages": {

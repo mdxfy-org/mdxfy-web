@@ -132,7 +132,7 @@
       "logout": "Sair da conta"
     }
   },
-  "Messages": {
+  "Messages ": {
     "titles": {
       "error": "Erro",
       "success": "Sucesso",
@@ -184,6 +184,9 @@
     "info": {
       "loading": "Carregando...",
       "wait_resend_code_timeout": "Aguarde {seconds} segundos para reenviar o código."
+    },
+    "modal": {
+      "crop_title": "Recortar imagem"
     }
   },
   "Application": {

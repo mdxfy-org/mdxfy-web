@@ -129,6 +129,9 @@
       "download_app": "Download app",
       "change_theme": "Change theme",
       "logout": "Sign out"
+    },
+    "modal": {
+      "crop_title": "Crop Image"
     }
   },
   "Messages": {
