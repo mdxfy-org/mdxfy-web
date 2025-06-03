@@ -2,7 +2,6 @@ import { ModalBody, ModalHeader } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import ScrollShadow from "../scroll-shadow";
 import Link from "@/components/link";
-import { getLegalUrl } from "@/lib/utils";
 
 export const TermsOfUse = () => {
   const t = useTranslations();
