@@ -1,7 +1,8 @@
 import { Image as HeroUIImage } from "@heroui/react";
 import Cropper, { Area } from "react-easy-crop";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import imageDefault from "@public/img/image-default.png";
 import { useTranslations } from "next-intl";
 import {
   Modal,
@@ -21,18 +22,21 @@ interface PictureCropModalProps {
   cropAspect?: number;
   onSave: (blob: Blob) => void;
   onCancel?: () => void;
+  loading?: boolean;
 }
 
 export const PictureCropModal: React.FC<PictureCropModalProps> = ({
-  label,  
+  label,
   isOpen,
   onOpenChange,
   initialImage,
   cropAspect = 1,
   onSave,
   onCancel,
+  loading,
 }) => {
   const t = useTranslations();
+
   const [image, setImage] = useState<string | undefined>(initialImage);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageCrop, setImageCrop] = useState<Area | undefined>();
@@ -88,6 +92,10 @@ export const PictureCropModal: React.FC<PictureCropModalProps> = ({
     };
   };
 
+  useEffect(() => {
+    setImage(initialImage);
+  }, [initialImage]);
+
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
       <ModalContent>
@@ -98,7 +106,7 @@ export const PictureCropModal: React.FC<PictureCropModalProps> = ({
               <div className="relative rounded-xl w-full aspect-square overflow-hidden">
                 {!image || !imageLoaded ? (
                   <HeroUIImage
-                    src={initialImage || ""}
+                    src={initialImage || imageDefault.src}
                     className="absolute inset-0 !opacity-60 w-full !h-[unset] object-cover"
                     width={416}
                     height={416}
@@ -145,11 +153,17 @@ export const PictureCropModal: React.FC<PictureCropModalProps> = ({
                   onCancel?.();
                   onClose();
                 }}
+                disabled={loading}
               >
                 {t("UI.buttons.cancel")}
               </Button>
-              <Button color="success" onPress={savePicture}>
-                {t("UI.buttons.enter")}
+              <Button
+                color="success"
+                onPress={savePicture}
+                disabled={!imageCrop}
+                isLoading={loading}
+              >
+                {t("UI.buttons.continue")}
               </Button>
             </ModalFooter>
           </>

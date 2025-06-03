@@ -130,9 +130,12 @@
       "download_app": "Fazer Download",
       "change_theme": "Alterar tema",
       "logout": "Sair da conta"
+    },
+    "modal": {
+      "crop_title": "Recortar imagem"
     }
   },
-  "Messages ": {
+  "Messages": {
     "titles": {
       "error": "Erro",
       "success": "Sucesso",
@@ -184,9 +187,6 @@
     "info": {
       "loading": "Carregando...",
       "wait_resend_code_timeout": "Aguarde {seconds} segundos para reenviar o código."
-    },
-    "modal": {
-      "crop_title": "Recortar imagem"
     }
   },
   "Application": {

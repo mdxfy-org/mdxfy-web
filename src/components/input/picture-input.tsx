@@ -1,6 +1,5 @@
-// PictureInput.tsx
 import { Image as HeroUIImage } from "@heroui/react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useForm } from "../form/form";
 import { useGroup } from "./group/input-group";
@@ -39,70 +38,22 @@ const PictureInput: React.FC<PictureInputProps> = ({
   const group = useGroup();
   const disclosure = useDisclosure();
   const { isOpen, onOpen, onOpenChange } = disclosure;
+
   const name = inputName && group ? group.getFieldName(inputName) : inputName;
 
-  const [value, setValue] = useState<string | undefined>(imageSrc);
-  const [error, setError] = useState<string | undefined>();
-  const [image, setImage] = useState<string | undefined>(value);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const changeValue = useCallback(
-    (newValue?: string) => {
-      if (newValue && newValue !== value) {
-        setValue(newValue);
-        if (name && form) {
-          form.setValue(name, newValue);
-          form.setError(name, undefined);
-        }
+  const [src, setSrc] = useState<string | undefined>(imageSrc);
+
+  useEffect(() => {
+    if (imageSrc && imageSrc !== src) {
+      setSrc(imageSrc);
+      if (name && form) {
+        form.setValue(name, imageSrc);
+        form.setError(name, undefined);
       }
-    },
-    [value, name, form]
-  );
-
-  const handleCropSave = (blob: Blob) => {
-    const formData = new FormData();
-    formData.append("image", blob, "profile_picture.png");
-    onSubmit?.(formData)
-      ?.then(() => {
-        onSuccess?.();
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          if (e.target) setImage(e.target.result as string);
-        };
-        reader.readAsDataURL(blob);
-      })
-      .catch(() => {
-        onError?.();
-      })
-      .finally(() => {
-        onFinally?.();
-      });
-  };
-
-  useEffect(() => {
-    changeValue(value);
-  }, [value, changeValue]);
-
-  useEffect(() => {
-    if (name && form?.values[name] && form.values[name] !== value) {
-      setValue(form.values[name]);
     }
-  }, [form, value, name]);
-
-  useEffect(() => {
-    if (name && form?.errors[name]) {
-      setError(
-        Array.isArray(form.errors[name])
-          ? form.errors[name].join(", ")
-          : form.errors[name]
-      );
-    }
-  }, [form?.errors, name]);
-
-  useEffect(() => {
-    if (name && form && form.values?.[name]) {
-      setImage(form.values[name]);
-    }
-  }, [form, name]);
+  }, [imageSrc, src, name, form]);
 
   useEffect(() => {
     if (group && inputName) {
@@ -113,6 +64,45 @@ const PictureInput: React.FC<PictureInputProps> = ({
     }
   }, [inputName, group]);
 
+  const handleCropSave = (blob: Blob) => {
+    const formData = new FormData();
+    formData.append("image", blob, "profile_picture.png");
+
+    setLoading(true);
+    onSubmit?.(formData)
+      ?.then(() => {
+        onSuccess?.();
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (e.target) {
+            const dataUrl = e.target.result as string;
+            setSrc(dataUrl);
+
+            if (name && form) {
+              form.setValue(name, dataUrl);
+              form.setError(name, undefined);
+            }
+          }
+        };
+        reader.readAsDataURL(blob);
+      })
+      .catch(() => {
+        onError?.();
+      })
+      .finally(() => {
+        onFinally?.();
+        setLoading(false);
+      });
+  };
+
+  const error =
+    name && form?.errors[name]
+      ? Array.isArray(form.errors[name])
+        ? form.errors[name].join(", ")
+        : form.errors[name]
+      : undefined;
+
   return (
     <div className="flex flex-row flex-1 justify-center gap-4 w-full">
       <div className="flex flex-col flex-1 items-center gap-4 max-w-md">
@@ -121,12 +111,13 @@ const PictureInput: React.FC<PictureInputProps> = ({
             label={label}
             isOpen={isOpen}
             onOpenChange={onOpenChange}
-            initialImage={image}
+            initialImage={src}
             cropAspect={cropAspect}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            onSave={(blob: any) => handleCropSave(blob)}
+            onSave={handleCropSave}
             onCancel={() => {}}
+            loading={loading}
           />
+
           {label && (
             <label
               htmlFor={name}
@@ -135,9 +126,10 @@ const PictureInput: React.FC<PictureInputProps> = ({
               {label}
             </label>
           )}
+
           <div className="shadow-sm border-2 border-default-200 hover:border-default-400 rounded-xl overflow-hidden !transition-all !duration-100">
             <HeroUIImage
-              src={value}
+              src={src}
               fallbackSrc={fallbackSrc || imageDefault.src}
               classNames={{
                 wrapper: "bg-contain",
@@ -152,6 +144,7 @@ const PictureInput: React.FC<PictureInputProps> = ({
               onClick={onOpen}
             />
           </div>
+
           {error && (
             <p
               className="-bottom-2 absolute p-1 max-w-full text-danger text-tiny text-start truncate"
