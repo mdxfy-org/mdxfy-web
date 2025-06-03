@@ -17,7 +17,8 @@ interface PictureInputProps {
   validationError?: string;
   cropAspect?: number;
   onSubmit?: (file: FormData) => void | Promise<unknown>;
-  onSuccess?: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSuccess?: (data: any) => void;
   onError?: () => void;
   onFinally?: () => void;
   messages?: Record<PictureInputMessages, string>;
@@ -70,8 +71,9 @@ const PictureInput: React.FC<PictureInputProps> = ({
 
     setLoading(true);
     onSubmit?.(formData)
-      ?.then(() => {
-        onSuccess?.();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ?.then(({ data }: any) => {
+        onSuccess?.(data);
 
         const reader = new FileReader();
         reader.onload = (e) => {

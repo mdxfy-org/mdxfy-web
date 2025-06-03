@@ -2,6 +2,7 @@
 import {
   BlockTypeSelect,
   BoldItalicUnderlineToggles,
+  codeMirrorPlugin,
   CodeToggle,
   CreateLink,
   diffSourcePlugin,
@@ -11,18 +12,19 @@ import {
   InsertTable,
   ListsToggle,
   MDXEditorProps,
+  SandpackConfig,
+  sandpackPlugin,
   Separator,
   tablePlugin,
   thematicBreakPlugin,
   toolbarPlugin,
   UndoRedo,
-  type CodeBlockEditorDescriptor,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import React from "react";
 import { useTranslations } from "next-intl";
 import api from "@/service/api";
-const {
+import {
   MDXEditor,
   codeBlockPlugin,
   headingsPlugin,
@@ -30,25 +32,24 @@ const {
   linkPlugin,
   quotePlugin,
   markdownShortcutPlugin,
-  useCodeBlockEditorContext,
-} = await import("@mdxeditor/editor");
+} from "@mdxeditor/editor";
 
-const PlainTextCodeEditorDescriptor: CodeBlockEditorDescriptor = {
-  match: () => true,
-  priority: 0,
-  Editor: (props) => {
-    const cb = useCodeBlockEditorContext();
-    return (
-      <div onKeyDown={(e) => e.nativeEvent.stopImmediatePropagation()}>
-        <textarea
-          rows={props.code.split("\n").length}
-          className="rounded-md min-w-full max-w-full resize-none"
-          defaultValue={props.code}
-          onChange={(e) => cb.setCode(e.target.value)}
-        />
-      </div>
-    );
-  },
+const defaultSnippetContent = "".trim();
+
+const simpleSandpackConfig: SandpackConfig = {
+  defaultPreset: "react",
+  presets: [
+    {
+      label: "React",
+      name: "react",
+      meta: "live react",
+      sandpackTemplate: "react",
+      sandpackTheme: "light",
+      snippetFileName: "/App.js",
+      snippetLanguage: "jsx",
+      initialSnippetContent: defaultSnippetContent,
+    },
+  ],
 };
 
 export interface EditorProps extends MDXEditorProps {
@@ -89,8 +90,31 @@ const Editor: React.FC<EditorProps> = ({
       markdown={markdown ?? ""}
       onChange={onChange}
       plugins={[
-        codeBlockPlugin({
-          codeBlockEditorDescriptors: [PlainTextCodeEditorDescriptor],
+        codeBlockPlugin({ defaultCodeBlockLanguage: "js" }),
+        sandpackPlugin({ sandpackConfig: simpleSandpackConfig }),
+        codeMirrorPlugin({
+          autoLoadLanguageSupport: true,
+          codeBlockLanguages: {
+            js: "JavaScript",
+            jsx: "JavaScript XML",
+            ts: "TypeScript",
+            tsx: "TypeScript XML",
+            css: "CSS",
+            scss: "SCSS",
+            less: "LESS",
+            html: "HTML",
+            php: "PHP",
+            py: "Python",
+            java: "Java",
+            c: "C",
+            cpp: "C++",
+            csharp: "C#",
+            go: "Go",
+            ruby: "Ruby",
+            swift: "Swift",
+            kotlin: "Kotlin",
+            rust: "Rust",
+          },
         }),
         tablePlugin(),
         headingsPlugin(),

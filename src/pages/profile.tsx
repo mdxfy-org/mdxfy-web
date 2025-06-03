@@ -52,16 +52,7 @@ export default function Profile() {
 
   const handleSubmitPicture = async (file: FormData) => {
     setIsLoading(true);
-    uploadPicture(file)
-      .then(({ user }) => {
-        setUser(user);
-        toast.success({
-          description: t("Messages.success.image_uploaded_successfully"),
-        });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    return uploadPicture(file);
   };
 
   return (
@@ -90,8 +81,13 @@ export default function Profile() {
                     imageSrc={user?.profile_picture}
                     fallbackSrc={userPicture.src}
                     onSubmit={handleSubmitPicture}
-                    onSuccess={({ onClose }) => {
-                      onClose();
+                    onSuccess={({ user }) => {
+                      setUser(user);
+                      toast.success({
+                        description: t(
+                          "Messages.success.image_uploaded_successfully"
+                        ),
+                      });
                     }}
                     onError={() => {
                       toast.error({
@@ -99,6 +95,9 @@ export default function Profile() {
                           "Messages.errors.failed_to_upload_profile_picture"
                         ),
                       });
+                    }}
+                    onFinally={() => {
+                      setIsLoading(false);
                     }}
                   />
                 </div>
