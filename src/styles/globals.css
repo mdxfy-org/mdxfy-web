@@ -34,6 +34,10 @@ body {
   @apply bg-default-100
 }
 
+.mdxeditor * hr {
+  @apply !my-2;
+}
+
 .editor-content * table {
   @apply mx-2 my-2 max-w-[calc(100%-1rem)];
 }
@@ -44,4 +48,12 @@ body {
 
 .editor-content * table * {
   @apply border-default-300
+}
+
+div[data-lexical-decorator="true"] > div {
+  @apply !p-0
+}
+
+.editor-readonly * div[data-lexical-decorator="true"] > div > :first-child {
+  @apply hidden !p-0
 }

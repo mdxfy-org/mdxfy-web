@@ -1,10 +1,8 @@
-import { Logout2, Pen, Settings } from "@solar-icons/react";
+import { Logout2, Pen, User as UserIcon } from "@solar-icons/react";
 import IconOption from "../ui/icon-option";
 import { useUser } from "@/contexts/auth-provider";
 import { useTranslations } from "next-intl";
-import userPicture from "@public/img/user-default.png";
 import {
-  Avatar,
   Button,
   Divider,
   Popover,
@@ -15,14 +13,15 @@ import {
 } from "@heroui/react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { Avatar } from "../avatar";
 
 const UserOptionsButton: React.FC = () => {
   const t = useTranslations();
-  const { user, logout } = useUser();
+  const { logged, user, logout } = useUser();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!user) {
+  if (!logged) {
     return <LazyUserOptionsMenu />;
   }
 
@@ -34,12 +33,7 @@ const UserOptionsButton: React.FC = () => {
           className="data-[aria-expanded=true]:blur-md"
           isIconOnly
         >
-          <Avatar
-            radius="none"
-            src={user?.profile_picture}
-            fallback={<Avatar src={userPicture.src} radius="md" />}
-            className="pointer-events-none"
-          />
+          <Avatar src={user?.profile_picture} />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -48,26 +42,20 @@ const UserOptionsButton: React.FC = () => {
           isModalOpen && "opacity-25 duration-100 pointer-events-none"
         )}
       >
-        <Skeleton className="rounded-lg w-full" isLoaded={!!user}>
+        <Skeleton className="rounded-lg w-full h-7" isLoaded={!!user}>
           <p className="p-1 w-full text-start">{user?.name}</p>
         </Skeleton>
-        <Divider className={!user ? "hidden" : ""} />
-        <IconOption href="/profile" icon={<Settings />}>
+        <Divider className={cn("transition-opacity duration-200", !user ? "opacity-0" : "opacity-100")} />
+        <IconOption href={`/user/${user?.username}`} disabled={!user} icon={<UserIcon />}>
           {t("UI.redirects.profile")}
         </IconOption>
         <IconOption
           href="/post"
           className="md:hidden flex"
           icon={<Pen weight="LineDuotone" size={22} />}
-        >{t("UI.redirects.new_post")}</IconOption>
-        {/* <IconOption
-          href="/web"
-          onClick={toggleTheme}
-          className="md:hidden flex"
-          icon={<ThemeUserFeedback />}
         >
-          {t("UI.redirects.change_theme")}
-        </IconOption> */}
+          {t("UI.redirects.new_post")}
+        </IconOption>
         <IconOption
           onClick={logout}
           href="/login"
@@ -88,7 +76,7 @@ const UserOptionsButton: React.FC = () => {
 export const LazyUserOptionsMenu: React.FC = () => {
   return (
     <Button isIconOnly>
-      <Spinner color="current" className="text-default-500 scale-80" />
+      <Spinner color="current" className="text-default-500 scale-75" />
     </Button>
   );
 };

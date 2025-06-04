@@ -34,6 +34,7 @@ import {
   quotePlugin,
   markdownShortcutPlugin,
 } from "@mdxeditor/editor";
+import { cn } from "@heroui/react";
 
 const defaultSnippetContent = "".trim();
 
@@ -87,19 +88,24 @@ const Editor: React.FC<EditorProps> = ({
   return (
     <MDXEditor
       ref={ref}
-      className="bg-default-100/15 border-2 border-default-200 hover:border-default-400 focus-within:!border-default-600 rounded-xl w-full overflow-hidden duration-200"
+      className={cn(
+        "bg-default-100/15 border-2 border-default-200 rounded-xl w-full overflow-hidden duration-200",
+        // "editor-readonly",
+        !readonly &&
+          "hover:border-default-400 focus-within:!border-default-600"
+      )}
       contentEditableClassName="editor-content prose !w-full !max-w-full"
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       translation={(key, _, interpolations) => t(key as any, interpolations)}
       markdown={markdown ?? ""}
       onChange={onChange}
       plugins={[
-        codeBlockPlugin({ defaultCodeBlockLanguage: "js" }),
+        codeBlockPlugin({ defaultCodeBlockLanguage: "javascript" }),
         sandpackPlugin({ sandpackConfig: simpleSandpackConfig }),
         codeMirrorPlugin({
           autoLoadLanguageSupport: true,
           codeBlockLanguages: {
-            js: "JavaScript",
+            javascript: "JavaScript",
             jsx: "JavaScript XML",
             ts: "TypeScript",
             tsx: "TypeScript XML",
@@ -171,7 +177,10 @@ const Editor: React.FC<EditorProps> = ({
 
                     <Separator />
 
-                    <DiffSourceToggleWrapper options={["rich-text", "source"]} SourceToolbar={''}>
+                    <DiffSourceToggleWrapper
+                      options={["rich-text", "source"]}
+                      SourceToolbar={""}
+                    >
                       <></>
                     </DiffSourceToggleWrapper>
                   </>

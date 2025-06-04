@@ -20,6 +20,7 @@ import { cookieOptions } from "@/service/cookie";
 interface AuthContextProps {
   token: string | undefined;
   setToken: (token: string | undefined) => void;
+  logged: boolean;
   user: User | undefined;
   firstLogin: boolean;
   setUser: (user: User | undefined) => void;
@@ -48,6 +49,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   ]);
   const [token, setAuthTokenState] = useState<string | undefined>(undefined);
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [logged, setLogged] = useState<boolean>(false);
   const [firstLogin, setFirstLogin] = useState<boolean>(false);
 
   const fetchInProgress = useRef(false);
@@ -71,6 +73,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const logout = useCallback(() => {
     setUser(undefined);
     setToken(undefined);
+    setLogged(false);
     router.push("/login", undefined, { locale: router.locale });
   }, [router, setToken]);
 
@@ -80,6 +83,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
     const storedToken = cookies[AUTH_TOKEN_KEY];
     if (storedToken) {
+      setLogged(true);
       setToken(storedToken);
       setBearerToken(storedToken);
       getMe()
@@ -127,7 +131,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <AuthContext.Provider
-      value={{ token, setToken, user, firstLogin, setUser, logout }}
+      value={{ token, setToken, logged, user, firstLogin, setUser, logout }}
     >
       {children}
     </AuthContext.Provider>

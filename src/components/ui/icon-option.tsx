@@ -13,6 +13,7 @@ export interface IconOptionProps
   href?: string | HrefProps;
   confirmAction?: boolean;
   confirmActionInfo?: ConfirmActionModalMessages;
+  disabled?: boolean;
   onClick?: () => void;
 }
 
@@ -23,6 +24,7 @@ const IconOption: React.FC<IconOptionProps> = ({
   children,
   confirmAction = false,
   confirmActionInfo,
+  disabled = false,
   onClick,
   ...props
 }) => {
@@ -35,11 +37,13 @@ const IconOption: React.FC<IconOptionProps> = ({
   const newProps = confirmAction
     ? {
         onClick: () => {
+          if (disabled) return;
           onOpen();
         },
       }
     : {
         onClick: () => {
+          if (disabled) return;
           onClick?.();
           if (formattedHref) {
             router.push(formattedHref);
@@ -71,7 +75,8 @@ const IconOption: React.FC<IconOptionProps> = ({
         className={cn(
           "flex flex-row items-center gap-1.5 bg-default-100 bg-opacity-0 hover:bg-opacity-75 p-1 rounded-md w-full text-gray-700 dark:text-gray-200 duration-75 cursor-pointer",
           "focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-focus focus-visible:outline-offset-1 -outline-offset-1",
-          className
+          className,
+          disabled ? "opacity-60" : "opacity-100"
         )}
         {...props}
         {...newProps}

@@ -44,7 +44,7 @@ export default function Index() {
         <meta name="description" content={pt("meta.description")} />
       </Head>
       <Layout className="flex flex-col gap-10 w-full">
-        <section className="flex flex-col items-start gap-6 mx-auto p-4 max-w-[912px] container">
+        <section className="flex flex-col items-start gap-6 mx-auto p-4 px-6 max-w-[912px] container">
           <Form className="w-full">
             <Editor
               markdown={post}

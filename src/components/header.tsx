@@ -25,7 +25,7 @@ const Header: React.FC = () => {
     >
       <NavbarBrand className="flex flex-row flex-1 justify-start items-center gap-4">
         <Link href="/">
-          <Mdxfy.Logo className="w-36 h-9" />
+          <Mdxfy.Logo className="w-28 h-9" />
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden md:flex space-x-4" justify="center">
@@ -43,13 +43,12 @@ const Header: React.FC = () => {
         justify="end"
       >
         <CompactLanguageSelector />
-        <NavbarItem>
+        <NavbarItem className={user ? "md:flex hidden" : "flex"}>
           <Button
             as={HeroUILink}
             href="/post"
             className={cn(
-              "bg-default-100 hover:bg-default-200 shadow-sm text-default-700 duration-100",
-              user ? "md:flex hidden" : "flex"
+              "bg-default-100 hover:bg-default-200 shadow-sm text-default-700 duration-100"
             )}
             isIconOnly
           >
@@ -59,11 +58,9 @@ const Header: React.FC = () => {
         {/* <NavbarItem>
           <ThemeSwitcher className={cn(user ? "md:flex hidden" : "flex")} />
         </NavbarItem> */}
-        {user && (
-          <NavbarItem className="flex justify-center items-center">
-            <UserOptionsButton />
-          </NavbarItem>
-        )}
+        <NavbarItem className="flex justify-center items-center">
+          <UserOptionsButton />
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   );
