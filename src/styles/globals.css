@@ -35,7 +35,7 @@ body {
 }
 
 .mdxeditor * hr {
-  @apply !my-2;
+  @apply !my-2 border-t-2
 }
 
 .editor-content * table {
@@ -56,4 +56,8 @@ div[data-lexical-decorator="true"] > div {
 
 .editor-readonly * div[data-lexical-decorator="true"] > div > :first-child {
   @apply hidden !p-0
+}
+
+.mdxeditor-popup-container {
+  @apply hidden;
 }

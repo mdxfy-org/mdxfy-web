@@ -90,9 +90,9 @@ const Editor: React.FC<EditorProps> = ({
       ref={ref}
       className={cn(
         "bg-default-100/15 border-2 border-default-200 rounded-xl w-full overflow-hidden duration-200",
-        // "editor-readonly",
-        !readonly &&
-          "hover:border-default-400 focus-within:!border-default-600"
+        readonly
+          ? "editor-readonly"
+          : "hover:border-default-400 focus-within:!border-default-600"
       )}
       contentEditableClassName="editor-content prose !w-full !max-w-full"
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -106,6 +106,7 @@ const Editor: React.FC<EditorProps> = ({
           autoLoadLanguageSupport: true,
           codeBlockLanguages: {
             javascript: "JavaScript",
+            js: "JavaScript",
             jsx: "JavaScript XML",
             ts: "TypeScript",
             tsx: "TypeScript XML",
