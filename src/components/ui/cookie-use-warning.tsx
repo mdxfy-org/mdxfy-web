@@ -1,4 +1,4 @@
-import useLocalStorage from "@/hooks/use-localstorage";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useDisclosure } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import {

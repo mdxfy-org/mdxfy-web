@@ -1,4 +1,4 @@
-import useLocalStorage from "@/hooks/use-localstorage";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useTranslations } from "next-intl";
 import { I18nProvider } from "@react-aria/i18n";
 import React, { createContext, useContext, ReactNode, useEffect } from "react";

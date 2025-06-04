@@ -10,6 +10,8 @@ import { useState } from "react";
 import api from "@/service/api";
 import Form from "@/components/form/form";
 import { useRouter } from "next/router";
+import { useDebounce } from "@/hooks/use-debounce";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 
 export default function Index() {
   const router = useRouter();
@@ -17,10 +19,25 @@ export default function Index() {
   const pt = useTranslations("Pages.Index");
 
   const [loading, setLoading] = useState(false);
-  const [post, setPost] = useState<string>("");
+
+  const [storedPost, setStoredPost, removeStoredPost] = useLocalStorage<string>("post", "");
+  const [debounce] = useDebounce((post: string) => {
+    if (!post || post.length < 20) return;
+    setStoredPost(post);
+  }, 500);
+
+  const [post, setPost] = useState<string>(storedPost);
+  const [errors, setErrors] = useState<string[]>();
+
   const [visibility, setVisibility] = useState<
     "public" | "private" | "friends"
   >("public");
+
+  const handleChange = (val: string) => {
+    setPost(val);
+    debounce(val);
+    setErrors(undefined);
+  }
 
   const handleSave = (as: "draft" | "post" = "post") => {
     if (!post) return;
@@ -28,10 +45,13 @@ export default function Index() {
     api
       .post("/post", { content: post, visibility: visibility, as: as })
       .then(({ data }) => {
-        console.log(data);
+        removeStoredPost();
         router.push(`/post/${data.uuid}`);
       })
-      .catch(() => {});
+      .catch(({ data }) => {
+        setErrors(data.errors.content);
+        setLoading(false);
+      });
     // .finally(() => {
     //   setLoading(false);
     // });
@@ -48,9 +68,7 @@ export default function Index() {
           <Form className="w-full">
             <Editor
               markdown={post}
-              onChange={(val) => {
-                setPost(val);
-              }}
+              onChange={handleChange}
             />
             <div className="flex flex-row justify-between gap-4 w-full">
               <div>
@@ -88,6 +106,14 @@ export default function Index() {
                   Fazer post
                 </Button>
               </div>
+            </div>
+            <div>
+              {errors &&
+                errors.map((error, index) => (
+                  <p key={index} className="text-danger-500 text-sm">
+                    {error}
+                  </p>
+                ))}
             </div>
           </Form>
         </section>

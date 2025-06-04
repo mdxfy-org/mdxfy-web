@@ -1,6 +1,9 @@
 import { useRef, useCallback, useState } from "react";
 
-export const useDebounce = <T extends (...args: unknown[]) => void>(
+export const useDebounce = <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  T extends (...args: any[]) => void | Promise<void>
+>(
   fn: T,
   delay: number
 ): [(...args: Parameters<T>) => void, () => void, boolean] => {

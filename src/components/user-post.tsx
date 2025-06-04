@@ -19,7 +19,7 @@ export const UserPost: React.FC<PostProps> = ({ post, user }) => {
     <AnimatePresence>
       <motion.div
         key={post.uuid}
-        className="flex flex-col gap-2 pb-6 border-divider border-b-2 last:border-b-0 w-full"
+        className="flex flex-col gap-2 pb-6 border-default-200 border-b-2 last:border-b-0 w-full"
       >
         <div className="relative flex flex-row items-center gap-2">
           <Link
@@ -43,7 +43,13 @@ export const UserPost: React.FC<PostProps> = ({ post, user }) => {
             <PopoverContent>a</PopoverContent>
           </Popover> */}
         </div>
-        <Editor markdown={post.content} readonly />
+        {post.see_more ? (
+          <Link href={`/post/${post.uuid}`} className="w-full">
+            <Editor markdown={post.excerpt} readonly />
+          </Link>
+        ) : (
+          <Editor markdown={post.content} readonly />
+        )}
       </motion.div>
     </AnimatePresence>
   );

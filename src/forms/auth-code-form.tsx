@@ -10,13 +10,13 @@ import { useQuery } from "@tanstack/react-query";
 import { getAuthCodeLength } from "@/http/get-auth-code-length";
 import { auth, AuthError } from "@/http/user/auth";
 import { useToast } from "@/service/toast";
-import { useCountdown } from "@/hooks/use-countdown";
 import { resendCode } from "@/http/user/resend-code";
 import { AxiosError } from "axios";
 import InputOtp from "@/components/input/input-otp";
 import { useCookies } from "react-cookie";
 import { AUTHENTICATED_KEY } from "@/middleware";
 import { cookieOptions } from "@/service/cookie";
+import useCountdown from "@/hooks/use-countdown";
 
 const TIMEOUT = 60;
 
@@ -35,7 +35,7 @@ const AuthCodeForm: React.FC = () => {
 
   const [errors, setErrors] = useState<Record<string, string | string[]>>({});
 
-  const [timer, setTimer] = useCountdown(TIMEOUT);
+  const { time: timer, setTime: setTimer } = useCountdown(TIMEOUT);
 
   const { data: codeLength, isLoading: codeLengthLoading } = useQuery<number>({
     queryKey: ["auth-code-length"],

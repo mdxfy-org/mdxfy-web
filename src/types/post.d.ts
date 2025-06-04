@@ -4,11 +4,13 @@ export interface Post {
   uuid: string;
   as: "post" | "draft";
   content: string;
+  excerpt: string;
+  see_more?: boolean;
   user: User,
   visibility: "public" | "private" | "friends";
   active: true;
   answer_to: number;
-  created_at: "2025-06-02T18:33:42.000000Z";
-  updated_at: "2025-06-02T18:33:42.000000Z";
+  created_at: string;
+  updated_at: string;
   inactivated_at?: string;
 }
