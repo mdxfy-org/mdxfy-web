@@ -1,59 +1,11 @@
 import Body from "@/components/body";
-import { Button, Form, Spacer } from "@heroui/react";
-import { useState } from "react";
-import { numberInputMask } from "@/lib/utils";
-import Input from "@/components/input/input";
 import { useTranslations } from "next-intl";
 import { getStaticPropsWithMessages } from "@/lib/get-static-props";
 import Head from "next/head";
-import api from "@/service/api";
-import { useOverlay } from "@/contexts/overlay-provider";
-import { useUser } from "@/contexts/auth-provider";
-
-import userPicture from "@public/img/user-default.png";
-import { useLanguage } from "@/contexts/language-provider";
-import PhoneNumberHelper from "@/components/ux/phone-number-helper";
-import PictureInput from "@/components/input/picture-input";
-import { useToast } from "@/service/toast";
-import { uploadPicture } from "@/http/user/upload-picture";
+import { ProfileUpdateForm } from "@/forms/profile-update-form";
 
 export default function Profile() {
-  const t = useTranslations();
   const pt = useTranslations("Pages.SignUp");
-  const toast = useToast();
-
-  const { translateResponse } = useLanguage();
-  const { user, setUser } = useUser();
-  const { setIsLoading } = useOverlay();
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-
-    setIsLoading(true);
-    api
-      .put("/user", data)
-      .then(({ data }) => {
-        api.interceptors.request.use((config) => {
-          config.headers.Authorization = `Bearer ${data.token}`;
-          return config;
-        });
-      })
-      .catch(({ response: { data: error } }) => {
-        const fields = translateResponse(error.fields);
-        setErrors(fields);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  const handleSubmitPicture = async (file: FormData) => {
-    setIsLoading(true);
-    return uploadPicture(file);
-  };
 
   return (
     <>
@@ -64,106 +16,7 @@ export default function Profile() {
       <Body className="flex flex-row justify-center">
         <div className="flex flex-col flex-1 container">
           <div className="flex flex-row justify-center gap-4 px-8 py-6 w-full min-h-max">
-            <Form
-              className="flex flex-col flex-1 gap-4 max-w-md"
-              validationBehavior="native"
-              validationErrors={errors}
-              onSubmit={handleSubmit}
-            >
-              <p className="pr-8 pb-2 font-semibold text-gray-700 dark:text-gray-200 text-2xl text-left">
-                {t("UI.titles.update_account")}
-              </p>
-              <div className="flex flex-row flex-1 justify-center gap-4 w-full">
-                <div className="flex flex-col flex-1 items-center gap-4 max-w-md">
-                  <PictureInput
-                    name="profile"
-                    label="Foto de perfil"
-                    imageSrc={user?.profile_picture}
-                    fallbackSrc={userPicture.src}
-                    onSubmit={handleSubmitPicture}
-                    onSuccess={({ user }) => {
-                      setUser(user);
-                      toast.success({
-                        description: t(
-                          "Messages.success.image_uploaded_successfully"
-                        ),
-                      });
-                    }}
-                    onError={() => {
-                      toast.error({
-                        description: t(
-                          "Messages.errors.failed_to_upload_profile_picture"
-                        ),
-                      });
-                    }}
-                    onFinally={() => {
-                      setIsLoading(false);
-                    }}
-                  />
-                </div>
-              </div>
-              <Input
-                name="name"
-                label={t("UI.labels.name")}
-                placeholder={t("UI.placeholders.write_name")}
-                autoCapitalize="words"
-                value={user?.name}
-                type="name"
-              />
-              <Input
-                className="text-gray-700 dark:text-gray-200"
-                label={t("UI.labels.username")}
-                labelPlacement="outside"
-                name="username"
-                placeholder={t("UI.placeholders.write_username")}
-                type="name"
-                autoCapitalize="words"
-                variant="bordered"
-                value={user?.username}
-              />
-              <Input
-                name="number"
-                label={t("UI.labels.number")}
-                placeholder={t("UI.placeholders.write_number")}
-                queryCollectable
-                format={numberInputMask}
-                endContent={<PhoneNumberHelper />}
-                disabled
-              />
-              <Input
-                name="email"
-                label={t("UI.labels.email")}
-                placeholder={t("UI.placeholders.write_email")}
-                className="text-gray-700 dark:text-gray-200"
-                type="email"
-                value={user?.email}
-                disabled
-              />
-              {/* <Input
-                taggableVisibility
-                className="text-gray-700 dark:text-gray-200"
-                label={t("UI.labels.password")}
-                labelPlacement="outside"
-                name="password"
-                placeholder={t("UI.placeholders.write_password")}
-                type="password"
-                variant="bordered"
-              />
-              <Input
-                taggableVisibility
-                className="text-gray-700 dark:text-gray-200"
-                label={t("UI.labels.password_confirm")}
-                labelPlacement="outside"
-                name="password_confirm"
-                placeholder={t("UI.placeholders.write_password_confirm")}
-                type="password"
-                variant="bordered"
-              /> */}
-              <Spacer y={4} />
-              <Button className="w-full" color="primary" type="submit">
-                {t("UI.buttons.continue")}
-              </Button>
-            </Form>
+            <ProfileUpdateForm />
           </div>
         </div>
       </Body>

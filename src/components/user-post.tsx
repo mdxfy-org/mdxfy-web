@@ -12,6 +12,7 @@ import { useUser } from "@/contexts/auth-provider";
 import api from "@/service/api";
 import { useToast } from "@/service/toast";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export interface PostProps {
   post: Post;
@@ -24,6 +25,7 @@ export const UserPost: React.FC<PostProps> = ({
   user,
   redirect = false,
 }) => {
+  const router = useRouter();
   const toast = useToast();
   const { user: loggedUser } = useUser();
 
@@ -34,7 +36,9 @@ export const UserPost: React.FC<PostProps> = ({
   const handleDeletePost = () => {
     api
       .delete(`/post/${post.uuid}`)
-      .then(() => {})
+      .then(() => {
+        router.reload()
+      })
       .catch(() => {
         toast.error({
           description: "Erro ao excluir o post. Tente novamente mais tarde.",

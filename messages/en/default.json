@@ -22,6 +22,11 @@
         "not_match": "Fields do not match",
         "min_items": "Minimum number of items: {min}",
         "max_items": "Maximum number of items: {max}"
+      },
+      "select": {
+        "public": "Public",
+        "private": "Private",
+        "friends": "Friends"
       }
     },
     "input_group": {
@@ -65,7 +70,9 @@
       "understood": "Got it",
       "resend_code": "Resend code",
       "choose_a_photo": "Choose a photo",
-      "choose_another_photo": "Choose another photo"
+      "choose_another_photo": "Choose another photo",
+      "save_post": "Make post",
+      "save_as_draft": "Save as draft"
     },
     "labels": {
       "code": "Code",
@@ -94,7 +101,8 @@
       "write_new_password": "Enter your new password",
       "write_new_password_confirm": "Confirm your new password",
       "write_document_type": "Select the document type",
-      "write_document_number": "Document number"
+      "write_document_number": "Document number",
+      "characters": "{number} characters"
     },
     "messages": {
       "required_field": "Required field",
