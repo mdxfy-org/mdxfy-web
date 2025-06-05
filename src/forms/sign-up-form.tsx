@@ -6,7 +6,6 @@ import { PrivacyPolicy, TermsOfUse } from "@/components/ui/platform-agreements";
 import { useUser } from "@/contexts/auth-provider";
 import { useOverlay } from "@/contexts/overlay-provider";
 import { signUp } from "@/http/user/sign-up";
-import { useToast } from "@/service/toast";
 import {
   Button,
   Modal,
@@ -26,7 +25,6 @@ const SignInForm: React.FC = () => {
   const { setIsLoading } = useOverlay();
   const { setUser, setToken } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
 
   const [isLoading, setLoading] = useState<boolean>(false);
 
@@ -55,11 +53,6 @@ const SignInForm: React.FC = () => {
         router.push(`/auth-code`);
       })
       .catch(({ data: error }) => {
-        if (error.errors["password"]) {
-          toast.error({
-            description: error.errors["password"],
-          });
-        }
         setErrors(error.errors);
       })
       .finally(() => {

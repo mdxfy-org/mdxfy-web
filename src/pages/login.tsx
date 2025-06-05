@@ -17,7 +17,7 @@ export default function Login() {
         <meta name="description" content={pt("meta.description")} />
       </Head>
       <Body
-        className="flex flex-row justify-center h-screen"
+        className="flex flex-row justify-center h-svh"
         hideHeader
         hideFooter
       >

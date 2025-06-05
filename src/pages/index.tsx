@@ -6,23 +6,19 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import api from "@/service/api";
 import { Post } from "@/types/post";
-import { UserPost } from "@/components/user-post";
+import { PostsRenderer } from "@/components/ui/posts-renderer";
 
 export default function UserPosts() {
   const router = useRouter();
-  // const t = useTranslations();
   const pt = useTranslations("Pages.Index");
 
   const [posts, setPosts] = useState<Post[]>();
 
   useEffect(() => {
     if (!router.isReady || posts) return;
-    api
-      .get(`/post`)
-      .then(({ data }) => {
-        setPosts(data);
-      })
-      .catch(() => {});
+    api.get(`/post`).then(({ data }) => {
+      setPosts(data);
+    });
   }, [router, posts]);
 
   return (
@@ -33,10 +29,7 @@ export default function UserPosts() {
       </Head>
       <Body className="flex flex-row justify-center">
         <section className="flex flex-col items-start gap-6 mx-auto p-4 px-6 max-w-[912px] container">
-          {posts &&
-            posts.map((post) => (
-              <UserPost key={post.uuid} post={post} user={post.user} redirect />
-            ))}
+          <PostsRenderer posts={posts} />
         </section>
       </Body>
     </>
