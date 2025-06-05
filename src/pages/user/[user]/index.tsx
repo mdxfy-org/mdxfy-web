@@ -14,7 +14,6 @@ import { Avatar } from "@/components/avatar";
 import { Skeleton } from "@heroui/react";
 import { UserProfileUpdateModal } from "@/components/ui/user-profile-update-modal";
 import { useUser } from "@/contexts/auth-provider";
-import { PhotoProvider, PhotoView } from "react-photo-view";
 
 export default function UserPosts() {
   const router = useRouter();
@@ -46,18 +45,14 @@ export default function UserPosts() {
         <section className="relative flex flex-col items-start gap-2 mx-auto p-4 px-6 max-w-[912px] container">
           <div className="flex flex-row gap-4">
             <Skeleton isLoaded={!!user} className="rounded-lg">
-              <PhotoProvider>
-                <PhotoView src={user?.profile_picture}>
-                  <Avatar
-                    src={user?.profile_picture}
-                    className="size-24"
-                    fallbackIconProps={{
-                      size: 96,
-                    }}
-                    radius="sm"
-                  />
-                </PhotoView>
-              </PhotoProvider>
+              <Avatar
+                src={user?.profile_picture}
+                className="size-24"
+                fallbackIconProps={{
+                  size: 96,
+                }}
+                radius="sm"
+              />
             </Skeleton>
             <div className="flex flex-col items-start gap-1">
               <Skeleton isLoaded={!!user} className="rounded-lg w-48 min-w-max">
