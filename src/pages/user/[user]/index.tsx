@@ -19,15 +19,15 @@ export default function UserPosts() {
   const [posts, setPosts] = useState<Post[]>();
 
   useEffect(() => {
-    if (!router.isReady && user && posts) return;
+    if (!router.isReady) return;
     const { user: userQuery } = router.query as Params;
     api.get(`/user/info/username/${userQuery}`).then(({ data }) => {
       setUser(data.user);
-      api.get(`/post/user/${userQuery}`).then(({ data }) => {
-        setPosts(data);
-      });
     });
-  }, [router, user, posts]);
+    api.get(`/post/user/${userQuery}`).then(({ data }) => {
+      setPosts(data);
+    });
+  }, [router.isReady, router.query]);
 
   return (
     <>
