@@ -4,9 +4,13 @@ import { UserPost } from "../user-post";
 
 export interface PostsRendererProps {
   posts?: Post[];
+  feed?: boolean;
 }
 
-export const PostsRenderer: React.FC<PostsRendererProps> = ({ posts }) => {
+export const PostsRenderer: React.FC<PostsRendererProps> = ({
+  posts,
+  feed = false,
+}) => {
   return (
     <>
       {posts ? (
@@ -14,7 +18,12 @@ export const PostsRenderer: React.FC<PostsRendererProps> = ({ posts }) => {
           {posts.length > 0 ? (
             <>
               {posts.map((post) => (
-                <UserPost key={post.uuid} post={post} user={post.user} />
+                <UserPost
+                  key={post.uuid}
+                  post={post}
+                  user={post.user}
+                  redirect={feed}
+                />
               ))}
             </>
           ) : (
