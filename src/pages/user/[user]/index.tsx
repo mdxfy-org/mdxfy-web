@@ -44,7 +44,7 @@ export default function UserPosts() {
           {posts &&
             user &&
             posts.map((post) => (
-              <UserPost key={post.uuid} post={post} user={user} />
+              <UserPost key={post.uuid} post={post} user={user} redirect />
             ))}
         </section>
       </Body>

@@ -35,7 +35,7 @@ export default function UserPosts() {
         <section className="flex flex-col items-start gap-6 mx-auto p-4 px-6 max-w-[912px] container">
           {posts &&
             posts.map((post) => (
-              <UserPost key={post.uuid} post={post} user={post.user} />
+              <UserPost key={post.uuid} post={post} user={post.user} redirect />
             ))}
         </section>
       </Body>

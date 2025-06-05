@@ -10,9 +10,14 @@ import { Avatar } from "./avatar";
 export interface PostProps {
   post: Post;
   user: User;
+  redirect?: boolean;
 }
 
-export const UserPost: React.FC<PostProps> = ({ post, user }) => {
+export const UserPost: React.FC<PostProps> = ({
+  post,
+  user,
+  redirect = false,
+}) => {
   const postDate = new Date(post.updated_at);
 
   return (
@@ -43,9 +48,9 @@ export const UserPost: React.FC<PostProps> = ({ post, user }) => {
             <PopoverContent>a</PopoverContent>
           </Popover> */}
         </div>
-        {post.see_more ? (
+        {redirect ? (
           <Link href={`/post/${post.uuid}`} className="w-full">
-            <Editor markdown={post.excerpt} readonly />
+            <Editor markdown={post.content} readonly />
           </Link>
         ) : (
           <Editor markdown={post.content} readonly />

@@ -4,7 +4,6 @@ export interface Post {
   uuid: string;
   as: "post" | "draft";
   content: string;
-  excerpt: string;
   see_more?: boolean;
   user: User,
   visibility: "public" | "private" | "friends";
