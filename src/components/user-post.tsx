@@ -4,8 +4,11 @@ import Link from "next/link";
 import Editor from "./mark-down-editor";
 import { AnimatePresence, motion } from "framer-motion";
 import { Avatar } from "./avatar";
-// import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
-// import { MenuDots } from "@solar-icons/react";
+import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+import { MenuDots, Pen } from "@solar-icons/react";
+import { useUser } from "@/contexts/auth-provider";
+import { cn } from "@/lib/utils";
+import IconOption from "./ui/icon-option";
 
 export interface PostProps {
   post: Post;
@@ -13,6 +16,8 @@ export interface PostProps {
 }
 
 export const UserPost: React.FC<PostProps> = ({ post, user }) => {
+  const { user: loggedUser } = useUser();
+
   const postDate = new Date(post.updated_at);
 
   return (
@@ -34,14 +39,35 @@ export const UserPost: React.FC<PostProps> = ({ post, user }) => {
             {" - "}
             {postDate.toLocaleString()}
           </p>
-          {/* <Popover radius="sm" placement="bottom-end" offset={8}>
+          <Popover radius="sm" placement="bottom-end" offset={8}>
             <PopoverTrigger>
-              <Button className="right-0 absolute bg-default-200" size="sm" isIconOnly>
-                <MenuDots weight="Bold" className="text-default-600 rotate-90" />
+              <Button
+                className="right-0 absolute bg-default-200"
+                size="sm"
+                isIconOnly
+              >
+                <MenuDots
+                  weight="Bold"
+                  className="text-default-600 rotate-90"
+                />
               </Button>
             </PopoverTrigger>
-            <PopoverContent>a</PopoverContent>
-          </Popover> */}
+            <PopoverContent
+              className={cn(
+                "flex flex-col gap-0 p-1 w-full min-w-44 h-m text-gray-700 dark:text-gray-200 transition-all in"
+              )}
+            >
+              {loggedUser && (
+                <IconOption
+                  href={`/post/${post.uuid}/edit`}
+                  disabled={!user}
+                  icon={<Pen />}
+                >
+                  Editar
+                </IconOption>
+              )}
+            </PopoverContent>
+          </Popover>
         </div>
         {post.see_more ? (
           <Link href={`/post/${post.uuid}`} className="w-full">
