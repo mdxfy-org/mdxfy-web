@@ -46,6 +46,7 @@ export default function UserPosts() {
           <div className="flex flex-row gap-4">
             <Skeleton isLoaded={!!user} className="rounded-lg">
               <Avatar
+                photoView
                 src={user?.profile_picture}
                 className="size-24"
                 fallbackIconProps={{

@@ -7,10 +7,12 @@ import { IconProps } from "@solar-icons/react/lib/types";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 
 export interface AvatarProps extends HeroUIAvatarProps {
+  photoView?: boolean;
   fallbackIconProps?: IconProps;
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
+  photoView = false,
   fallbackIconProps,
   ...props
 }) => {
@@ -35,7 +37,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   );
   return (
     <>
-      {props.src ? (
+      {props.src && photoView ? (
         <PhotoProvider >
           <PhotoView src={props.src}>{component}</PhotoView>
         </PhotoProvider>
