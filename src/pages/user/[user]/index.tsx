@@ -19,15 +19,15 @@ export default function UserPosts() {
   const [posts, setPosts] = useState<Post[]>();
 
   useEffect(() => {
-    if (!router.isReady) return;
-    const { user } = router.query as Params;
-    api.get(`/user/info/username/${user}`).then(({ data }) => {
+    if (!router.isReady && user && posts) return;
+    const { user: userQuery } = router.query as Params;
+    api.get(`/user/info/username/${userQuery}`).then(({ data }) => {
       setUser(data.user);
-      api.get(`/post/user/${user}`).then(({ data }) => {
+      api.get(`/post/user/${userQuery}`).then(({ data }) => {
         setPosts(data);
       });
     });
-  }, [router, posts]);
+  }, [router, user, posts]);
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function UserPosts() {
         <title>{pt("meta.title")}</title>
         <meta name="description" content={pt("meta.description")} />
       </Head>
-      <Body className="flex flex-row justify-center">
+      <Body className="flex flex-col justify-center">
         <section className="flex flex-col items-start gap-2 mx-auto p-4 px-6 max-w-[912px] container">
           {user && (
             <div className="flex flex-col items-start gap-2">

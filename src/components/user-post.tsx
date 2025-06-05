@@ -4,11 +4,11 @@ import Link from "next/link";
 import Editor from "./mark-down-editor";
 import { AnimatePresence, motion } from "framer-motion";
 import { Avatar } from "./avatar";
-import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
-import { MenuDots, Pen } from "@solar-icons/react";
-import { useUser } from "@/contexts/auth-provider";
-import { cn } from "@/lib/utils";
-import IconOption from "./ui/icon-option";
+// import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
+// import { MenuDots, Pen } from "@solar-icons/react";
+// import { cn } from "@/lib/utils";
+// import IconOption from "./ui/icon-option";
+// import { useUser } from "@/contexts/auth-provider";
 
 export interface PostProps {
   post: Post;
@@ -21,7 +21,7 @@ export const UserPost: React.FC<PostProps> = ({
   user,
   redirect = false,
 }) => {
-  const { user: loggedUser } = useUser();
+  // const { user: loggedUser } = useUser();
 
   const postDate = new Date(post.updated_at);
 
@@ -44,7 +44,7 @@ export const UserPost: React.FC<PostProps> = ({
             {" - "}
             {postDate.toLocaleString()}
           </p>
-          <Popover radius="sm" placement="bottom-end" offset={8}>
+          {/* <Popover radius="sm" placement="bottom-end" offset={8}>
             <PopoverTrigger>
               <Button
                 className="right-0 absolute bg-default-200"
@@ -72,7 +72,7 @@ export const UserPost: React.FC<PostProps> = ({
                 </IconOption>
               )}
             </PopoverContent>
-          </Popover>
+          </Popover> */}
         </div>
         {redirect ? (
           <Link href={`/post/${post.uuid}`} className="w-full">
