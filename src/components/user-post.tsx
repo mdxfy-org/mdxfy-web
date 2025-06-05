@@ -13,9 +13,14 @@ import IconOption from "./ui/icon-option";
 export interface PostProps {
   post: Post;
   user: User;
+  redirect?: boolean;
 }
 
-export const UserPost: React.FC<PostProps> = ({ post, user }) => {
+export const UserPost: React.FC<PostProps> = ({
+  post,
+  user,
+  redirect = false,
+}) => {
   const { user: loggedUser } = useUser();
 
   const postDate = new Date(post.updated_at);
@@ -69,9 +74,9 @@ export const UserPost: React.FC<PostProps> = ({ post, user }) => {
             </PopoverContent>
           </Popover>
         </div>
-        {post.see_more ? (
+        {redirect ? (
           <Link href={`/post/${post.uuid}`} className="w-full">
-            <Editor markdown={post.excerpt} readonly />
+            <Editor markdown={post.content} readonly />
           </Link>
         ) : (
           <Editor markdown={post.content} readonly />
