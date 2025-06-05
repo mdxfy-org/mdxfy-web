@@ -10,6 +10,8 @@ import api from "@/service/api";
 import { Post } from "@/types/post";
 import { PostsRenderer } from "@/components/ui/posts-renderer";
 import { User } from "@/types/user";
+import { Avatar } from "@/components/avatar";
+import { Skeleton } from "@heroui/react";
 
 export default function UserPosts() {
   const router = useRouter();
@@ -22,10 +24,10 @@ export default function UserPosts() {
     if (!router.isReady) return;
     const { user: userQuery } = router.query as Params;
     api.get(`/user/info/username/${userQuery}`).then(({ data }) => {
-      setUser(data.user);
-    });
-    api.get(`/post/user/${userQuery}`).then(({ data }) => {
-      setPosts(data);
+      setUser(data);
+      api.get(`/post/user/${userQuery}`).then(({ data }) => {
+        setPosts(data);
+      });
     });
   }, [router.isReady, router.query]);
 
@@ -36,16 +38,32 @@ export default function UserPosts() {
         <meta name="description" content={pt("meta.description")} />
       </Head>
       <Body className="flex flex-col justify-center">
-        <section className="flex flex-col items-start gap-2 mx-auto p-4 px-6 max-w-[912px] container">
-          {user && (
-            <div className="flex flex-col items-start gap-2">
-              <h1 className="font-bold text-2xl">{user.username}</h1>
-              <p className="text-gray-600">{user.email}</p>
+        <section className="relative flex flex-col items-start gap-2 mx-auto p-4 px-6 max-w-[912px] container">
+          <div className="flex flex-row gap-4">
+            <Skeleton isLoaded={!!user} className="rounded-lg">
+              <Avatar
+                src={user?.profile_picture}
+                className="size-24"
+                fallbackIconProps={{
+                  size: 96,
+                }}
+                radius="sm"
+              />
+            </Skeleton>
+            <div className="flex flex-col items-start gap-1">
+              <Skeleton isLoaded={!!user} className="rounded-lg w-48">
+                <h1 className="font-bold text-2xl">
+                  {user?.username ?? "username"}
+                </h1>
+              </Skeleton>
+              <Skeleton isLoaded={!!user} className="rounded-lg w-40">
+                <p className="text-gray-600">{user?.email ?? "user_email"}</p>
+              </Skeleton>
             </div>
-          )}
+          </div>
         </section>
         <section className="flex flex-col items-start gap-6 mx-auto p-4 px-6 max-w-[912px] container">
-          <PostsRenderer posts={posts} />
+          <PostsRenderer posts={posts} feed />
         </section>
       </Body>
     </>
