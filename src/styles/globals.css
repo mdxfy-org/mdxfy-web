@@ -50,6 +50,10 @@ body {
   @apply border-default-300
 }
 
+.editor-content * div[data-editor-block-type="image"] {
+  @apply hidden
+}
+
 div[data-lexical-decorator="true"] > div {
   @apply !p-0
 }
