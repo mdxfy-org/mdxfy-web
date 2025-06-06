@@ -35,17 +35,15 @@ const LoginForm: React.FC = () => {
         setToken(token);
         setUser(user);
         if (auth === "authenticate") {
-          router.reload();
+          router.push("/");
         }
         if (auth === "authenticated") {
           setCookie(AUTHENTICATED_KEY, "true", cookieOptions);
-          router.reload();
+          router.push("/auth-code");
         }
       })
       .catch(({ response: { data: error } }) => {
         setErrors(error.errors);
-      })
-      .finally(() => {
         setIsLoading(false);
         setLoading(false);
       });

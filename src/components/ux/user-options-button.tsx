@@ -38,7 +38,7 @@ const UserOptionsButton: React.FC = () => {
       </PopoverTrigger>
       <PopoverContent
         className={cn(
-          "flex flex-col gap-0 p-1 w-full min-w-44 h-min text-gray-700 dark:text-gray-200 transition-all",
+          "flex flex-col gap-0 p-1 w-full min-w-44 h-m text-gray-700 dark:text-gray-200 transition-all in",
           isModalOpen && "opacity-25 duration-100 pointer-events-none"
         )}
       >

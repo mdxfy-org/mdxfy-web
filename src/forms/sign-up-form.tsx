@@ -54,8 +54,6 @@ const SignInForm: React.FC = () => {
       })
       .catch(({ data: error }) => {
         setErrors(error.errors);
-      })
-      .finally(() => {
         setIsLoading(false);
         setLoading(false);
       });
