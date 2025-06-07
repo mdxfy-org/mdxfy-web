@@ -102,7 +102,11 @@
   },
   "codeBlock": {
     "language": "Linguagem do bloco de código",
-    "selectLanguage": "Selecionar linguagem do bloco de código"
+    "selectLanguage": "Selecionar linguagem do bloco de código",
+    "inlineLanguage": "Linguagem do código inline"
+  },
+  "codeblock": {
+    "delete": "Deletar bloco de código"
   },
   "contentArea": {
     "editableMarkdown": "Markdown editável"

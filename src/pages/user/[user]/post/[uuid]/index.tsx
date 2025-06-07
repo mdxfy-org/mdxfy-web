@@ -24,7 +24,7 @@ export default function Index() {
     api
       .get(`/post/${uuid}`)
       .then(({ data }) => {
-        setPost(data.post);
+        setPost(data);
       })
       .catch(() => {});
   }, [router, post]);

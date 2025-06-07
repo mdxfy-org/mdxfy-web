@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import Header from "@/components/header";
 import Footer from "./footer";
+import Loading from "./loading";
 
 interface LayoutProps {
   className?: string;
@@ -12,11 +13,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ className, children, hideHeader, hideFooter }) => {
   return (
     <>
-      {/* <Loading /> */}
+      <Loading />
       {!hideHeader && <Header />}
       <main
         className={cn(
-          "bg-slate-50 dark:bg-neutral-900 sm:pb-4 w-full overflow-hidden overflow-y-auto transition-colors",
+          "sm:pb-4 w-full h-min overflow-hidden overflow-y-auto transition-colors",
           className
         )}
       >

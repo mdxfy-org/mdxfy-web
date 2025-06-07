@@ -1,5 +1,6 @@
 import Form from "@/components/form/form";
 import Editor from "@/components/mark-down-editor";
+import { useUser } from "@/contexts/auth-provider";
 import { useDebounce } from "@/hooks/use-debounce";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import api from "@/service/api";
@@ -11,19 +12,21 @@ import {
   SelectItem,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
-import { Params } from "next/dist/server/request/params";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export interface PostFormProps {
   uuid?: string;
+  className?: string;
 }
 
-export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
+export const PostForm: React.FC<PostFormProps> = ({ uuid, className }) => {
   const router = useRouter();
   const t = useTranslations();
 
   const [loading, setLoading] = useState(false);
+
+  const { user } = useUser();
 
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
   const [storedPost, setStoredPost, removeStoredPost] = useLocalStorage<string>(
@@ -35,6 +38,7 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
     setStoredPost(post);
   }, 500);
 
+  const [postHistory, setPostHistory] = useState<string>(storedPost);
   const [post, setPost] = useState<string>(storedPost);
   const [postLength, setPostLength] = useState<number>(0);
   const [errors, setErrors] = useState<Record<string, string | string[]>>();
@@ -52,11 +56,13 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
   const handleSave = (as: "draft" | "post" = "post") => {
     if (!post) return;
     setLoading(true);
-    api
-      .post("/post", { content: post, visibility: visibility, as: as })
+    const request = uuid
+      ? api.put(`/post/${uuid}`, { content: post, visibility, as })
+      : api.post("/post", { content: post, visibility, as });
+    request
       .then(({ data }) => {
         removeStoredPost();
-        router.push(`/post/${data.uuid}`);
+        router.push(`/user/${user?.username}/post/${data.uuid}`);
       })
       .catch(({ data }) => {
         setErrors(data.errors);
@@ -65,13 +71,13 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
   };
 
   useEffect(() => {
-    const { uuid } = router.query as Params;
     if (uuid && !isDataLoaded) {
       setLoading(true);
       api
         .get(`/post/${uuid}`)
         .then(({ data }) => {
           setPost(data.content);
+          setPostHistory(data.content);
           debounce(data.content);
           setErrors(undefined);
           setVisibility(data.visibility);
@@ -85,7 +91,7 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
     } else {
       setIsDataLoaded(true);
     }
-  }, [router.query, isDataLoaded, debounce]);
+  }, [uuid, router.query, isDataLoaded, debounce]);
 
   useEffect(() => {
     setPostLength(post?.length ?? 0);
@@ -97,10 +103,16 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
         "w-full transition-opacity",
         (uuid && !isDataLoaded) || loading
           ? "opacity-35 pointer-events-none"
-          : "opacity-100"
+          : "opacity-100",
+        className
       )}
     >
-      <Editor markdown={post} onChange={handleChange} />
+      <Editor
+        markdown={post}
+        before={postHistory}
+        onChange={handleChange}
+        placeholder="Escreva seu post aqui..."
+      />
       <div className="flex flex-row justify-between gap-4 w-full h-max overflow-x-auto overflow-y-clip">
         <div className="flex justify-start items-start gap-2">
           <Select

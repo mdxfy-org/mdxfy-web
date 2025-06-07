@@ -67,7 +67,8 @@ const PictureInput: React.FC<PictureInputProps> = ({
 
   const handleCropSave = (blob: Blob) => {
     const formData = new FormData();
-    formData.append("image", blob, "profile_picture.png");
+    const fileExtension = blob.type.split("/")[1] || "png";
+    formData.append("image", blob, `profile_picture.${fileExtension}`);
 
     setLoading(true);
     onSubmit?.(formData)

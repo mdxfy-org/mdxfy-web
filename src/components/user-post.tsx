@@ -66,10 +66,10 @@ export const UserPost: React.FC<PostProps> = ({
             {postDate.toLocaleString()}
           </p>
           {loggedUser?.id === post.user.id && (
-            <Popover radius="sm" placement="bottom-end" offset={8}>
+            <Popover radius="sm" placement="bottom-end"  offset={8}>
               <PopoverTrigger>
                 <Button
-                  className="right-0 absolute bg-default-200"
+                  className="print:hidden right-0 absolute bg-default-200"
                   size="sm"
                   isIconOnly
                 >
@@ -87,7 +87,7 @@ export const UserPost: React.FC<PostProps> = ({
               >
                 <>
                   <IconOption
-                    href={`/post/${post.uuid}/edit`}
+                    href={`/user/${post.user.username}/post/${post.uuid}/edit`}
                     disabled={!user}
                     icon={<Pen />}
                   >
@@ -111,14 +111,14 @@ export const UserPost: React.FC<PostProps> = ({
           )}
         </div>
         {redirect ? (
-          <Link href={`/post/${post.uuid}`} className="w-full">
+          <Link href={`/user/${post.user.username}/post/${post.uuid}`} className="w-full">
             <Editor markdown={post.content} readonly />
           </Link>
         ) : (
           <Editor markdown={post.content} readonly />
         )}
         {post.see_more && (
-          <Link className="w-max" href={`/post/${post.uuid}`}>
+          <Link className="w-max" href={`/user/${post.user.username}/post/${post.uuid}`}>
             Ver mais...
           </Link>
         )}

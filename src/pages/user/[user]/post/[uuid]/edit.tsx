@@ -5,9 +5,11 @@ import Head from "next/head";
 import { PostForm } from "@/forms/post-form";
 import { GetStaticPaths } from "next";
 import { Params } from "next/dist/server/request/params";
+import { useRouter } from "next/router";
 
 export default function Index() {
   const pt = useTranslations("Pages.Index");
+  const router = useRouter();
 
   return (
     <>
@@ -17,7 +19,7 @@ export default function Index() {
       </Head>
       <Layout className="flex flex-col gap-10 pb-16 w-full">
         <section className="flex flex-col items-start gap-6 mx-auto p-4 px-6 max-w-[912px] container">
-          <PostForm />
+          <PostForm uuid={router.query.uuid as string} />
         </section>
       </Layout>
     </>

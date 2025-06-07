@@ -2,40 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground: #394051;
-  --background: #f8fafc;
-
-  color: var(--foreground);
-  background: var(--background);
+html, body {
+  @apply bg-default-50 min-h-svh text-default-900;
 }
 
-@media (color-scheme: dark) {
-  :root {
-    --foreground: #e5e7eb;
-    --background: #171717;
-
-    color: var(--foreground);
-    background: var(--background);
-  }
+.prose :is(h1, h2, h3, h4, h5, h6, p, a, ul, li, blockquote, strong) {
+  @apply text-default-700;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
+._placeholder_sects_1101 * {
+  @apply !text-default-400;
+}
+
+.prose :is(hr) {
+  @apply border-default-200 duration-200;
+}
+
+.prose :is(code) {
+  @apply max-w-max;
+}
+
+.prose :is(code) span {
+  @apply bg-default-200 p-1 rounded-md text-default-600;
+}
+
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)):before {
+  content: " ";
+  @apply inline-block w-0 h-0;
+}
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+  content: " ";
+  @apply inline-block w-0 h-0;
 }
 
 .editor-header * svg {
-  /* color: inherit !important;
-  fill: currentColor !important; */
+  @apply fill-default-500 !text-default-700;
 }
 
 .editor-header * button {
-  @apply bg-default-100
+  @apply bg-default-100;
+}
+
+.editor-header * button:hover {
+  @apply !bg-default-200/80;
+}
+
+.editor-header * button:focus {
+  @apply !bg-default-200/80;
+}
+
+.editor-header *[aria-checked="true"] {
+  @apply !bg-default-200;
+}
+
+.mdxeditor-source-editor, .cm-editor {
+  @apply dark:invert;
 }
 
 .mdxeditor * hr {
-  @apply !my-2 border-t-2
+  @apply !my-2 border-t-2;
 }
 
 .editor-content * table {
@@ -43,25 +68,36 @@ body {
 }
 
 .editor-content * table thead tr th {
-  @apply py-0
+  @apply py-0;
 }
 
-.editor-content * table * {
-  @apply border-default-300
+.editor-content * table *, .editor-content * table {
+  @apply !border-default-400;
 }
 
-.editor-content * div[data-editor-block-type="image"] {
-  @apply hidden
-}
+/* .editor-content * div[data-editor-block-type="image"] {
+  @apply hidden;
+} */
 
 div[data-lexical-decorator="true"] > div {
-  @apply !p-0
+  @apply !p-0;
 }
 
 .editor-readonly * div[data-lexical-decorator="true"] > div > :first-child {
-  @apply hidden !p-0
+  @apply hidden !p-0;
 }
 
 .mdxeditor-popup-container {
-  @apply hidden;
+  @apply border-none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  :is(.no-print, .no-print *) {
+    display: none;
+  }
 }
