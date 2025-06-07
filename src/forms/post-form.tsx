@@ -1,22 +1,36 @@
 import Form from "@/components/form/form";
 import Editor from "@/components/mark-down-editor";
+import { useUser } from "@/contexts/auth-provider";
 import { useDebounce } from "@/hooks/use-debounce";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import api from "@/service/api";
-import { Button, Select, SelectItem } from "@heroui/react";
+import {
+  Button,
+  CircularProgress,
+  cn,
+  Select,
+  SelectItem,
+} from "@heroui/react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export interface PostFormProps {
   uuid?: string;
+  className?: string;
 }
 
-export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
+export const PostForm: React.FC<PostFormProps> = ({ uuid, className }) => {
   const router = useRouter();
+  const t = useTranslations();
+
   const [loading, setLoading] = useState(false);
 
+  const { user } = useUser();
+
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
   const [storedPost, setStoredPost, removeStoredPost] = useLocalStorage<string>(
-    "post",
+    `post-${uuid ?? "new"}`,
     ""
   );
   const [debounce] = useDebounce((post: string) => {
@@ -24,8 +38,10 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
     setStoredPost(post);
   }, 500);
 
+  const [postHistory, setPostHistory] = useState<string>(storedPost);
   const [post, setPost] = useState<string>(storedPost);
-  const [errors, setErrors] = useState<string[]>();
+  const [postLength, setPostLength] = useState<number>(0);
+  const [errors, setErrors] = useState<Record<string, string | string[]>>();
 
   const [visibility, setVisibility] = useState<
     "public" | "private" | "friends"
@@ -40,41 +56,65 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
   const handleSave = (as: "draft" | "post" = "post") => {
     if (!post) return;
     setLoading(true);
-    api
-      .post("/post", { content: post, visibility: visibility, as: as })
+    const request = uuid
+      ? api.put(`/post/${uuid}`, { content: post, visibility, as })
+      : api.post("/post", { content: post, visibility, as });
+    request
       .then(({ data }) => {
         removeStoredPost();
-        router.push(`/post/${data.uuid}`);
+        router.push(`/user/${user?.username}/post/${data.uuid}`);
       })
       .catch(({ data }) => {
-        setErrors(data.errors.content);
+        setErrors(data.errors);
         setLoading(false);
       });
   };
 
   useEffect(() => {
-    if (uuid) {
+    if (uuid && !isDataLoaded) {
       setLoading(true);
       api
         .get(`/post/${uuid}`)
         .then(({ data }) => {
           setPost(data.content);
+          setPostHistory(data.content);
+          debounce(data.content);
+          setErrors(undefined);
           setVisibility(data.visibility);
+          setIsDataLoaded(true);
           setLoading(false);
         })
-        .catch(({ data }) => {
-          setErrors(data.errors.content);
+        .catch(() => {
+          setIsDataLoaded(true);
           setLoading(false);
-        }
-      );
+        });
+    } else {
+      setIsDataLoaded(true);
     }
-  }, [uuid, storedPost, setStoredPost, removeStoredPost, setLoading]);
+  }, [uuid, router.query, isDataLoaded, debounce]);
+
+  useEffect(() => {
+    setPostLength(post?.length ?? 0);
+  }, [post]);
 
   return (
-    <Form className="w-full">
-      <Editor markdown={post} onChange={handleChange} />
-      <div className="flex flex-row justify-between gap-4 w-full">
-        <div>
+    <Form
+      className={cn(
+        "w-full transition-opacity",
+        (uuid && !isDataLoaded) || loading
+          ? "opacity-35 pointer-events-none"
+          : "opacity-100",
+        className
+      )}
+    >
+      <Editor
+        markdown={post}
+        before={postHistory}
+        onChange={handleChange}
+        placeholder="Escreva seu post aqui..."
+      />
+      <div className="flex flex-row justify-between gap-4 w-full h-max overflow-x-auto overflow-y-clip">
+        <div className="flex justify-start items-start gap-2">
           <Select
             name="visibility"
             placeholder="Selecione a visibilidade"
@@ -85,10 +125,36 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
               setVisibility(e.target.value as "public" | "private" | "friends");
             }}
           >
-            <SelectItem key="public">Publico</SelectItem>
-            <SelectItem key="private">Privado</SelectItem>
-            <SelectItem key="friends">Amigos</SelectItem>
+            <SelectItem key="public">{t("UI.input.select.public")}</SelectItem>
+            <SelectItem key="private">
+              {t("UI.input.select.private")}
+            </SelectItem>
+            <SelectItem key="friends">
+              {t("UI.input.select.friends")}
+            </SelectItem>
           </Select>
+          <CircularProgress
+            aria-label="Caracteres"
+            color={
+              postLength >= 9500
+                ? "danger"
+                : postLength >= 8000
+                ? "warning"
+                : "primary"
+            }
+            size="md"
+            showValueLabel={true}
+            minValue={0}
+            value={postLength}
+            maxValue={10000}
+          />
+          <div className="flex justify-center items-center h-full">
+            <p className="w-max truncate">
+              {t("UI.placeholders.characters", {
+                number: postLength,
+              })}
+            </p>
+          </div>
         </div>
         <div className="flex flex-row gap-4">
           <Button
@@ -96,7 +162,7 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
             type="submit"
             onPress={() => handleSave("draft")}
           >
-            Salvar como rascunho
+            {t("UI.buttons.save_as_draft")}
           </Button>
           <Button
             isLoading={loading}
@@ -104,17 +170,19 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid }) => {
             onPress={() => handleSave("post")}
             color="primary"
           >
-            Fazer post
+            {t("UI.buttons.save_post")}
           </Button>
         </div>
       </div>
       <div>
         {errors &&
-          errors.map((error, index) => (
-            <p key={index} className="text-danger-500 text-sm">
-              {error}
-            </p>
-          ))}
+          Object.values(errors)
+            .flat()
+            .map((error: string, index: number) => (
+              <p key={index} title={error} className="text-danger-500 text-sm">
+                {error}
+              </p>
+            ))}
       </div>
     </Form>
   );

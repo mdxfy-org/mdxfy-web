@@ -11,7 +11,7 @@ import { Post } from "@/types/post";
 import { PostsRenderer } from "@/components/ui/posts-renderer";
 import { User } from "@/types/user";
 import { Avatar } from "@/components/avatar";
-import { Skeleton } from "@heroui/react";
+import { Divider, Skeleton } from "@heroui/react";
 import { UserProfileUpdateModal } from "@/components/ui/user-profile-update-modal";
 import { useUser } from "@/contexts/auth-provider";
 
@@ -41,7 +41,7 @@ export default function UserPosts() {
         <title>{pt("meta.title")}</title>
         <meta name="description" content={pt("meta.description")} />
       </Head>
-      <Body className="flex flex-col justify-center">
+      <Body className="flex flex-col justify-center" disableLoading>
         <section className="relative flex flex-col items-start gap-2 mx-auto p-4 px-6 max-w-[912px] container">
           <div className="flex flex-row gap-4">
             <Skeleton isLoaded={!!user} className="rounded-lg">
@@ -68,13 +68,16 @@ export default function UserPosts() {
                 </div>
               </Skeleton>
               <Skeleton isLoaded={!!user} className="rounded-lg w-40">
-                <p className="w-max text-gray-600">
+                {/* <p className="w-max text-gray-600">
                   {user?.email ?? "user_email"}
-                </p>
+                </p> */}
               </Skeleton>
             </div>
           </div>
           {user && loggedUser?.id === user?.id && <UserProfileUpdateModal />}
+        </section>
+        <section className="flex flex-col items-start mx-auto px-6 max-w-[912px] container">
+          <Divider className="h-[2px]" />
         </section>
         <section className="flex flex-col items-start gap-6 mx-auto p-4 px-6 max-w-[912px] container">
           <PostsRenderer posts={posts} feed />

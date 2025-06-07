@@ -63,6 +63,24 @@ export const PictureCropModal: React.FC<PictureCropModalProps> = ({
 
   const savePicture = () => {
     if (!image || !imageCrop) return;
+
+    const isGif = image.startsWith("data:image/gif");
+
+    if (isGif) {
+      const byteString = atob(image.split(",")[1]);
+      const mimeString = image.split(",")[0].split(":")[1].split(";")[0];
+
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([ab], { type: mimeString });
+      onSave(blob);
+      onOpenChange(false);
+      return;
+    }
+
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.src = image;
@@ -138,7 +156,7 @@ export const PictureCropModal: React.FC<PictureCropModalProps> = ({
                 <input
                   id="upload-picture"
                   type="file"
-                  accept="image/png, image/jpeg, image/webp"
+                  accept="image/png, image/jpeg, image/webp, image/gif"
                   tabIndex={0}
                   className="absolute inset-0 opacity-0 w-full h-full"
                   onChange={handleFileChange}

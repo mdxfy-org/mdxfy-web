@@ -8,11 +8,13 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/navbar";
 import CompactLanguageSelector from "./ux/compact-language-selector";
 import { Button, Link as HeroUILink } from "@heroui/react";
 import { Pen } from "@solar-icons/react";
+import dynamic from "next/dynamic";
+import { LazyThemeSwitcher } from "@/components/ui/theme-switcher";
 
-// const ThemeSwitcher = dynamic(() => import("@/components/ui/theme-switcher"), {
-//   ssr: false,
-//   loading: () => <LazyThemeSwitcher />,
-// });
+const ThemeSwitcher = dynamic(() => import("@/components/ui/theme-switcher"), {
+  ssr: false,
+  loading: () => <LazyThemeSwitcher />,
+});
 
 const Header: React.FC = () => {
   // const t = useTranslations();
@@ -20,7 +22,7 @@ const Header: React.FC = () => {
 
   return (
     <Navbar
-      className="z-50 bg-slate-50/60 dark:bg-stone-900/60 shadow-sm backdrop-blur-sm border-b dark:border-b-stone-950/50 w-full transition-colors"
+      className="print:hidden z-50 bg-default-50/60 shadow-sm backdrop-blur-sm border-b border-b-default-100/40 w-full transition-colors duration-200"
       shouldHideOnScroll
     >
       <NavbarBrand className="flex flex-row flex-1 justify-start items-center gap-4">
@@ -55,9 +57,9 @@ const Header: React.FC = () => {
             <Pen weight="LineDuotone" size={22} />
           </Button>
         </NavbarItem>
-        {/* <NavbarItem>
-          <ThemeSwitcher className={cn(user ? "md:flex hidden" : "flex")} />
-        </NavbarItem> */}
+        <NavbarItem className={cn(user ? "md:flex hidden" : "flex")}>
+          <ThemeSwitcher />
+        </NavbarItem>
         <NavbarItem className="flex justify-center items-center">
           <UserOptionsButton />
         </NavbarItem>

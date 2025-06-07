@@ -84,7 +84,7 @@ const AuthCodeForm: React.FC = () => {
         setUser(data.user);
         setToken(data.token);
         setCookie(AUTHENTICATED_KEY, "true", cookieOptions);
-        router.reload();
+        router.push("/");
       })
       .catch(({ response, status }: AxiosError<AuthError>) => {
         if (status === 401) {
@@ -112,8 +112,6 @@ const AuthCodeForm: React.FC = () => {
         toast.error({
           description: t("Messages.errors.default"),
         });
-      })
-      .finally(() => {
         setIsLoading(false);
         setLoading(false);
       });
