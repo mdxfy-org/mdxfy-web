@@ -8,7 +8,7 @@ import api from "@/service/api";
 import { Post } from "@/types/post";
 import { PostsRenderer } from "@/components/ui/posts-renderer";
 import { PostForm } from "@/forms/post-form";
-import { cn, Divider } from "@heroui/react";
+import { cn } from "@heroui/react";
 import { useUser } from "@/contexts/auth-provider";
 
 export default function UserPosts() {
