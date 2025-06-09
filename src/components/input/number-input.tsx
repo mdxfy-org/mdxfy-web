@@ -1,107 +1,55 @@
 import {
+  cn,
   NumberInputProps as HeroUIINumberInputProps,
   NumberInput as HeroUINumberInput,
 } from "@heroui/react";
-import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-// import { useRouter } from "next/router";
-import { cn } from "@/lib/utils";
-import PasswordVisibilityToggle from "../ux/password-visibility-toggle";
-import {
-  InputGroupProviderProps,
-  useGroup,
-} from "@/components/input/group/input-group";
-import { FormProviderProps, useForm } from "../form/form";
-
-export type InputFormatInfo = {
-  form?: FormProviderProps;
-  group?: InputGroupProviderProps;
-};
+import { useField } from "@/hooks/use-field";
 
 export interface NumberInputProps extends HeroUIINumberInputProps {
   queryCollectable?: boolean;
-  taggableVisibility?: boolean;
 }
 
-const NumberInput: React.FC<NumberInputProps> = ({
+export const NumberInput: React.FC<NumberInputProps> = ({
   name: inputName,
   value,
   className,
-  // queryCollectable = false,
-  taggableVisibility,
   disabled,
   onChange,
   required,
   isRequired,
+  queryCollectable,
   ...props
 }) => {
-  const ref = useRef<HTMLInputElement>(null);
-
-  // const router = useRouter();
   const t = useTranslations();
-  const form = useForm();
-  const group = useGroup();
-
-  const name = inputName && group ? group.getFieldName(inputName) : inputName;
   const isFieldRequired = required ?? isRequired ?? false;
 
-  // const [hasFirstRender, setHasFirstRender] = useState(false);
-  const [inputValue, setInputValue] = useState(
-    value ?? form?.values?.[name] ?? ""
-  );
-  const [isPassVisible, setIsPassVisible] = useState(false);
-
-  const togglePassVisibility = () => setIsPassVisible(!isPassVisible);
-
-  const changeValue = useCallback(
-    (newValue?: number) => {
-      const finalValue = newValue ?? "";
-      if (name && form) {
-        form.setValue(name, finalValue);
-        form.setError(name, undefined);
+  const field = useField<number | string>(inputName, {
+    initialValue: value,
+    required: isFieldRequired,
+    type: props.type ?? "text",
+    validate: (val) => {
+      if (isFieldRequired && !val) {
+        return t("UI.messages.fill_this_field");
       }
-      setInputValue(finalValue);
-      onChange?.({
-        target: { value: finalValue },
-      } as unknown as React.ChangeEvent<HTMLInputElement>);
+      if (props.validate) {
+        const result = props.validate(Number(val));
+        if (result === true || result === undefined) {
+          return null;
+        }
+        if (Array.isArray(result)) {
+          return result.join(", ");
+        }
+        return result;
+      }
+      return null;
     },
-    [name, form, onChange]
-  );
-
-  useEffect(() => {
-    setInputValue(value ?? "");
-  }, [value, setInputValue]);
-
-  // useEffect(() => {
-  //   if (queryCollectable && name && router.query[name] && !hasFirstRender) {
-  //     const queryValue = router.query[name];
-  //     if (queryValue) {
-  //       const val = queryValue as string;
-  //       changeValue(val);
-  //       setHasFirstRender(true);
-  //     }
-  //   }
-  // }, [queryCollectable, name, changeValue, router.query, hasFirstRender]);
-
-  useEffect(() => {
-    if (name && form && form.values?.[name]) {
-      setInputValue(form.values?.[name]);
-    }
-  }, [name, form, inputValue]);
-
-  useEffect(() => {
-    if (group && inputName) {
-      group.declareField(inputName, {
-        type: props.type ?? "text",
-        required: isFieldRequired ?? false,
-      });
-    }
-  }, [group, inputName, props.type, isFieldRequired]);
+    queryCollectable,
+  });
 
   return (
     <HeroUINumberInput
-      ref={ref}
-      name={name}
+      name={field.name}
       classNames={{
         base: "!relative",
         label: "!top-6 !-translate-y-[3.25em] start-0",
@@ -117,48 +65,18 @@ const NumberInput: React.FC<NumberInputProps> = ({
         className,
         disabled && "opacity-50 pointer-events-none"
       )}
-      value={inputValue}
-      errorMessage={(v) => {
-        if (!v && form && name) {
-          form.setError(name, undefined);
-        }
-        return v.validationErrors;
-      }}
-      onChange={(e) => {
-        if (typeof e === "number") {
-          changeValue(e);
-        } else {
-          changeValue(Number(e.target.value.replace(/[^0-9]/g, "")));
-        }
-      }}
-      endContent={
-        taggableVisibility &&
-        props.type === "password" && (
-          <PasswordVisibilityToggle
-            isPassVisible={isPassVisible}
-            togglePassVisibility={() => {
-              ref.current?.focus();
-              togglePassVisibility();
-            }}
-          />
-        )
-      }
-      validate={(value) => {
-        if (isFieldRequired && !value) {
-          return t("UI.messages.fill_this_field");
-        }
-        if (props.validate) {
-          return props.validate(value);
-        }
-        return null;
+      value={Number(field.value)}
+      errorMessage={field.error}
+      onValueChange={(v) => {
+        field.onChange(v);
+        onChange?.({
+          target: { value: v },
+        } as unknown as React.ChangeEvent<HTMLInputElement>);
       }}
       required={isFieldRequired}
       isRequired={isFieldRequired}
       {...props}
-      type={isPassVisible ? "text" : props.type}
       disabled={disabled}
     />
   );
 };
-
-export default NumberInput;

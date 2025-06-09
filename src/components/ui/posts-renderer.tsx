@@ -4,11 +4,13 @@ import { UserPost } from "../user-post";
 
 export interface PostsRendererProps {
   posts?: Post[];
+  placeholder?: React.ReactNode;
   feed?: boolean;
 }
 
 export const PostsRenderer: React.FC<PostsRendererProps> = ({
   posts,
+  placeholder,
   feed = false,
 }) => {
   return (
@@ -27,13 +29,13 @@ export const PostsRenderer: React.FC<PostsRendererProps> = ({
               ))}
             </>
           ) : (
-            <>Nada para ver por aqui.</>
+            <div className="w-full text-center">{placeholder ?? 'Nada para ver por aquí'}</div>
           )}
         </>
       ) : (
         <div className="flex justify-center p-10 w-full">
           <Spinner
-            color="current"
+            color="current" 
             label="Carregando"
           />
         </div>

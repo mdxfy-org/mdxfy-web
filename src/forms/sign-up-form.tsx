@@ -1,6 +1,6 @@
-import Checkbox from "@/components/input/checkbox";
+import { Checkbox } from "@/components/input/checkbox";
 import Form from "@/components/form/form";
-import Input from "@/components/input/input";
+import { Input } from "@/components/input/input";
 import Link from "@/components/link";
 import { PrivacyPolicy, TermsOfUse } from "@/components/ui/platform-agreements";
 import { useUser } from "@/contexts/auth-provider";

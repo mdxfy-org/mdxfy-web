@@ -1,102 +1,58 @@
 import {
-  CalendarDate,
   DatePicker as HeroUIDatePicker,
-  DatePickerProps as HeroUIDatePickerPro,
+  DatePickerProps as HeroUIDatePickerProps,
 } from "@heroui/react";
-import { useGroup } from "@/components/input/group/input-group";
-import { useCallback, useEffect, useState } from "react";
-import { useForm } from "../form/form";
-import { useRouter } from "next/router";
-import { parseQueryDate } from "@/lib/utils";
+import { useField } from "@/hooks/use-field";
+import { parseToCalendarDate } from "@/lib/date";
 import { parseDate } from "@internationalized/date";
 
-export type DatePickerValue = CalendarDate | null | undefined;
+export type DatePickerValue = HeroUIDatePickerProps["value"];
 
-export interface DatePickerProps extends HeroUIDatePickerPro {
+export interface DatePickerProps extends HeroUIDatePickerProps {
   required?: boolean;
   label?: string;
   queryCollectable?: boolean;
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({
+export const DatePicker: React.FC<DatePickerProps> = ({
   name: inputName,
   queryCollectable,
-  onChange,
-  value,
+  onChange: propOnChange,
+  value: initialFieldValue,
   required,
   isRequired,
   ...props
 }) => {
-  const router = useRouter();
-  const form = useForm();
-  const group = useGroup();
-
-  const name = inputName && group ? group.getFieldName(inputName) : inputName;
   const isFieldRequired = required ?? isRequired ?? false;
 
-  const [hasFirstRender, setHasFirstRender] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<DatePickerValue>();
-
-  const changeValue = useCallback(
-    (newValue?: DatePickerValue) => {
-      if (newValue && newValue !== inputValue) {
-        if (name && form) {
-          form.setValue(name, newValue);
-          form.setError(name, undefined);
+  const { name, value, onChange } = useField<DatePickerValue>(inputName, {
+    initialValue:
+      typeof initialFieldValue === "string"
+        ? parseToCalendarDate(initialFieldValue)
+        : initialFieldValue,
+    onChange: (value) => {
+      propOnChange?.(value ?? null);
+    },
+    queryCollectable: queryCollectable ?? false,
+    queryCollectFunction: ({ name, router }) => {
+      if (name) {
+        const queryValue: string | undefined = Array.isArray(router.query[name])
+          ? router.query[name][0]
+          : router.query[name];
+        if (queryValue) {
+          return parseDate(queryValue);
         }
-        setInputValue(newValue);
       }
     },
-    [name, form, inputValue]
-  );
-
-  useEffect(() => {
-    setInputValue(value as unknown as DatePickerValue);
-  }, [value]);
-
-  useEffect(() => {
-    if (queryCollectable && name && router.query[name] && !hasFirstRender) {
-      const queryValue = router.query[name];
-      if (queryValue) {
-        try {
-          const val = parseQueryDate(queryValue as string);
-          changeValue(val as unknown as DatePickerValue);
-          setHasFirstRender(true);
-        } catch {}
-      }
-    }
-  }, [queryCollectable, name, changeValue, router.query, hasFirstRender]);
-
-  useEffect(() => {
-    if (name && form && form.values?.[name]) {
-      const formValue = form.values?.[name];
-      changeValue(
-        typeof formValue === "string"
-          ? parseDate(
-              formValue.includes("T") ? formValue.split("T")[0] : formValue
-            )
-          : formValue
-      );
-    }
-  }, [value, form, name, changeValue]);
-
-  useEffect(() => {
-    if (group && inputName) {
-      group.declareField(inputName, {
-        type: "date",
-        required: isFieldRequired ?? false,
-      });
-    }
-  }, [group, inputName, isFieldRequired]);
+    required: isFieldRequired,
+    type: "date",
+  });
 
   return (
     <HeroUIDatePicker
       name={name}
-      value={inputValue}
-      onChange={(val) => {
-        onChange?.(val);
-        changeValue(val as unknown as DatePickerValue);
-      }}
+      value={typeof value === "string" ? undefined : value}
+      onChange={onChange}
       classNames={{
         base: "relative gap-1 !pb-0",
         label: "top-6 !translate-y-[0.30em] w-max pr-2",
@@ -112,5 +68,3 @@ const DatePicker: React.FC<DatePickerProps> = ({
     />
   );
 };
-
-export default DatePicker;

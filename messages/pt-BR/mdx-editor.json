@@ -89,7 +89,10 @@
     "redo": "Refazer {shortcut}",
     "superscript": "Sobrescrito",
     "subscript": "Subscrito",
-    "strikethrough": "Riscado"
+    "strikethrough": "Riscado",
+    "removeStrikethrough": "Remover riscado",
+    "removeSuperscript": "Remover sobrescrito",
+    "removeSubscript": "Remover subscrito"
   },
   "admonitions": {
     "note": "Nota",

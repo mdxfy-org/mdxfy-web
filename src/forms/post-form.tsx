@@ -17,10 +17,11 @@ import { useEffect, useState } from "react";
 
 export interface PostFormProps {
   uuid?: string;
+  answerTo?: string;
   className?: string;
 }
 
-export const PostForm: React.FC<PostFormProps> = ({ uuid, className }) => {
+export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className }) => {
   const router = useRouter();
   const t = useTranslations();
 
@@ -30,7 +31,7 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, className }) => {
 
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
   const [storedPost, setStoredPost, removeStoredPost] = useLocalStorage<string>(
-    `post-${uuid ?? "new"}`,
+    `post-${uuid ?? "new"}${answerTo ? `-answer-${answerTo}` : ""}`,
     ""
   );
   const [debounce] = useDebounce((post: string) => {
@@ -56,9 +57,15 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, className }) => {
   const handleSave = (as: "draft" | "post" = "post") => {
     if (!post) return;
     setLoading(true);
+    const data = {
+      content: post,
+      visibility,
+      as,
+      answer_to: answerTo,
+    };
     const request = uuid
-      ? api.put(`/post/${uuid}`, { content: post, visibility, as })
-      : api.post("/post", { content: post, visibility, as });
+      ? api.put(`/post/${uuid}`, data)
+      : api.post("/post", data);
     request
       .then(({ data }) => {
         removeStoredPost();

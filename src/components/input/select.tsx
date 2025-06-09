@@ -2,106 +2,52 @@ import {
   SelectProps as HeroUISelectProps,
   Select as HeroUISelect,
   SelectItem as HeroUISelectItem,
+  cn,
 } from "@heroui/react";
-import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { cn } from "@/lib/utils";
-import { useGroup } from "@/components/input/group/input-group";
-import { useForm } from "../form/form";
+
+import { useField } from "@/hooks/use-field";
 import { Options } from "@/types/options";
 
-export interface SelectProps extends HeroUISelectProps {
+export type SelectProps = {
   queryCollectable?: boolean;
-  taggableVisibility?: boolean;
+  children?: HeroUISelectProps["children"];
   options?: Options;
-}
+} & Omit<HeroUISelectProps, "children">;
 
-const Select: React.FC<SelectProps> = ({
+export const Select: React.FC<SelectProps> = ({
   name: inputName,
   value,
   className,
   queryCollectable = false,
+  options,
   disabled,
-  onChange,
   children,
   required,
   isRequired,
+  multiple,
   ...props
 }) => {
-  const router = useRouter();
-  const form = useForm();
-  const group = useGroup();
-
-  const name = inputName && group ? group.getFieldName(inputName) : inputName;
   const isFieldRequired = required ?? isRequired ?? false;
 
-  const [inputValue, setInputValue] = useState<string | number>(
-    Array.isArray(value) ? value[0] : value ?? ""
-  );
-  const [hasFirstRender, setHasFirstRender] = useState(false);
-
-  const changeValue = useCallback(
-    (newValue?: string | number) => {
-      if (newValue && newValue !== inputValue) {
-        if (name && form) {
-          form.setValue(name, newValue);
-          form.setError(name, undefined);
-        }
-        setInputValue(newValue);
-        onChange?.({
-          target: { value: newValue },
-        } as unknown as React.ChangeEvent<HTMLSelectElement>);
-      }
+  const {
+    name,
+    value: fieldValue,
+    onChange,
+  } = useField<HeroUISelectProps["value"]>(inputName, {
+    initialValue: value,
+    required: isFieldRequired,
+    queryCollectable,
+    queryCollectFunction({ name, router }) {
+      return String(router.query[name]).split(",");
     },
-    [name, form, inputValue, onChange]
-  );
-
-  useEffect(() => {
-    changeValue(inputValue ?? "");
-  }, [inputValue, changeValue]);
-
-  useEffect(() => {
-    if (queryCollectable && name && router.query[name] && !hasFirstRender) {
-      const queryValue = router.query[name];
-      if (queryValue) {
-        const val = queryValue as string;
-        changeValue(val);
-        setHasFirstRender(true);
-      }
-    }
-  }, [queryCollectable, name, changeValue, router.query, hasFirstRender]);
-
-  useEffect(() => {
-    if (name && form && form.values?.[name]) {
-      changeValue(form.values?.[name]);
-    }
-  }, [value, form, name, changeValue]);
-
-  useEffect(() => {
-    if (group && inputName) {
-      group.declareField(inputName, {
-        type: "select",
-        required: isFieldRequired ?? false,
-      });
-    }
-  }, [inputName, isFieldRequired, group]);
-
-  useEffect(() => {
-    if (name) {
-      const element = document.querySelector(
-        `select[name="${name}"]`
-      ) as HTMLSelectElement;
-      if (element) {
-        element.setAttribute("required", String(isFieldRequired));
-      }
-    }
-  }, [name, isFieldRequired]);
+    type: multiple ? "select-multiple" : "select",
+  });
 
   return (
     <HeroUISelect
       name={name}
       classNames={{
-        base: "relative",
+        base: "relative max-h-10",
         label: "top-6 !-translate-y-[3.10em] text-foreground",
         helperWrapper: "absolute -bottom-[20px] -left-0.5 max-w-full",
         errorMessage: "truncate",
@@ -110,26 +56,49 @@ const Select: React.FC<SelectProps> = ({
       }}
       labelPlacement="outside"
       variant="bordered"
+      selectionMode={multiple ? "multiple" : "single"}
       className={cn(
         "text-gray-700 dark:text-gray-200 transition-colors duration-100 select",
         className,
         disabled && "opacity-50 pointer-events-none"
       )}
-      selectedKeys={[inputValue]}
-      onChange={(e) => {
-        changeValue(e.target.value);
-      }}
-      onSelect={(e) => {
-        changeValue(e.currentTarget.value);
+      selectedKeys={
+        Array.isArray(fieldValue)
+          ? fieldValue
+              .filter((v) => v !== undefined && v !== null)
+              .map(String)
+              .filter((key) => key !== "undefined")
+          : fieldValue !== undefined &&
+            fieldValue !== null &&
+            String(fieldValue) !== "undefined"
+          ? [String(fieldValue)]
+          : []
+      }
+      onSelectionChange={(keys) => {
+        const selectedKeys = Array.from(keys as Set<string>);
+        if (multiple) {
+          onChange(selectedKeys);
+        } else {
+          onChange(selectedKeys[0]);
+        }
       }}
       required={isFieldRequired}
       isRequired={isFieldRequired}
       {...props}
     >
-      {children}
+      {options
+        ? options.map((option) => (
+            <HeroUISelectItem
+              key={option.value}
+              textValue={option.label}
+              description={option.description}
+            >
+              {option.label}
+            </HeroUISelectItem>
+          ))
+        : children ?? null}
     </HeroUISelect>
   );
 };
 
 export const SelectItem = HeroUISelectItem;
-export default Select;

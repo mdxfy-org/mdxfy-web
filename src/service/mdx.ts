@@ -49,5 +49,6 @@ export const codeMirrorConfig = {
     json: "JSON",
     xml: "XML",
     markdown: "Markdown",
+    "": "Unspecified",
   },
 };

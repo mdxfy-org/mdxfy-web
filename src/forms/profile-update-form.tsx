@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import userPicture from "@public/img/user-default.png";
 import { useToast } from "@/service/toast";
-import Input from "@/components/input/input";
+import { Input } from "@/components/input/input";
 import { cn, Spacer, Spinner } from "@heroui/react";
 import Button from "@/components/button";
 import { FormValues } from "@/types/form";
@@ -131,7 +131,13 @@ export const ProfileUpdateForm: React.FC = () => {
           disabled
         />
         <Spacer y={4} />
-        <Button className="w-full" color="primary" type="submit" isLoading={loading} confirmAction>
+        <Button
+          className="w-full"
+          color="primary"
+          type="submit"
+          isLoading={loading}
+          confirmAction
+        >
           {t("UI.buttons.continue")}
         </Button>
       </div>

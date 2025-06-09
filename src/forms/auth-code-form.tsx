@@ -12,7 +12,7 @@ import { auth, AuthError } from "@/http/user/auth";
 import { useToast } from "@/service/toast";
 import { resendCode } from "@/http/user/resend-code";
 import { AxiosError } from "axios";
-import InputOtp from "@/components/input/input-otp";
+import { InputOtp } from "@/components/input/input-otp";
 import { useCookies } from "react-cookie";
 import { AUTHENTICATED_KEY } from "@/middleware";
 import { cookieOptions } from "@/service/cookie";

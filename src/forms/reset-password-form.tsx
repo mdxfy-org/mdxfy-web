@@ -1,9 +1,5 @@
-import Input from "@/components/input/input";
-import {
-  Button,
-  Form,
-  Spacer,
-} from "@heroui/react";
+import { Input } from "@/components/input/input";
+import { Button, Form, Spacer } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Link from "@/components/link";
 import { useState } from "react";

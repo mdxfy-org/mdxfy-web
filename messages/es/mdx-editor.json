@@ -3,7 +3,7 @@
     "title": "Editar frontmatter del documento",
     "key": "Clave",
     "value": "Valor",
-    "addEntry": "Añadir entrada"
+    "addEntry": "Agregar entrada"
   },
   "dialogControls": {
     "save": "Guardar",
@@ -12,43 +12,43 @@
   "uploadImage": {
     "dialogTitle": "Subir una imagen",
     "uploadInstructions": "Sube una imagen desde tu dispositivo:",
-    "addViaUrlInstructions": "O añade una imagen desde una URL:",
-    "autoCompletePlaceholder": "Selecciona o pega el src de la imagen",
-    "alt": "Alt:",
+    "addViaUrlInstructions": "O agrega una imagen desde una URL:",
+    "autoCompletePlaceholder": "Introduce un enlace de imagen",
+    "alt": "Texto alternativo:",
     "title": "Título:"
   },
   "imageEditor": {
-    "deleteImage": "Borrar imagen",
+    "deleteImage": "Eliminar imagen",
     "editImage": "Editar imagen"
   },
   "createLink": {
     "url": "URL",
-    "urlPlaceholder": "Selecciona o pega una URL",
+    "urlPlaceholder": "Introduce una URL",
     "title": "Título",
     "saveTooltip": "Establecer URL",
-    "cancelTooltip": "Cancelar cambios"
+    "cancelTooltip": "Cancelar"
   },
   "linkPreview": {
-    "open": "Abrir {url} en una ventana nueva",
-    "edit": "Editar URL del enlace",
+    "open": "Abrir {url} en una nueva ventana",
+    "edit": "Editar URL",
     "copyToClipboard": "Copiar al portapapeles",
-    "copied": "¡Copiado!",
-    "remove": "Borrar enlace"
+    "copied": "¡Copiado al portapapeles!",
+    "remove": "Eliminar enlace"
   },
   "table": {
-    "deleteTable": "Borrar tabla",
-    "columnMenu": "Menú de columna",
-    "textAlignment": "Alineación del texto",
+    "deleteTable": "Eliminar tabla",
+    "columnMenu": "Opciones de columna",
+    "textAlignment": "Alineación de texto",
     "alignLeft": "Alinear a la izquierda",
-    "alignCenter": "Alinear al centro",
+    "alignCenter": "Centrar",
     "alignRight": "Alinear a la derecha",
-    "insertColumnLeft": "Añadir una columna a la izquierda de esta",
-    "insertColumnRight": "Añadir una columna a la derecha de esta",
-    "deleteColumn": "Borrar esta columna",
-    "rowMenu": "Menú de fila",
-    "insertRowAbove": "Insertar una fila por encima de esta",
-    "insertRowBelow": "Insertar una fila por debajo de esta",
-    "deleteRow": "Borrar esta fila"
+    "insertColumnLeft": "Insertar columna a la izquierda",
+    "insertColumnRight": "Insertar columna a la derecha",
+    "deleteColumn": "Eliminar esta columna",
+    "rowMenu": "Opciones de fila",
+    "insertRowAbove": "Insertar fila superior",
+    "insertRowBelow": "Insertar fila inferior",
+    "deleteRow": "Eliminar esta fila"
   },
   "toolbar": {
     "blockTypes": {
@@ -57,22 +57,22 @@
       "heading": "Encabezado {level}"
     },
     "blockTypeSelect": {
-      "selectBlockTypeTooltip": "Selecciona el tipo de bloque",
-      "placeholder": "Tipo de bloque"
+      "selectBlockTypeTooltip": "Seleccionar tipo de bloque de texto",
+      "placeholder": "Bloque de texto"
     },
-    "toggleGroup":"Conmutar grupo",
-    "removeBold": "Borrar negrita",
+    "toggleGroup": "Alternar grupo",
+    "removeBold": "Quitar negrita",
     "bold": "Negrita",
-    "removeItalic": "Borrar cursiva",
+    "removeItalic": "Quitar cursiva",
     "italic": "Cursiva",
-    "underline": "Borrar subrayado",
-    "removeUnderline": "Subrayado",
-    "removeInlineCode": "Borrar formato de código",
-    "inlineCode": "Formato de código en línea",
+    "underline": "Subrayado",
+    "removeUnderline": "Quitar subrayado",
+    "removeInlineCode": "Quitar código en línea",
+    "inlineCode": "Código en línea",
     "link": "Crear enlace",
-    "richText": "Texto enriquecido",
-    "diffMode": "Modo diferencial",
-    "source": "Modo fuente",
+    "richText": "Modo de texto enriquecido",
+    "diffMode": "Modo diff",
+    "source": "Modo de código fuente",
     "admonition": "Insertar admonición",
     "codeBlock": "Insertar bloque de código",
     "editFrontmatter": "Editar frontmatter",
@@ -80,28 +80,38 @@
     "image": "Insertar imagen",
     "insertSandpack": "Insertar Sandpack",
     "table": "Insertar tabla",
-    "thematicBreak": "Insertar salto de línea",
+    "thematicBreak": "Insertar separación temática",
     "bulletedList": "Lista con viñetas",
     "numberedList": "Lista numerada",
     "checkList": "Lista de verificación",
-    "deleteSandpack": "Borrar este bloque de código",
+    "deleteSandpack": "Eliminar este bloque de código",
     "undo": "Deshacer {shortcut}",
-    "redo": "Rehacer {shortcut}"
+    "redo": "Rehacer {shortcut}",
+    "superscript": "Superíndice",
+    "subscript": "Subíndice",
+    "strikethrough": "Tachado",
+    "removeStrikethrough": "Quitar tachado",
+    "removeSuperscript": "Quitar superíndice",
+    "removeSubscript": "Quitar subíndice"
   },
   "admonitions": {
     "note": "Nota",
     "tip": "Consejo",
     "danger": "Peligro",
     "info": "Información",
-    "caution": "Aviso",
+    "caution": "Precaución",
     "changeType": "Seleccionar tipo de admonición",
     "placeholder": "Tipo de admonición"
   },
   "codeBlock": {
     "language": "Lenguaje del bloque de código",
-    "selectLanguage": "Seleccionar el lenguaje del bloque de código"
+    "selectLanguage": "Seleccionar lenguaje del bloque de código",
+    "inlineLanguage": "Lenguaje de código en línea"
   },
-  "contentArea":{
+  "codeblock": {
+    "delete": "Eliminar bloque de código"
+  },
+  "contentArea": {
     "editableMarkdown": "Markdown editable"
   }
 }

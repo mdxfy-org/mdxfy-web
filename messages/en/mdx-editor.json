@@ -12,9 +12,9 @@
   "uploadImage": {
     "dialogTitle": "Upload an image",
     "uploadInstructions": "Upload an image from your device:",
-    "addViaUrlInstructions": "Or add an image from an URL:",
-    "autoCompletePlaceholder": "Select or paste an image src",
-    "alt": "Alt:",
+    "addViaUrlInstructions": "Or add an image from a URL:",
+    "autoCompletePlaceholder": "Enter an image link",
+    "alt": "Alternate text:",
     "title": "Title:"
   },
   "imageEditor": {
@@ -23,29 +23,29 @@
   },
   "createLink": {
     "url": "URL",
-    "urlPlaceholder": "Select or paste an URL",
+    "urlPlaceholder": "Enter a URL",
     "title": "Title",
     "saveTooltip": "Set URL",
-    "cancelTooltip": "Cancel change"
+    "cancelTooltip": "Cancel"
   },
   "linkPreview": {
-    "open": "Open {url} in new window",
-    "edit": "Edit link URL",
+    "open": "Open {url} in a new window",
+    "edit": "Edit URL",
     "copyToClipboard": "Copy to clipboard",
-    "copied": "Copied!",
+    "copied": "Copied to clipboard!",
     "remove": "Remove link"
   },
   "table": {
     "deleteTable": "Delete table",
-    "columnMenu": "Column menu",
+    "columnMenu": "Column options",
     "textAlignment": "Text alignment",
     "alignLeft": "Align left",
-    "alignCenter": "Align center",
+    "alignCenter": "Center",
     "alignRight": "Align right",
     "insertColumnLeft": "Insert a column to the left of this one",
     "insertColumnRight": "Insert a column to the right of this one",
     "deleteColumn": "Delete this column",
-    "rowMenu": "Row menu",
+    "rowMenu": "Row options",
     "insertRowAbove": "Insert a row above this one",
     "insertRowBelow": "Insert a row below this one",
     "deleteRow": "Delete this row"
@@ -57,36 +57,42 @@
       "heading": "Heading {level}"
     },
     "blockTypeSelect": {
-      "selectBlockTypeTooltip": "Select block type",
-      "placeholder": "Block type"
+      "selectBlockTypeTooltip": "Select text block type",
+      "placeholder": "Text block"
     },
-    "toggleGroup":"toggle group",
+    "toggleGroup": "Toggle group",
     "removeBold": "Remove bold",
     "bold": "Bold",
     "removeItalic": "Remove italic",
     "italic": "Italic",
-    "underline": "Remove underline",
-    "removeUnderline": "Underline",
-    "removeInlineCode": "Remove code format",
-    "inlineCode": "Inline code format",
+    "underline": "Underline",
+    "removeUnderline": "Remove underline",
+    "removeInlineCode": "Remove inline code",
+    "inlineCode": "Inline code",
     "link": "Create link",
-    "richText": "Rich text",
+    "richText": "Rich text mode",
     "diffMode": "Diff mode",
-    "source": "Source mode",
-    "admonition": "Insert Admonition",
-    "codeBlock": "Insert Code Block",
+    "source": "Source code mode",
+    "admonition": "Insert admonition",
+    "codeBlock": "Insert code block",
     "editFrontmatter": "Edit frontmatter",
     "insertFrontmatter": "Insert frontmatter",
     "image": "Insert image",
     "insertSandpack": "Insert Sandpack",
-    "table": "Insert Table",
+    "table": "Insert table",
     "thematicBreak": "Insert thematic break",
     "bulletedList": "Bulleted list",
     "numberedList": "Numbered list",
-    "checkList": "Check list",
+    "checkList": "Checklist",
     "deleteSandpack": "Delete this code block",
     "undo": "Undo {shortcut}",
-    "redo": "Redo {shortcut}"
+    "redo": "Redo {shortcut}",
+    "superscript": "Superscript",
+    "subscript": "Subscript",
+    "strikethrough": "Strikethrough",
+    "removeStrikethrough": "Remove strikethrough",
+    "removeSuperscript": "Remove superscript",
+    "removeSubscript": "Remove subscript"
   },
   "admonitions": {
     "note": "Note",
@@ -99,9 +105,13 @@
   },
   "codeBlock": {
     "language": "Code block language",
-    "selectLanguage": "Select code block language"
+    "selectLanguage": "Select code block language",
+    "inlineLanguage": "Inline code language"
   },
-  "contentArea":{
-    "editableMarkdown": "editable markdown"
+  "codeblock": {
+    "delete": "Delete code block"
+  },
+  "contentArea": {
+    "editableMarkdown": "Editable Markdown"
   }
 }

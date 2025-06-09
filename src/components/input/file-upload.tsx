@@ -1,12 +1,14 @@
-import { cn } from "@/lib/utils";
 import { Upload } from "@solar-icons/react";
-// import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useForm } from "../form/form";
 import { useGroup } from "./group/input-group";
-import { Button, useDisclosure } from "@heroui/react";
+import { Button, cn, Spinner, useDisclosure } from "@heroui/react";
 import ModalDialogue from "../modal-dialogue";
-import FileList from "../file-list";
+import { useRouter } from "next/router";
+import { uploadAttachment } from "@/http/uploads/upload-attachment";
+import { Attachment } from "@/types/attachment";
+import { FileList } from "../file-list";
+import { useSessionStorage } from "@/hooks/use-session-storage";
 
 export type FileAcceptedTypes =
   | "image/png"
@@ -28,10 +30,13 @@ export interface FileUploadProps {
   type?: "append" | "replace";
   accept?: FileAcceptedTypes[];
   multiple?: boolean;
-  onUpload?: (files: File[]) => void;
+  onUpload?: (files: Attachment[]) => void;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({
+const STORAGE_KEY = (formId: string, fieldName: string) =>
+  `file-upload:${formId}:${fieldName}`;
+
+export const FileUpload: React.FC<FileUploadProps> = ({
   name: inputName,
   label,
   placeholder,
@@ -39,95 +44,144 @@ const FileUpload: React.FC<FileUploadProps> = ({
   required = false,
   type = "replace",
   accept,
-  multiple,
+  multiple = false,
   onUpload,
 }) => {
+  const router = useRouter();
+  // const toast = useToast();
   // const t = useTranslations();
   const disclosure = useDisclosure();
   const { onOpen } = disclosure;
 
-  const [files, setFiles] = useState<File[] | undefined>();
-
   const form = useForm();
   const group = useGroup();
+  const fieldName =
+    inputName && group ? group.getFieldName(inputName) : inputName!;
 
-  const name = inputName && group ? group.getFieldName(inputName) : inputName;
+  const storageKey = useMemo(
+    () => STORAGE_KEY(router.pathname, fieldName),
+    [router.pathname, fieldName]
+  );
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files ? Array.from(e.target.files) : [];
-    let updatedFiles: File[] = [];
-
-    if (type === "replace") {
-      updatedFiles = selectedFiles;
-    } else if (type === "append") {
-      updatedFiles = [...(files ?? []), ...selectedFiles];
-    }
-
-    setFiles(updatedFiles);
-    onUpload?.(updatedFiles);
-  };
+  const [files, setFiles] = useState<Attachment[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const [sessionFiles, setSessionFiles] = useSessionStorage<Attachment[]>(
+    storageKey,
+    []
+  );
 
   useEffect(() => {
-    if (form && form.getters[name]) return;
-    if (name && form) {
-      form.setGetter(name, () => files);
-      form.setValue(name, files);
+    if (!form) return;
+    if (sessionFiles && sessionFiles.length) {
+      const uuids = sessionFiles.map((entry: Attachment) => entry.uuid);
+      if (JSON.stringify(form.values?.[fieldName]) !== JSON.stringify(uuids)) {
+        setFiles(sessionFiles);
+        form?.setValue(fieldName, uuids);
+      }
     }
-  }, [form, name, files]);
+  }, [sessionFiles, fieldName, form]);
 
-  const fileNames = files?.map((file) => file.name).join(", ");
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selected = e.target.files ? Array.from(e.target.files) : [];
+    if (!selected.length) return;
+
+    setIsUploading(true);
+    try {
+      const attachment = new FormData();
+      if (multiple) {
+        selected.forEach((file) => attachment.append("files[]", file));
+      } else {
+        attachment.append("file", selected[0]);
+      }
+
+      uploadAttachment(attachment).then(({ data }) => {
+        const uploaded: Attachment[] = data.map((entry: Attachment) => ({
+          ...entry,
+        }));
+        const uuids: Attachment["uuid"][] = data.map(
+          (entry: Attachment) => entry.uuid
+        );
+
+        const updated = type === "append" ? [...files, ...uploaded] : uploaded;
+
+        setFiles(updated);
+        form?.setValue(fieldName, uuids);
+
+        setSessionFiles(updated);
+        onUpload?.(updated);
+
+        // toast.success({
+        //   description: t("Messages.success.files_successfully_uploaded"),
+        // });
+      });
+    } catch (error) {
+      console.log(error);
+
+      // toast.error({
+      //   description: t("Messages.errors.failed_on_file_upload"),
+      // });
+    } finally {
+      setIsUploading(false);
+      e.target.value = "";
+    }
+  };
+
+  const fileNames = files.map((f) => f.name).join(", ");
 
   return (
     <div className="relative flex flex-col pt-6">
       <ModalDialogue title="Arquivos" {...disclosure}>
         <FileList files={files} />
       </ModalDialogue>
-      <span className="top-0 z-20 absolute flex justify-between w-full text-foreground text-small transition-[transform,color,left,opacity]">
+
+      <span className="top-0 z-20 absolute flex justify-between w-full text-foreground text-small">
         <p>{label ?? placeholder ?? "Upload a file"}</p>
         <Button
           className={cn(
-            "!min-w-5 !max-w-5 !size-5",
-            files && files?.length > 0 ? "opacity-100" : " opacity-0"
+            "bg-default-200 !min-w-5 !max-w-5 !size-5 text-default-600",
+            files.length ? "" : "opacity-0"
           )}
           onPress={onOpen}
-          isDisabled={!files || files?.length === 0}
+          isDisabled={!files.length}
           isIconOnly
         >
           i
         </Button>
       </span>
+
       <Button
-        as={"label"}
-        htmlFor={name}
-        className={cn(
-          "inline-flex justify-center items-center gap-4 px-4 rounded-medium w-full min-w-20 h-10 text-sm duration-75 cursor-pointer"
-        )}
+        as="label"
+        htmlFor={fieldName}
+        className="inline-flex justify-center items-center gap-2 bg-default-200 px-4 py-2 rounded-medium w-full text-default-600 cursor-pointer"
+        isDisabled={disabled || isUploading}
       >
-        {placeholder ?? label ?? "Input a file"}
-        {/* {files
-          ? t("UI.buttons.choose_another_photo")
-          : t("UI.buttons.choose_a_photo")} */}
+        {isUploading ? <Spinner size="sm" /> : <Upload weight="LineDuotone" />}
+        {isUploading
+          ? "Carregando..."
+          : files.length
+          ? "Adicionar mais"
+          : placeholder ?? label ?? "Selecionar arquivo"}
         <input
-          id={name}
-          name={name}
+          id={fieldName}
+          name={fieldName}
           type="file"
-          accept={accept?.join(", ")}
-          tabIndex={-1}
+          accept={accept?.join(",")}
           className="hidden"
           multiple={multiple}
-          onChange={handleUpload}
-          disabled={disabled}
+          disabled={disabled || isUploading}
           required={required}
+          onChange={handleUpload}
         />
-        <Upload className="text-gray-700 dark:text-gray-200" />
       </Button>
-      {files && (
-        <span className="text-xs truncate" title={fileNames}>
+
+      {files.length > 0 && (
+        <span
+          className="mt-1 text-default-600 text-xs truncate"
+          title={fileNames}
+        >
           {fileNames}
         </span>
       )}
     </div>
   );
 };
-
-export default FileUpload;

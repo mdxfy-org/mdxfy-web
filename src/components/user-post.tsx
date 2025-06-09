@@ -5,7 +5,12 @@ import Editor from "./mark-down-editor";
 import { AnimatePresence, motion } from "framer-motion";
 import { Avatar } from "./avatar";
 import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
-import { MenuDots, Pen, TrashBinTrash } from "@solar-icons/react";
+import {
+  ChatRound,
+  MenuDots,
+  Pen,
+  TrashBinTrash,
+} from "@solar-icons/react";
 import { cn } from "@/lib/utils";
 import IconOption from "./ui/icon-option";
 import { useUser } from "@/contexts/auth-provider";
@@ -13,17 +18,20 @@ import api from "@/service/api";
 import { useToast } from "@/service/toast";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { PostIconFeedback } from "./post-icon-feedback";
 
 export interface PostProps {
   post: Post;
   user: User;
   redirect?: boolean;
+  className?: string;
 }
 
 export const UserPost: React.FC<PostProps> = ({
   post,
   user,
   redirect = false,
+  className,
 }) => {
   const router = useRouter();
   const toast = useToast();
@@ -37,7 +45,7 @@ export const UserPost: React.FC<PostProps> = ({
     api
       .delete(`/post/${post.uuid}`)
       .then(() => {
-        router.reload()
+        router.reload();
       })
       .catch(() => {
         toast.error({
@@ -50,7 +58,10 @@ export const UserPost: React.FC<PostProps> = ({
     <AnimatePresence>
       <motion.div
         key={post.uuid}
-        className="flex flex-col gap-2 pb-6 border-default-200 border-b-2 last:border-b-0 w-full"
+        className={cn(
+          "flex flex-col gap-2 pb-6 border-default-200 border-b-2 last:border-b-0 w-full",
+          className
+        )}
       >
         <div className="relative flex flex-row items-center gap-2">
           <Link
@@ -66,7 +77,7 @@ export const UserPost: React.FC<PostProps> = ({
             {postDate.toLocaleString()}
           </p>
           {loggedUser?.id === post.user.id && (
-            <Popover radius="sm" placement="bottom-end"  offset={8}>
+            <Popover radius="sm" placement="bottom-end" offset={8}>
               <PopoverTrigger>
                 <Button
                   className="print:hidden right-0 absolute bg-default-200"
@@ -111,17 +122,44 @@ export const UserPost: React.FC<PostProps> = ({
           )}
         </div>
         {redirect ? (
-          <Link href={`/user/${post.user.username}/post/${post.uuid}`} className="w-full">
+          <Link
+            href={`/user/${post.user.username}/post/${post.uuid}`}
+            className="w-full"
+          >
             <Editor markdown={post.content} readonly />
           </Link>
         ) : (
           <Editor markdown={post.content} readonly />
         )}
-        {post.see_more && (
-          <Link className="w-max" href={`/user/${post.user.username}/post/${post.uuid}`}>
-            Ver mais...
-          </Link>
-        )}
+        <data className="flex flex-row items-center gap-2 min-h-7 text-default-500">
+          <PostIconFeedback
+            href={`/user/${post.user.username}/post/${post.uuid}`}
+            title="Comentários"
+            icon={<ChatRound size={16} />}
+          >
+            {post.answers_count}
+          </PostIconFeedback>
+          {/* <div>
+            <EmojiPicker>
+              <Button
+                className="bg-default-200/75 text-default-500"
+                radius="full"
+                isIconOnly
+                size="sm"
+              >
+                <EmojiFunnyCircle size={16} />
+              </Button>
+            </EmojiPicker>
+          </div> */}
+          {post.see_more && (
+            <Link
+              href={`/user/${post.user.username}/post/${post.uuid}`}
+              className="w-max underline"
+            >
+              Ver mais...
+            </Link>
+          )}
+        </data>
       </motion.div>
     </AnimatePresence>
   );
