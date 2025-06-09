@@ -35,7 +35,7 @@ export const PostsRenderer: React.FC<PostsRendererProps> = ({
                     hideHideAnswersTo={hideHideAnswersTo}
                   />
                   {posts.length - 1 > index && (
-                    <Divider className="bg-default-200 my-4 h-[2px]" />
+                    <Divider className="bg-default-200 mb-4 h-[2px]" />
                   )}
                 </>
               ))}

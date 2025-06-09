@@ -1,0 +1,29 @@
+{
+  "id": "/",
+  "name": "MdxFy App",
+  "short_name": "MdxFy",
+  "description": "MdxFy é uma rede social destinada a desenvolvedores, onde você pode compartilhar seus projetos, interagir com outros usuários e explorar conteúdos relacionados a tecnologia.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "portrait-primary",
+  "background_color": "#f8fafc",
+  "theme_color": "#171717",
+  "icons": [
+    {
+      "src": "/img/mdxfy-light.png",
+      "sizes": "256x84",
+      "type": "image/png",
+      "theme": "light"
+    },
+    {
+      "src": "/img/mdxfy-dark.png",
+      "sizes": "256x84",
+      "type": "image/png",
+      "theme": "dark"
+    }
+  ]
+}

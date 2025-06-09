@@ -96,7 +96,7 @@ export default function UserPosts() {
             <section className="flex flex-col items-start mx-auto px-6 max-w-[912px] container">
               <Divider className="h-[2px]" />
             </section>
-            <section className="flex flex-col items-start gap-6 mx-auto p-4 px-6 max-w-[912px] container">
+            <section className="flex flex-col items-start gap-2 mx-auto p-4 px-6 max-w-[912px] container">
               <PostsRenderer posts={posts} feed />
             </section>
           </>
