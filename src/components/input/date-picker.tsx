@@ -1,4 +1,5 @@
 import {
+  CalendarDate,
   DatePicker as HeroUIDatePicker,
   DatePickerProps as HeroUIDatePickerProps,
 } from "@heroui/react";
@@ -6,9 +7,10 @@ import { useField } from "@/hooks/use-field";
 import { parseToCalendarDate } from "@/lib/date";
 import { parseDate } from "@internationalized/date";
 
-export type DatePickerValue = HeroUIDatePickerProps["value"];
+export type DatePickerValue = CalendarDate | null | undefined;
 
-export interface DatePickerProps extends HeroUIDatePickerProps {
+export interface DatePickerProps
+  extends Omit<HeroUIDatePickerProps, "validate"> {
   required?: boolean;
   label?: string;
   queryCollectable?: boolean;
@@ -25,14 +27,13 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 }) => {
   const isFieldRequired = required ?? isRequired ?? false;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { name, value, onChange } = useField<any>(inputName, {
+  const { name, value, onChange } = useField<DatePickerValue>(inputName, {
     initialValue:
       typeof initialFieldValue === "string"
-        ? parseToCalendarDate(initialFieldValue)
-        : initialFieldValue,
+        ? parseToCalendarDate(initialFieldValue) as unknown as DatePickerValue
+        : initialFieldValue as DatePickerValue,
     onChange: (value) => {
-      propOnChange?.(value ?? null);
+      propOnChange?.((value as null) ?? null);
     },
     queryCollectable: queryCollectable ?? false,
     queryCollectFunction: ({ name, router }) => {
@@ -41,7 +42,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           ? router.query[name][0]
           : router.query[name];
         if (queryValue) {
-          return parseDate(queryValue);
+          return parseDate(queryValue) as unknown as DatePickerValue;
         }
       }
     },
@@ -49,11 +50,17 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     type: "date",
   });
 
+  const handleChange = (value: DatePickerValue) => {
+    const parsedValue = value ? parseToCalendarDate(value) : null;
+    onChange(parsedValue as unknown as DatePickerValue);
+    propOnChange?.(parsedValue as null);
+  };
+
   return (
     <HeroUIDatePicker
       name={name}
       value={typeof value === "string" ? undefined : value}
-      onChange={onChange}
+      onChange={handleChange}
       classNames={{
         base: "relative gap-1 !pb-0",
         label: "top-6 !translate-y-[0.30em] w-max pr-2",
@@ -62,8 +69,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         inputWrapper: "!transition-colors !duration-100",
         selectorButton: "rounded-lg left-0.5",
       }}
-      labelPlacement="outside"
       variant="bordered"
+      labelPlacement="outside"
       isRequired={isFieldRequired}
       {...props}
     />
