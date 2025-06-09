@@ -7,7 +7,7 @@ html, body {
 }
 
 .prose :is(h1, h2, h3, h4, h5, h6, p, a, ul, li, blockquote, strong) {
-  @apply text-inherit;
+  @apply text-default-700;
 }
 
 .prose :is(hr) {

@@ -33,7 +33,7 @@ export default function UserPosts() {
         <meta name="description" content={pt("meta.description")} />
       </Head>
       <Body className="flex flex-row justify-center" disableLoading>
-        <section className="flex flex-col items-start gap-2 mx-auto p-4 px-6 border-x-2 max-w-[912px] container">
+        <section className="flex flex-col items-start gap-2 mx-auto p-4 px-6 max-w-[912px] container">
           <PostForm
             className={cn(
               "mb-4 pb-2 border-default-200 border-b-2",

@@ -44,7 +44,7 @@ const Editor: React.FC<EditorProps> = ({
         )}
         contentEditableClassName={cn(
           "!w-full !max-w-full editor-content prose",
-          contentEditableClassName
+          contentEditableClassName,
         )}
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         translation={(key, _, interpolations) => t(key as any, interpolations)}

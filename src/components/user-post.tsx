@@ -73,7 +73,7 @@ export const UserPost: React.FC<PostProps> = ({
         <div className="relative flex flex-row items-center gap-2">
           <Link
             className={cn(
-              "flex flex-row items-center gap-2 min-w-max truncate",
+              "flex flex-row items-center gap-2 min-w-max truncate !transition-none duration-0",
               linkFocusClasses
             )}
             href={`/user/${user.username}`}
@@ -154,7 +154,7 @@ export const UserPost: React.FC<PostProps> = ({
                 </Link>
               </Link>
             </div>
-            <div className="relative flex flex-row items-center gap-2 text-default-600 text-sm">
+            <div className="relative flex flex-row items-center gap-2 text-sm">
               <Link
                 href={`/user/${answer.user?.username}/post/${answer.uuid}`}
                 className={linkFocusClasses}
@@ -162,7 +162,7 @@ export const UserPost: React.FC<PostProps> = ({
                 <UserPost
                   post={answer}
                   user={answer.user}
-                  className="p-4 border-2 !border-b-2 rounded-2xl max-h-[180px] overflow-hidden"
+                  className="p-4 border-2 border-default-200 !border-b-2 rounded-2xl max-h-[180px] overflow-hidden"
                   hideInteractions
                   redirect
                 />

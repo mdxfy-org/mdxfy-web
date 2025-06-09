@@ -47,14 +47,16 @@ export default function Index() {
       <Layout className="flex flex-col gap-10 w-full" disableLoading>
         <section className="flex flex-col items-start gap-2 mx-auto p-4 px-6 max-w-[912px] container">
           {post && (
-            <UserPost
-              key={post.uuid}
-              post={post}
-              user={post.user}
-              className="mb-0 pb-0"
-            />
+            <>
+              <UserPost
+                key={post.uuid}
+                post={post}
+                user={post.user}
+                className="mb-0 pb-0"
+              />
+              <Divider className="bg-default-200 mb-2 h-[2px]" />
+            </>
           )}
-          <Divider className="bg-default-200 mb-2 h-[2px]" />
           <PostForm
             answerTo={router.query.uuid as string}
             className={cn(
