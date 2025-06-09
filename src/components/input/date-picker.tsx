@@ -50,7 +50,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     type: "date",
   });
 
-  const handleChange = (value: DatePickerValue) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleChange = (value: any) => {
     const parsedValue = value ? parseToCalendarDate(value) : null;
     onChange(parsedValue as unknown as DatePickerValue);
     propOnChange?.(parsedValue as null);
