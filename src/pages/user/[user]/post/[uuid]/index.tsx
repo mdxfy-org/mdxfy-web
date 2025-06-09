@@ -12,7 +12,7 @@ import { UserPost } from "@/components/user-post";
 import { PostForm } from "@/forms/post-form";
 import { PostsRenderer } from "@/components/ui/posts-renderer";
 import { cn } from "@/lib/utils";
-import { Spinner } from "@heroui/react";
+import { Divider, Spinner } from "@heroui/react";
 import NotFound from "@/components/error/not-found";
 
 export default function Index() {
@@ -51,9 +51,10 @@ export default function Index() {
               key={post.uuid}
               post={post}
               user={post.user}
-              className="mb-2 pb-2"
+              className="mb-0 pb-0"
             />
           )}
+          <Divider className="bg-default-200 mb-2 h-[2px]" />
           <PostForm
             answerTo={router.query.uuid as string}
             className={cn(

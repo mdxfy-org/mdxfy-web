@@ -63,10 +63,10 @@ export const UserPost: React.FC<PostProps> = ({
         key={post.uuid}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 100 }}
-        viewport={{ once: false, margin: "-100px 0px" }}
+        viewport={{ once: false, margin: "-80px 0px" }}
         transition={{ duration: 0.2 }}
         className={cn(
-          "flex flex-col gap-2 pb-6 border-default-200 border-b-2 last:border-b-0 w-full",
+          "flex flex-col gap-2 px-2 pb-6 w-full",
           className
         )}
       >

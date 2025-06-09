@@ -1,5 +1,5 @@
 import { Post } from "@/types/post";
-import { Spinner } from "@heroui/react";
+import { Divider, Spinner } from "@heroui/react";
 import { UserPost } from "../user-post";
 
 export interface PostsRendererProps {
@@ -23,27 +23,32 @@ export const PostsRenderer: React.FC<PostsRendererProps> = ({
         <>
           {posts.length > 0 ? (
             <>
-              {posts.map((post) => (
-                <UserPost
-                  key={post.uuid}
-                  post={post}
-                  user={post.user}
-                  redirect={feed}
-                  hideInteractions={hideInteractions}
-                  hideHideAnswersTo={hideHideAnswersTo}
-                />
+              {posts.map((post, index) => (
+                <>
+                  <UserPost
+                    key={post.uuid}
+                    post={post}
+                    user={post.user}
+                    redirect={feed}
+                    className="px-0 pb-0"
+                    hideInteractions={hideInteractions}
+                    hideHideAnswersTo={hideHideAnswersTo}
+                  />
+                  {posts.length - 1 > index && (
+                    <Divider className="bg-default-200 my-4 h-[2px]" />
+                  )}
+                </>
               ))}
             </>
           ) : (
-            <div className="w-full text-center">{placeholder ?? 'Nada para ver por aquí'}</div>
+            <div className="w-full text-center">
+              {placeholder ?? "Nada para ver por aquí"}
+            </div>
           )}
         </>
       ) : (
         <div className="flex justify-center p-10 w-full">
-          <Spinner
-            color="current" 
-            label="Carregando"
-          />
+          <Spinner color="current" label="Carregando" />
         </div>
       )}
     </>

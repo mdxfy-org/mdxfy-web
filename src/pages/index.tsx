@@ -8,7 +8,7 @@ import api from "@/service/api";
 import { Post } from "@/types/post";
 import { PostsRenderer } from "@/components/ui/posts-renderer";
 import { PostForm } from "@/forms/post-form";
-import { cn } from "@heroui/react";
+import { cn, Divider } from "@heroui/react";
 import { useUser } from "@/contexts/auth-provider";
 
 export default function UserPosts() {
@@ -33,10 +33,10 @@ export default function UserPosts() {
         <meta name="description" content={pt("meta.description")} />
       </Head>
       <Body className="flex flex-row justify-center" disableLoading>
-        <section className="flex flex-col items-start gap-6 mx-auto p-4 px-6 max-w-[912px] container">
+        <section className="flex flex-col items-start gap-2 mx-auto p-4 px-6 border-x-2 max-w-[912px] container">
           <PostForm
             className={cn(
-              "pb-4 border-default-200 border-b-2",
+              "mb-4 pb-2 border-default-200 border-b-2",
               !!user ? "opacity-100" : "opacity-50 pointer-events-none"
             )}
           />
