@@ -23,9 +23,11 @@ export default function Index() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (!router.isReady || post) return;
+    if (!router.isReady) return;
     const { uuid } = router.query as Params;
     if (!uuid) return;
+    setPost(undefined);
+    setNotFound(false);
     api
       .get(`/post/${uuid}`)
       .then(({ data }) => {
@@ -34,7 +36,7 @@ export default function Index() {
       .catch(() => {
         setNotFound(true);
       });
-  }, [router, post]);
+  }, [router.isReady, router.query, router.query.uuid]);
 
   return (
     <>
@@ -64,6 +66,8 @@ export default function Index() {
               <PostsRenderer
                 posts={post?.answers ?? []}
                 placeholder="Não há nenhuma resposta ainda"
+                hideHideAnswersTo
+                feed
               />
             </>
           ) : notFound ? (

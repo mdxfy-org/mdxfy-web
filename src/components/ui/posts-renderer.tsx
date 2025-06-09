@@ -5,12 +5,16 @@ import { UserPost } from "../user-post";
 export interface PostsRendererProps {
   posts?: Post[];
   placeholder?: React.ReactNode;
+  hideInteractions?: boolean;
+  hideHideAnswersTo?: boolean;
   feed?: boolean;
 }
 
 export const PostsRenderer: React.FC<PostsRendererProps> = ({
   posts,
   placeholder,
+  hideInteractions = false,
+  hideHideAnswersTo = false,
   feed = false,
 }) => {
   return (
@@ -25,6 +29,8 @@ export const PostsRenderer: React.FC<PostsRendererProps> = ({
                   post={post}
                   user={post.user}
                   redirect={feed}
+                  hideInteractions={hideInteractions}
+                  hideHideAnswersTo={hideHideAnswersTo}
                 />
               ))}
             </>

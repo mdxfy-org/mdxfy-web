@@ -47,8 +47,8 @@ const AuthCodeForm: React.FC = () => {
 
   const handleResendCode = async () => {
     if (timer <= 0) {
-      setIsLoading(true);
       setLoading(true);
+      setIsLoading(true);
       resendCode()
         .then(() => {
           toast.success({
@@ -114,8 +114,8 @@ const AuthCodeForm: React.FC = () => {
         });
       })
       .finally(() => {
-        setIsLoading(false);
         setLoading(false);
+        setIsLoading(false);
       });
   };
 

@@ -68,6 +68,8 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className })
     request
       .then(({ data }) => {
         removeStoredPost();
+        console.log(data);
+      
         router.push(`/user/${user?.username}/post/${data.uuid}`);
       })
       .catch(({ data }) => {
@@ -117,6 +119,7 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className })
         markdown={post}
         before={postHistory}
         onChange={handleChange}
+        contentEditableClassName={cn(postLength <= 0 ? "!text-default-400" : "!text-default-700")}
         placeholder="Escreva seu post aqui..."
       />
       <div className="flex flex-row justify-between gap-4 w-full h-max overflow-x-auto overflow-y-clip">

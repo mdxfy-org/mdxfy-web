@@ -29,7 +29,7 @@ export const formatLink = (href: HrefProps) => {
 };
 
 export const linkFocusClasses =
-  "hover:bg-default-100/50 rounded-xl outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-default-100 transition-colors duration-200";
+  "hover:bg-default-100/50 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default-100 transition-colors duration-200";
 
 const Link: React.FC<LinkProps> = ({
   href,

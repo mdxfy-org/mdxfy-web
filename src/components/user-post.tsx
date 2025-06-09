@@ -20,6 +20,8 @@ export interface PostProps {
   post: Post;
   user: User;
   redirect?: boolean;
+  hideInteractions?: boolean;
+  hideHideAnswersTo?: boolean;
   className?: string;
 }
 
@@ -27,11 +29,15 @@ export const UserPost: React.FC<PostProps> = ({
   post,
   user,
   redirect = false,
+  hideInteractions = false,
+  hideHideAnswersTo = false,
   className,
 }) => {
   const router = useRouter();
   const toast = useToast();
   const { user: loggedUser } = useUser();
+
+  const answer = post.answers_to;
 
   const postDate = new Date(post.updated_at);
 
@@ -66,7 +72,10 @@ export const UserPost: React.FC<PostProps> = ({
       >
         <div className="relative flex flex-row items-center gap-2">
           <Link
-            className={cn("flex flex-row items-center gap-2 min-w-max truncate", linkFocusClasses)}
+            className={cn(
+              "flex flex-row items-center gap-2 min-w-max truncate",
+              linkFocusClasses
+            )}
             href={`/user/${user.username}`}
           >
             <Avatar src={user.profile_picture} />
@@ -77,7 +86,7 @@ export const UserPost: React.FC<PostProps> = ({
             {" - "}
             {postDate.toLocaleString()}
           </p>
-          {loggedUser?.id === post.user.id && (
+          {loggedUser?.id === post?.user?.id && !hideInteractions && (
             <Popover radius="sm" placement="bottom-end" offset={8}>
               <PopoverTrigger>
                 <Button
@@ -132,15 +141,45 @@ export const UserPost: React.FC<PostProps> = ({
         ) : (
           <Editor markdown={post.content} readonly />
         )}
-        <data className="flex flex-row items-center gap-2 min-h-7 text-default-500">
-          <PostIconFeedback
-            href={`/user/${post.user.username}/post/${post.uuid}`}
-            title="Comentários"
-            icon={<ChatRound size={16} />}
-          >
-            {post.answers_count}
-          </PostIconFeedback>
-          {/* <div>
+        {!!answer && !hideHideAnswersTo && (
+          <>
+            <div className="relative flex flex-row items-center gap-2 text-default-600 text-sm">
+              <Link href={`/user/${answer.user?.username}/post/${answer.uuid}`}>
+                Respondeu{" "}
+                <Link
+                  className="font-medium hover:underline"
+                  href={`/user/${answer.user?.username}`}
+                >
+                  {answer.user?.name}
+                </Link>
+              </Link>
+            </div>
+            <div className="relative flex flex-row items-center gap-2 text-default-600 text-sm">
+              <Link
+                href={`/user/${answer.user?.username}/post/${answer.uuid}`}
+                className={linkFocusClasses}
+              >
+                <UserPost
+                  post={answer}
+                  user={answer.user}
+                  className="p-4 border-2 !border-b-2 rounded-2xl max-h-[180px] overflow-hidden"
+                  hideInteractions
+                  redirect
+                />
+              </Link>
+            </div>
+          </>
+        )}
+        {!hideInteractions && (
+          <div className="flex flex-row items-center gap-2 min-h-7 text-default-500">
+            <PostIconFeedback
+              href={`/user/${post.user.username}/post/${post.uuid}`}
+              title="Comentários"
+              icon={<ChatRound size={16} />}
+            >
+              {post.answers_count}
+            </PostIconFeedback>
+            {/* <div>
             <EmojiPicker>
               <Button
                 className="bg-default-200/75 text-default-500"
@@ -152,15 +191,16 @@ export const UserPost: React.FC<PostProps> = ({
               </Button>
             </EmojiPicker>
           </div> */}
-          {post.see_more && (
-            <Link
-              href={`/user/${post.user.username}/post/${post.uuid}`}
-              className="w-max decoration-default-400 hover:underline"
-            >
-              Ver mais...
-            </Link>
-          )}
-        </data>
+            {post.see_more && (
+              <Link
+                href={`/user/${post.user.username}/post/${post.uuid}`}
+                className="w-max decoration-default-400 hover:underline"
+              >
+                Ver mais...
+              </Link>
+            )}
+          </div>
+        )}
       </motion.div>
     </AnimatePresence>
   );

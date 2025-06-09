@@ -9,7 +9,8 @@ export interface Post {
   visibility: "public" | "private" | "friends";
   active: true;
   answers: Post[];
-  answer_to: number;
+  answer_to?: number;
+  answers_to?: Post;
   answers_count: number;
   created_at: string;
   updated_at: string;
