@@ -25,7 +25,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 }) => {
   const isFieldRequired = required ?? isRequired ?? false;
 
-  const { name, value, onChange } = useField<DatePickerValue>(inputName, {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { name, value, onChange } = useField<any>(inputName, {
     initialValue:
       typeof initialFieldValue === "string"
         ? parseToCalendarDate(initialFieldValue)
