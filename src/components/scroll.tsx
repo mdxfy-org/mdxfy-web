@@ -6,7 +6,7 @@ export interface ScrollProps {
 }
 
 export const scrollClasses = [
-  "[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]",
+  "[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]",
   "[&::-webkit-scrollbar-track]:rounded-full",
   "[&::-webkit-scrollbar-thumb]:rounded-full",
   "[&::-webkit-scrollbar-track]:bg-default-100",

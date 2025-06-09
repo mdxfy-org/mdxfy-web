@@ -28,6 +28,9 @@ export const formatLink = (href: HrefProps) => {
   return `${pathname}${queryString ? `?${queryString}` : ""}`;
 };
 
+export const linkFocusClasses =
+  "hover:bg-default-100/50 rounded-xl outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-default-100 transition-colors duration-200";
+
 const Link: React.FC<LinkProps> = ({
   href,
   target,

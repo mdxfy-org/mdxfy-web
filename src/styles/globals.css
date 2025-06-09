@@ -87,6 +87,10 @@ div[data-lexical-decorator="true"] > div {
   @apply hidden !p-0;
 }
 
+.editor-readonly * img {
+  @apply pointer-events-none;
+}
+
 .mdxeditor-popup-container {
   @apply border-none;
 }

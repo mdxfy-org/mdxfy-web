@@ -3,7 +3,11 @@ import Mdxfy from "../ui/mdxfy";
 import Link from "@/components/link";
 import { useRouter } from "next/router";
 
-const NotFound: React.FC = () => {
+export interface NotFoundProps {
+  children?: React.ReactNode;
+}
+
+const NotFound: React.FC<NotFoundProps> = ({ children }) => {
   const router = useRouter();
   const t = useTranslations();
 
@@ -13,7 +17,7 @@ const NotFound: React.FC = () => {
         <div className="flex flex-col items-center">
           <Mdxfy.Logo className="w-72 h-min" />
           <p className="py-2 font-semibold text-gray-700 dark:text-gray-200 text-2xl text-center">
-            {t("Pages.NotFound.messages.page_not_found")}
+            {children ?? t("Pages.NotFound.messages.page_not_found")}
           </p>
           {router.asPath === "/404" && (
             <p className="text-gray-700 text-medium dark:text-gray-200 text-center">

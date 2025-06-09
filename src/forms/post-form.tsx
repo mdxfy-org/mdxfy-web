@@ -2,7 +2,7 @@ import Form from "@/components/form/form";
 import Editor from "@/components/mark-down-editor";
 import { useUser } from "@/contexts/auth-provider";
 import { useDebounce } from "@/hooks/use-debounce";
-import { useLocalStorage } from "@/hooks/use-local-storage";
+import { useSessionStorage } from "@/hooks/use-session-storage";
 import api from "@/service/api";
 import {
   Button,
@@ -30,14 +30,13 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className })
   const { user } = useUser();
 
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
-  const [storedPost, setStoredPost, removeStoredPost] = useLocalStorage<string>(
+  const [storedPost, setStoredPost, removeStoredPost] = useSessionStorage<string>(
     `post-${uuid ?? "new"}${answerTo ? `-answer-${answerTo}` : ""}`,
     ""
   );
   const [debounce] = useDebounce((post: string) => {
-    if (!post || post.length < 20) return;
     setStoredPost(post);
-  }, 500);
+  }, 1250);
 
   const [postHistory, setPostHistory] = useState<string>(storedPost);
   const [post, setPost] = useState<string>(storedPost);

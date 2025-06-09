@@ -11,12 +11,16 @@ import { Post } from "@/types/post";
 import { UserPost } from "@/components/user-post";
 import { PostForm } from "@/forms/post-form";
 import { PostsRenderer } from "@/components/ui/posts-renderer";
+import { cn } from "@/lib/utils";
+import { Spinner } from "@heroui/react";
+import NotFound from "@/components/error/not-found";
 
 export default function Index() {
   const router = useRouter();
   const pt = useTranslations("Pages.Index");
 
   const [post, setPost] = useState<Post>();
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     if (!router.isReady || post) return;
@@ -27,7 +31,9 @@ export default function Index() {
       .then(({ data }) => {
         setPost(data);
       })
-      .catch(() => {});
+      .catch(() => {
+        setNotFound(true);
+      });
   }, [router, post]);
 
   return (
@@ -36,7 +42,7 @@ export default function Index() {
         <title>{pt("meta.title")}</title>
         <meta name="description" content={pt("meta.description")} />
       </Head>
-      <Layout className="flex flex-col gap-10 w-full">
+      <Layout className="flex flex-col gap-10 w-full" disableLoading>
         <section className="flex flex-col items-start gap-2 mx-auto p-4 px-6 max-w-[912px] container">
           {post && (
             <UserPost
@@ -46,8 +52,27 @@ export default function Index() {
               className="mb-2 pb-2"
             />
           )}
-          <PostForm answerTo={router.query.uuid as string} className="mb-2 pb-2 border-default-200 border-b-2" />
-          <PostsRenderer posts={post?.answers ?? []} placeholder="Não há nenhuma resposta ainda" />
+          <PostForm
+            answerTo={router.query.uuid as string}
+            className={cn(
+              "mb-2 pb-2 border-default-200 border-b-2 transition-opacity duration-200",
+              !!post ? "" : "hidden"
+            )}
+          />
+          {post ? (
+            <>
+              <PostsRenderer
+                posts={post?.answers ?? []}
+                placeholder="Não há nenhuma resposta ainda"
+              />
+            </>
+          ) : notFound ? (
+            <NotFound>Post não encontrado</NotFound>
+          ) : (
+            <div className="flex justify-center p-10 w-full">
+              <Spinner color="current" label="Carregando" />
+            </div>
+          )}
         </section>
       </Layout>
     </>

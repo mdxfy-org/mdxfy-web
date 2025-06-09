@@ -1,5 +1,5 @@
-import Header from "@/components/header";
 import { cn } from "@/lib/utils";
+import Header from "@/components/header";
 import Footer from "./footer";
 import Loading from "./loading";
 

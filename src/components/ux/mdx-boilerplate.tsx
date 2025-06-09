@@ -39,12 +39,14 @@ import {
   ShowSandpackInfo,
   StrikeThroughSupSubToggles,
   ChangeAdmonitionType,
-  InsertImage,
+  // InsertImage,
   InsertThematicBreak,
   InsertFrontmatter,
 } from "@mdxeditor/editor";
 import api, { apiBaseUrl } from "@/service/api";
 import { codeMirrorConfig, simpleSandpackConfig } from "@/service/mdx";
+import { cn } from "@heroui/react";
+import { scrollClasses } from "../scroll";
 
 // const defaultSnippetContent = `
 // export default function App() {
@@ -206,7 +208,7 @@ export const EditorTools: React.FC = () => {
               <Separator />
 
               <CreateLink />
-              <InsertImage />
+              {/* <InsertImage /> */}
 
               <Separator />
 
@@ -253,7 +255,7 @@ export const plugins = ({
       ? [
           toolbarPlugin({
             toolbarClassName:
-              "editor-header sticky top-0 z-10 !bg-default-50 !*:text-neutral-50 ",
+              cn("top-0 z-10 sticky !bg-default-50 mb-1 !pb-1 !*:text-neutral-50 scroll-p-2 editor-header", scrollClasses),
             toolbarContents: () => (
               <>
                 <DiffSourceToggleWrapper

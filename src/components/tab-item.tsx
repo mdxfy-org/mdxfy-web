@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Button } from "@heroui/react";
+import { Button, Link } from "@heroui/react";
 import { useRouter } from "next/router";
 
 interface TabItemChildrenProps {
@@ -14,6 +14,7 @@ interface TabItemProps {
   children?:
     | React.ReactNode
     | ((params: TabItemChildrenProps) => React.ReactNode);
+  disabled?: boolean;
 }
 
 const TabItem: React.FC<TabItemProps> = ({
@@ -21,6 +22,7 @@ const TabItem: React.FC<TabItemProps> = ({
   href,
   className,
   children,
+  disabled,
 }) => {
   const router = useRouter();
 
@@ -29,15 +31,17 @@ const TabItem: React.FC<TabItemProps> = ({
   return (
     <Button
       onPress={() => {
-        if (href) {
+        if (href && !disabled) {
           router.push(href);
         }
       }}
+      as={Link}
       isIconOnly
       className={cn(
         className,
-        "flex flex-col items-center text-sm aspect-square size-14 gap-0.5 bg-transparent"
+        "flex flex-col items-center text-sm aspect-square size-14 gap-0.5 text-default-900 bg-transparent"
       )}
+      isDisabled={disabled}
     >
       {typeof children === "function"
         ? children({ active: isActive, className: className || "" })

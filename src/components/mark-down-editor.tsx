@@ -41,7 +41,7 @@ const Editor: React.FC<EditorProps> = ({
         ref={ref}
         placeholder={placeholder}
         className={cn(
-          "bg-default-100/15 border-2 border-default-200 rounded-xl w-full overflow-hidden duration-200",
+          "bg-default-100/15 border-2 border-default-200 rounded-xl w-full overflow-hidden duration-100",
           readonly
             ? "editor-readonly"
             : "hover:border-default-400 focus-within:!border-default-600"

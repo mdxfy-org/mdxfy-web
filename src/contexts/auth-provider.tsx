@@ -74,6 +74,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setUser(undefined);
     setToken(undefined);
     setLogged(false);
+    sessionStorage.clear();
     router.push("/login", undefined, { locale: router.locale });
   }, [router, setToken]);
 

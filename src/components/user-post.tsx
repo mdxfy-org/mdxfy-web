@@ -5,12 +5,7 @@ import Editor from "./mark-down-editor";
 import { AnimatePresence, motion } from "framer-motion";
 import { Avatar } from "./avatar";
 import { Button, Popover, PopoverContent, PopoverTrigger } from "@heroui/react";
-import {
-  ChatRound,
-  MenuDots,
-  Pen,
-  TrashBinTrash,
-} from "@solar-icons/react";
+import { ChatRound, MenuDots, Pen, TrashBinTrash } from "@solar-icons/react";
 import { cn } from "@/lib/utils";
 import IconOption from "./ui/icon-option";
 import { useUser } from "@/contexts/auth-provider";
@@ -19,6 +14,7 @@ import { useToast } from "@/service/toast";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { PostIconFeedback } from "./post-icon-feedback";
+import { linkFocusClasses } from "./link";
 
 export interface PostProps {
   post: Post;
@@ -57,7 +53,12 @@ export const UserPost: React.FC<PostProps> = ({
   return (
     <AnimatePresence>
       <motion.div
+        id={`${post.uuid}`}
         key={post.uuid}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 100 }}
+        viewport={{ once: false, margin: "-100px 0px" }}
+        transition={{ duration: 0.2 }}
         className={cn(
           "flex flex-col gap-2 pb-6 border-default-200 border-b-2 last:border-b-0 w-full",
           className
@@ -65,7 +66,7 @@ export const UserPost: React.FC<PostProps> = ({
       >
         <div className="relative flex flex-row items-center gap-2">
           <Link
-            className="flex flex-row items-center gap-2 min-w-max truncate"
+            className={cn("flex flex-row items-center gap-2 min-w-max truncate", linkFocusClasses)}
             href={`/user/${user.username}`}
           >
             <Avatar src={user.profile_picture} />
@@ -124,7 +125,7 @@ export const UserPost: React.FC<PostProps> = ({
         {redirect ? (
           <Link
             href={`/user/${post.user.username}/post/${post.uuid}`}
-            className="w-full"
+            className={linkFocusClasses}
           >
             <Editor markdown={post.content} readonly />
           </Link>
@@ -154,7 +155,7 @@ export const UserPost: React.FC<PostProps> = ({
           {post.see_more && (
             <Link
               href={`/user/${post.user.username}/post/${post.uuid}`}
-              className="w-max underline"
+              className="w-max decoration-default-400 hover:underline"
             >
               Ver mais...
             </Link>
