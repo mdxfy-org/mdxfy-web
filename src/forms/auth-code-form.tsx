@@ -112,6 +112,8 @@ const AuthCodeForm: React.FC = () => {
         toast.error({
           description: t("Messages.errors.default"),
         });
+      })
+      .finally(() => {
         setIsLoading(false);
         setLoading(false);
       });
