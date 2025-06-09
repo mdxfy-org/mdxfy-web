@@ -65,10 +65,7 @@ export const UserPost: React.FC<PostProps> = ({
         whileInView={{ opacity: 100 }}
         viewport={{ once: false, margin: "-80px 0px" }}
         transition={{ duration: 0.2 }}
-        className={cn(
-          "flex flex-col gap-2 px-2 pb-6 w-full",
-          className
-        )}
+        className={cn("flex flex-col gap-2 px-2 pb-6 w-full", className)}
       >
         <div className="relative flex flex-row items-center gap-2">
           <Link
@@ -134,7 +131,7 @@ export const UserPost: React.FC<PostProps> = ({
         {redirect ? (
           <Link
             href={`/user/${post.user.username}/post/${post.uuid}`}
-            className={linkFocusClasses}
+            className={cn("w-full", linkFocusClasses)}
           >
             <Editor markdown={post.content} readonly />
           </Link>
