@@ -97,7 +97,8 @@ Este projeto segue um [Código de Conduta](./CODE_OF_CONDUCT.md) para garantir u
 Este projeto está licenciado sob a [Licença MIT](./LICENSE). Sinta-se à vontade para usá-lo e contribuir!
 
 ---
-<!-- 
+
+<!--
 ## ✨ **Contato**
 
 Se você tiver dúvidas, sugestões ou apenas quiser dizer oi, entre em contato:
