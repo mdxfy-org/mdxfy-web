@@ -68,17 +68,21 @@ export const UserPost: React.FC<PostProps> = ({
         className={cn("flex flex-col gap-2 px-2 pb-6 w-full", className)}
       >
         <div className="relative flex flex-row items-center gap-2">
-          <Link
-            className={cn(
-              "flex flex-row items-center gap-2 min-w-max truncate !transition-none duration-0",
-              linkFocusClasses
-            )}
-            href={`/user/${user.username}`}
-          >
-            <Avatar src={user.profile_picture} />
-            {user?.name}
-            <span className="min-w-max text-default-500">@{user.username}</span>
-          </Link>
+          <span>
+            <Link
+              className={cn(
+                "flex flex-row items-center gap-2 min-w-max truncate !transition-none duration-0",
+                linkFocusClasses
+              )}
+              href={`/user/${user.username}`}
+            >
+              <Avatar src={user.profile_picture} />
+              {user?.name}
+              <span className="min-w-max text-default-500">
+                @{user.username}
+              </span>
+            </Link>
+          </span>
           <p className="hidden sm:block min-w-max text-default-500">
             {" - "}
             {postDate.toLocaleString()}
@@ -141,15 +145,19 @@ export const UserPost: React.FC<PostProps> = ({
         {!!answer && !hideHideAnswersTo && (
           <>
             <div className="relative flex flex-row items-center gap-2 text-default-600 text-sm">
-              <Link href={`/user/${answer.user?.username}/post/${answer.uuid}`}>
-                Respondeu{" "}
+              <span>
+                <Link
+                  href={`/user/${answer.user?.username}/post/${answer.uuid}`}
+                >
+                  Respondeu{" "}
+                </Link>
                 <Link
                   className="font-medium hover:underline"
                   href={`/user/${answer.user?.username}`}
                 >
                   {answer.user?.name}
                 </Link>
-              </Link>
+              </span>
             </div>
             <div className="relative flex flex-row items-center gap-2 text-sm">
               <Link

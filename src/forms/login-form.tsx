@@ -44,8 +44,10 @@ const LoginForm: React.FC = () => {
       })
       .catch(({ response: { data: error } }) => {
         setErrors(error.errors);
-        setIsLoading(false);
+      })
+      .finally(() => {
         setLoading(false);
+        setIsLoading(false);
       });
   };
 

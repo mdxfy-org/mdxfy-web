@@ -38,6 +38,7 @@ import { cn } from "@heroui/react";
 import { codeMirrorConfig, simpleSandpackConfig } from "@/service/mdx";
 
 export interface EditorProps extends MDXEditorProps {
+  ref?: React.Ref<MDXEditorMethods>;
   before?: string;
   readonly?: boolean;
 }
@@ -69,6 +70,7 @@ export const EditorTools = () => {
 };
 
 const Editor: React.FC<EditorProps> = ({
+  ref: propsRef,
   before,
   markdown,
   onChange,
@@ -100,7 +102,7 @@ const Editor: React.FC<EditorProps> = ({
   return (
     <>
       <MDXEditor
-        ref={ref}
+        ref={propsRef ?? ref}
         className={cn(
           "bg-default-100/15 border-2 border-default-200 rounded-xl w-full overflow-hidden duration-200",
           readonly

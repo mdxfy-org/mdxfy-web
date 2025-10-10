@@ -87,6 +87,8 @@ const AuthCodeForm: React.FC = () => {
         router.push("/");
       })
       .catch(({ response, status }: AxiosError<AuthError>) => {
+        console.log(response);
+        
         if (status === 401) {
           toast.error({
             description: t(
@@ -96,9 +98,9 @@ const AuthCodeForm: React.FC = () => {
           logout();
           return;
         }
-        if (response?.data?.attempts) {
+        if (response?.data?.data?.attempts) {
           const params = {
-            attempts_left: response?.data?.attempts?.toString() || "0",
+            attempts_left: response?.data?.data?.attempts?.toString() || "0",
           };
           toast.error({
             description: t(
@@ -106,7 +108,7 @@ const AuthCodeForm: React.FC = () => {
               params
             ),
           });
-          setErrors(response?.data?.errors ?? {});
+          setErrors(response?.data?.data?.errors ?? {});
           return;
         }
         toast.error({

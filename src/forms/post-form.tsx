@@ -2,6 +2,7 @@ import Form from "@/components/form/form";
 import Editor from "@/components/mark-down-editor";
 import { useUser } from "@/contexts/auth-provider";
 import { useDebounce } from "@/hooks/use-debounce";
+import { useInterval } from "@/hooks/use-event";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import api from "@/service/api";
 import {
@@ -11,9 +12,10 @@ import {
   Select,
   SelectItem,
 } from "@heroui/react";
+import { MDXEditorMethods } from "@mdxeditor/editor";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export interface PostFormProps {
   uuid?: string;
@@ -21,25 +23,30 @@ export interface PostFormProps {
   className?: string;
 }
 
-export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className }) => {
+export const PostForm: React.FC<PostFormProps> = ({
+  uuid,
+  answerTo,
+  className,
+}) => {
   const router = useRouter();
   const t = useTranslations();
+  const editorRef = useRef<MDXEditorMethods>(null);
 
   const [loading, setLoading] = useState(false);
 
   const { user } = useUser();
 
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
-  const [storedPost, setStoredPost, removeStoredPost] = useSessionStorage<string>(
-    `post-${uuid ?? "new"}${answerTo ? `-answer-${answerTo}` : ""}`,
-    ""
-  );
+  const [storedPost, setStoredPost, removeStoredPost] =
+    useSessionStorage<string>(
+      `post-${uuid ?? "new"}${answerTo ? `-answer-${answerTo}` : ""}`,
+      ""
+    );
   const [debounce] = useDebounce((post: string) => {
     setStoredPost(post);
   }, 1250);
 
   const [postHistory, setPostHistory] = useState<string>(storedPost);
-  const [post, setPost] = useState<string>(storedPost);
   const [postLength, setPostLength] = useState<number>(0);
   const [errors, setErrors] = useState<Record<string, string | string[]>>();
 
@@ -48,16 +55,17 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className })
   >("public");
 
   const handleChange = (val: string) => {
-    setPost(val);
     debounce(val);
     setErrors(undefined);
   };
 
   const handleSave = (as: "draft" | "post" = "post") => {
-    if (!post) return;
+    const content = editorRef.current?.getMarkdown() ?? "";
+
+    if (!content) return;
     setLoading(true);
     const data = {
-      content: post,
+      content: content,
       visibility,
       as,
       answer_to: answerTo,
@@ -69,7 +77,7 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className })
       .then(({ data }) => {
         removeStoredPost();
         console.log(data);
-      
+
         router.push(`/user/${user?.username}/post/${data.uuid}`);
       })
       .catch(({ data }) => {
@@ -84,7 +92,7 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className })
       api
         .get(`/post/${uuid}`)
         .then(({ data }) => {
-          setPost(data.content);
+          editorRef.current?.setMarkdown(data.content);
           setPostHistory(data.content);
           debounce(data.content);
           setErrors(undefined);
@@ -101,9 +109,11 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className })
     }
   }, [uuid, router.query, isDataLoaded, debounce]);
 
-  useEffect(() => {
-    setPostLength(post?.length ?? 0);
-  }, [post]);
+  useInterval(() => {
+    const content = editorRef.current?.getMarkdown() ?? "";
+    handleChange(content);
+    setPostLength(content.length ?? 0);
+  }, 750);
 
   return (
     <Form
@@ -116,9 +126,10 @@ export const PostForm: React.FC<PostFormProps> = ({ uuid, answerTo, className })
       )}
     >
       <Editor
-        markdown={post}
+        ref={editorRef}
+        markdown={""}
         before={postHistory}
-        onChange={handleChange}
+        // onChange={handleChange}
         contentEditableClassName={cn(postLength <= 0 && "opacity-50")}
         placeholder="Escreva seu post aqui..."
       />
