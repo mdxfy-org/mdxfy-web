@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroui/react": "^2.7.6",
+    "@heroui/react": "2.7.6",
     "@internationalized/date": "^3.7.0",
     "@mdxeditor/editor": "^3.31.0",
     "@react-google-maps/api": "^2.20.6",
