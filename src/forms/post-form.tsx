@@ -130,7 +130,7 @@ export const PostForm: React.FC<PostFormProps> = ({
         markdown={""}
         before={postHistory}
         // onChange={handleChange}
-        contentEditableClassName={cn(postLength <= 0 && "opacity-50")}
+        contentEditableClassName={cn(postLength <= 0 && "opacity-50 dark:opacity-70")}
         placeholder="Escreva seu post aqui..."
       />
       <div className="flex flex-row justify-between gap-4 w-full h-max overflow-x-auto overflow-y-clip">
